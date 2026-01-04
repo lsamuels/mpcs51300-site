@@ -5,7 +5,6 @@ Assignments
 
 Milestones 
 ===========
-- `Homework #1  <./hw1/index.html>`__, due January 13th at 11:59pm CDT
 
 
 Compiler Documents 

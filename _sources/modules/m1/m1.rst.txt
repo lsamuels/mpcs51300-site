@@ -42,4 +42,4 @@ As a reminder here are the dates and times for the synchronous session for this 
 
 Assignment
 ----------------------
-* `Homework #1 <../../assignments/milestone1/index.html>`__, due January 13th at 11:59pm CDT
+* `Homework #1 (Coming Soon) <>`__, due January 13th at 11:59pm CDT
