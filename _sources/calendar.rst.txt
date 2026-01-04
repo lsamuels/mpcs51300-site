@@ -23,3 +23,9 @@ In general, assignments are posted on Wednesday preceding their deadline.
     8, M6: Compiler Back-End  (Code Generation), None, None 
     9, M7: Compiler Optimizer (Overview of Optimizations), Milestone 4, Milestone 3   
     10, (Finals Week), None, Milestone 4 (Compiler Submission)
+
+There will be no class on the following dates: 
+
+- No class (MLK Holiday) - Monday January 19th (Week 3)  
+
+Professor Samuels will post a pre-recorded lecture on those days. 
