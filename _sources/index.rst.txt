@@ -1,4 +1,4 @@
-MPCS 51082 - Introduction to Unix Systems
+MPCS 51300 - Compilers
 =================================================
 
 .. include:: course-staff.rst

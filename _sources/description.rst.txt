@@ -1,6 +1,7 @@
 Course Description
 -------------------
-This course introduces the fundamental concepts, principles, and abstractions that underlie the design and architecture of Unix systems. Students will learn how Unix works from the hardware level up through the application layer, while developing practical skills in the shell environment. Along the way, the course emphasizes core topics such as processes, system calls, file systems, and networking, as well as advanced kernel subsystems that support modern operating environments. By the end, students will not only gain confidence with Unix commands and utilities, but also develop a deeper understanding of systems programming, enabling them to implement programs effectively on Unix operating systems such as Linux and macOS.
+Many of the computations computers process are done via executing programs. But how are these programs (e.g., Google Chrome, Adobe Photoshop etc.) actually created? As programmers write and create new programs, we use these "magical" programs known as compilers that convert the code we write into executable programs. In this course, we will explore the major ideas used today in the implementation of compilers, including lexical analysis, parsing, syntax-directed translation, abstract syntax trees, types and type checking, intermediate languages, dataflow analysis, program optimization, code generation, and runtime systems. By the end of this course, you will know how a program written in a high-level language designed for humans is systematically translated into a program written in a language that a computer can execute. Additionally, we 
+will explore how programming languages are designed, their semantics, and how knowing how a compiler works also makes you into a better programmer and increases your ability to learn new programming languages even faster.   
 
-Prerequisite: Core Programming (or concurrently),
+Prerequisite: Core Programming, Familiarity with C, Java, and/or Python
 

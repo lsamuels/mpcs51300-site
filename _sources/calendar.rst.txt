@@ -6,20 +6,20 @@ Calendar - Winter 2026
 
    This is a tentative calendar and subject to change
 
-In general, assignments are posted on Tuesday preceding their deadline. 
+In general, assignments are posted on Wednesday preceding their deadline. 
 
 .. csv-table::
    :widths: 5, 55, 20, 20
    :header-rows: 1
 
     Week, Module, Assignment Out, Assignment Due  
-    1, M1: Unix Shell, HW 1 , None  
-    2, M1: Unix Shell, HW 2,  HW 1 
-    3, M1: Unix Shell, Hw 3 ,HW 2
-    4, M2: Unix Processes & Management, HW 4,  HW 3
-    5, M2: Unix Processes & Management, HW 5, HW 4   
-    6, M3: Interacting with the Unix Kernel, HW 6, HW 5  
-    7, M4: Unix File Systems & Networking in Unix, Milestone 1, HW 6
-    8, **Quarter Exam** and M5: Inter-Process Communication, Milestone 2, None 
-    9, M6: Advance Kernel Subsystems, None, Milestone 1   
-    10, (Finals Week), None, Milestone 2 
+    1, M1: Introduction to Compilers, HW 1 , None  
+    2, M2: Compiler Front-End (Lexical Analysis/Scanning), HW 2,  HW 1  
+    3, M3: Compiler Front-End (Syntax Analysis), Milestone 1, HW 2 
+    4, M3: Compiler Front-End (Syntax Analysis), None,  None 
+    5, M5: Compiler Front-End (Semantic Analysis),  Milestone 2, Milestone 1 
+    6, M5: Compiler Front-End (Intermediate Representations & IR Lowering), None, None 
+    7, M6: Compiler Back-End (Code Generation),  Milestone 3, Milestone 2
+    8, M6: Compiler Back-End  (Code Generation), None, None 
+    9, M7: Compiler Optimizer (Overview of Optimizations), Milestone 4, Milestone 3   
+    10, (Finals Week), None, Milestone 4 (Compiler Submission)

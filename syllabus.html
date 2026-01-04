@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Syllabus &#8212; MPCS 51082 - Introduction to Unix Systems  documentation</title>
+    <title>Syllabus &#8212; MPCS 51300 - Compilers  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/bootstrap-sphinx.css?v=0bf093e7" />
     <link rel="stylesheet" type="text/css" href="_static/chiweb.css?v=9805d56b" />
@@ -37,7 +37,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="index.html">
-          MPCS 51082</a>
+          MPCS 51300</a>
         <span class="navbar-text navbar-version pull-left"><b></b></span>
       </div>
 
@@ -97,7 +97,6 @@
 <li><a class="reference internal" href="#course-staff">Course Staff</a></li>
 <li><a class="reference internal" href="#course-structure">Course Structure</a><ul>
 <li><a class="reference internal" href="#coursework">Coursework</a></li>
-<li><a class="reference internal" href="#exams">Exams</a></li>
 <li><a class="reference internal" href="#course-software">Course Software</a></li>
 </ul>
 </li>
@@ -130,8 +129,9 @@
 </div>
 <section id="course-description">
 <h2>Course Description<a class="headerlink" href="#course-description" title="Link to this heading">¶</a></h2>
-<p>This course introduces the fundamental concepts, principles, and abstractions that underlie the design and architecture of Unix systems. Students will learn how Unix works from the hardware level up through the application layer, while developing practical skills in the shell environment. Along the way, the course emphasizes core topics such as processes, system calls, file systems, and networking, as well as advanced kernel subsystems that support modern operating environments. By the end, students will not only gain confidence with Unix commands and utilities, but also develop a deeper understanding of systems programming, enabling them to implement programs effectively on Unix operating systems such as Linux and macOS.</p>
-<p>Prerequisite: Core Programming (or concurrently),</p>
+<p>Many of the computations computers process are done via executing programs. But how are these programs (e.g., Google Chrome, Adobe Photoshop etc.) actually created? As programmers write and create new programs, we use these “magical” programs known as compilers that convert the code we write into executable programs. In this course, we will explore the major ideas used today in the implementation of compilers, including lexical analysis, parsing, syntax-directed translation, abstract syntax trees, types and type checking, intermediate languages, dataflow analysis, program optimization, code generation, and runtime systems. By the end of this course, you will know how a program written in a high-level language designed for humans is systematically translated into a program written in a language that a computer can execute. Additionally, we
+will explore how programming languages are designed, their semantics, and how knowing how a compiler works also makes you into a better programmer and increases your ability to learn new programming languages even faster.</p>
+<p>Prerequisite: Core Programming, Familiarity with C, Java, and/or Python</p>
 </section>
 <section id="course-staff">
 <h2>Course Staff<a class="headerlink" href="#course-staff" title="Link to this heading">¶</a></h2>
@@ -141,21 +141,53 @@
 </ul>
 <p><strong>Teaching Assistants</strong></p>
 <ul class="simple">
-<li><p>Daniel Sheeler</p></li>
+<li><p>Skye Soss</p></li>
+</ul>
+<p><strong>Graders</strong></p>
+<ul class="simple">
+<li><p>Tieyong Yu</p></li>
 </ul>
 </section>
 <section id="course-structure">
 <h2>Course Structure<a class="headerlink" href="#course-structure" title="Link to this heading">¶</a></h2>
-<p>The course material will be split into six modules that will span 1-2 weeks through out the quarter. Each module looks at a different layer of a Unix system and explores its functionality and importance in the system:</p>
-<ul class="simple">
-<li><p>M1: The Unix Shell (Week 1-2): Learn how to interact with Unix through the command line, mastering essential commands, syntax, and scripting basics.</p></li>
-<li><p>M2: Unix Processes and Management(Week 3 - 4): Look at the internal structures of programs and processes in Unix and how they are managed.</p></li>
-<li><p>M3: Interacting with the Unix Kernel(Week 5-6): Explore how user programs communicate with the kernel through system calls and how the kernel manages resources.</p></li>
-<li><p>M4: Unix File Systems and Networking in Unix (Week 7): Study how Unix organizes files and directories, with emphasis on permissions, links, and the virtual file system.Gain practical experience with network tools and commands, learning how Unix systems communicate over local and remote connections.</p></li>
-<li><p>M5: Inter-Process Communication (Week 8): Understand how processes communication with each other.</p></li>
-<li><p>M6: Advanced Kernel Subsystems (Week 9): Examine advanced features such as memory management, device drivers.</p></li>
+<p>The course material will be split into six modules that will span 1-2 weeks through out the quarter. Each module looks at a different phase of a compiler and explores its functionality and importance in the system:</p>
+<ul>
+<li><p><strong>M1: Introduction to Compilers</strong></p>
+<p>This module provides an overview of what compilers do and why they are structured as multi-phase systems.
+We examine the classic compiler pipeline and establish the roles and responsibilities of each stage,
+setting the conceptual foundation for the rest of the course.</p>
+</li>
+<li><p><strong>M2: Compiler Front-End — Lexical Analysis (Scanning)</strong></p>
+<p>This module focuses on transforming raw source code into a stream of tokens through lexical analysis.
+Students learn how scanners are designed, how regular expressions and finite automata are used,
+and how lexical errors are detected and reported.</p>
+</li>
+<li><p><strong>M3: Compiler Front-End — Syntax Analysis</strong></p>
+<p>This module covers parsing, where token streams are structured into abstract syntax trees (ASTs)
+according to a formal grammar. We study context-free grammars, parsing strategies,
+and how syntactic errors are identified and recovered from.</p>
+</li>
+<li><p><strong>M4: Compiler Front-End — Semantic Analysis</strong></p>
+<p>This module addresses meaning beyond syntax, including name resolution, type checking,
+and scope rules. Students implement semantic checks that ensure programs are well-formed
+and consistent before code generation begins.</p>
+</li>
+<li><p><strong>M5: Compiler Front-End — Intermediate Representations &amp; IR Lowering</strong></p>
+<p>This module introduces intermediate representations (IRs) as a bridge between high-level language
+constructs and low-level code. We explore AST lowering, control-flow representations,
+and how IR design choices affect optimization and code generation.</p>
+</li>
+<li><p><strong>M6: Compiler Back-End — Code Generation</strong></p>
+<p>This module focuses on translating IR into target-specific machine code or assembly.
+Topics include instruction selection, register allocation, calling conventions,
+and mapping abstract operations to concrete hardware instructions.</p>
+</li>
+<li><p><strong>M7: Compiler Optimizer — Overview of Optimizations</strong></p>
+<p>This module provides an overview of compiler optimizations that improve performance and efficiency
+without changing program semantics. We study classic optimizations, their preconditions,
+and how they fit into modern compiler pipelines.</p>
+</li>
 </ul>
-<p>The delivery of the course content will follow a flipped classroom model, where lecture material and course content will be provided in two ways:</p>
 <ul class="simple">
 <li><p><strong>Synchronous content</strong> (<em>i.e., in-person</em>): Each week during our normal class time, we will meet in person at the time and location designated above. The synchronous sessions will include:</p>
 <ul>
@@ -169,58 +201,36 @@
 <p>Please see the <a class="reference external" href="calendar.html">calendar</a> for more details on what happens on a week to week basis.</p>
 <section id="coursework">
 <h3>Coursework<a class="headerlink" href="#coursework" title="Link to this heading">¶</a></h3>
-<p>The course will include weekly homework, one midterm exam, attendance and projects:</p>
+<p>The course work consists of two early on homework assignments, attendance and building a quarter long project (i.e., a fully working compiler). The compiler will be built in stages, where each stage represents a milestone.</p>
 <ul>
 <li><p><strong>Homework</strong> - The weekly homework assignments will contain practice problems to help enforce the concepts learned during a lecture.</p></li>
-<li><p><strong>Milestones</strong> - The course work for the second half of the course revolves around building a course project in two parts. Each part of the project is represented as a milestone. Details about the course project and its parts will be presented by the instructor later in the course.</p></li>
+<li><p><strong>Compiler project</strong> - There will be a single quarter-long project where you will  develop the components that make up a compiler: front-end (scanner, parser, type checker), back-end (code-generation), and optimizer. You need to submit the fully working project by the end of the quarter as specified via the assignment description.</p></li>
+<li><p><strong>Milestone</strong> -  There will be milestones that will you need complete by certain due dates. These milestones check to ensure that you are making progress on the various components of the compiler. The grading of these milestones will be somewhat subjective in nature but each milestone description will provide a grading outline to help understand what needs to be completed by the milestone due date.</p></li>
 <li><dl>
 <dt><strong>Attendance</strong> - In order to receive you full attendance weight, you must do the following</dt><dd><ol class="arabic simple">
 <li><p>Attend every lecture (either in-person or remotely). If you cannot attend a lecture then you must reach out to the instructor letting them know you won’t be able to attend.</p></li>
-<li><p>You must watch any specified pre-recorded lectures. We will look at the statistics on Panopto to ensure you watch the videos.</p></li>
 </ol>
-<p>As long as you continuously do those two main points you will receive full credit for attendance.</p>
+<p>2. You must watch any specified pre-recorded lectures. We will look at the statistics on Panopto to ensure you watch the videos.
+As long as you continuously do those two main points you will receive full credit for attendance.</p>
 </dd>
 </dl>
 </li>
-<li><p><strong>Exam</strong> - There will be one exam in the course. Please see the <em>Exams</em> section for more details.</p></li>
 </ul>
-<p>All homework will be due and out on <strong>Wednesday &#64; 11:59pm</strong>.</p>
+<p>All homework and projects will be due on  <strong>Tuesday &#64; 11:59pm</strong>. I will post when they are available. Please note that I am normally busy on
+Friday afternoons and weekends so I may not be available for additional help. Please make sure to take this into consideration as you manage the coursework in this class.</p>
 <p>Please see the <a class="reference external" href="assignments/index.html">Assignments Rubric</a> page for
 more details on how the assignments will be graded.</p>
 </section>
-<section id="exams">
-<h3>Exams<a class="headerlink" href="#exams" title="Link to this heading">¶</a></h3>
-<p>There will be one exam in this course. The exam will be a mixture of coding exercises and short-answer questions. The exam will be in-person during our normal classroom time.</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Exam</p></th>
-<th class="head"><p>Time Limit</p></th>
-<th class="head"><p>Date</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Quarter Exam</p></td>
-<td><p>120 minutes</p></td>
-<td><p><strong>February 24th &#64; 7:30pm</strong></p></td>
-</tr>
-</tbody>
-</table>
-<p>The exam location is in our normal classroom at the same time. There are no make-up exam in this class. There also will not be any earlier exam taken unless due to extraordinary circumstances such as an medical emergency.</p>
-</section>
 <section id="course-software">
 <h3>Course Software<a class="headerlink" href="#course-software" title="Link to this heading">¶</a></h3>
-<p>Bash and C will be the <strong>required</strong> language to code all programming assignment. You do not need to know the language in order to take this course.
-If you haven’t already learned it then you will learn it as the course progresses. I will provide a rationale for the languages during the
-first lecture. <strong>Please note this not a C programming class</strong>. We will learn just enough of the C language to see how we can use it to to
-develop applications that interacts with a Unix system.</p>
+<p>You will have an option to code your assignments (and compiler project) in either: C/C++, Python, Java, or Go. You will need to make sure you have this software installed on your local machine. However, the code examples in lecture will be done in Go because the compiler you are building in the course is a subset of the language. If you haven’t already learned it then you will learn it as the course progresses. It’s a very small and simple language that prior students all had no difficulty learning. I will provide a rationale for the language during the first lecture.</p>
 <p>Please make sure you have following software installed for this course:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://clang.llvm.org">Clang</a> If you are running on macOS or linux then you already have this installed. If you are running a Windows machine then you’ll need to download a C compiler.</p></li>
-<li><p><a class="reference external" href="http://git-scm.com/downloads/">Git</a></p></li>
+<li><p><a class="reference external" href="https://go.dev/dl/">At least Golang 1.23</a>  (<em>You may also use any version of go from 1.18 and on.</em>)</p></li>
+<li><p><a class="reference external" href="https://git-scm.com/downloads/">Git</a></p></li>
 <li><p>Text editor (suggestion, not required): <a class="reference external" href="https://code.visualstudio.com">Visual Studio Code</a></p></li>
-<li><p>IDE (suggestion, not required): <a class="reference external" href="https://www.jetbrains.com/clion/">CLion</a></p></li>
 </ul>
-<p>The course software is also accessible via logging in remotely to a CS Linux Machine. We will explain how to do this during the first week of the quarter.</p>
+<p>The course software is also accessible via logging in remotely to a CS Linux Machine. We will explain how to do this during the first week of the quarter. There might be additional software to install as the quarter progresses but the course staff will let you know how to install it.</p>
 </section>
 </section>
 <section id="grading">
@@ -228,20 +238,20 @@ develop applications that interacts with a Unix system.</p>
 <p>Your final grade will be based on the following:</p>
 <table class="docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p>Homework 1-6 (5% each)</p></td>
-<td><p>30%</p></td>
-</tr>
-<tr class="row-even"><td><p>Milestone 1</p></td>
+<tr class="row-odd"><td><p>Homework 1-2  (5% each)</p></td>
 <td><p>10%</p></td>
 </tr>
-<tr class="row-odd"><td><p>Milestone 2</p></td>
-<td><p>30%</p></td>
+<tr class="row-even"><td><p>Milestone 1-3  (6% each)</p></td>
+<td><p>18%</p></td>
 </tr>
-<tr class="row-even"><td><p>Quarter Exam</p></td>
-<td><p>35%</p></td>
+<tr class="row-odd"><td><p>Milestone 4 (Final Compiler Submission)</p></td>
+<td><p>55%</p></td>
 </tr>
-<tr class="row-odd"><td><p>Attendance</p></td>
+<tr class="row-even"><td><p>Attendance</p></td>
 <td><p>5%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compiler Paper</p></td>
+<td><p>12%</p></td>
 </tr>
 </tbody>
 </table>
@@ -264,6 +274,7 @@ to get, at least, a B (but may potentially get a higher grade if the boundary fo
 a B+ is lowered).</p>
 <section id="late-submissions">
 <span id="id1"></span><h3>Late submissions<a class="headerlink" href="#late-submissions" title="Link to this heading">¶</a></h3>
+<p><strong>You cannot use a late extension on the last milestone (i.e., Milestone 4) in the course!</strong></p>
 <p>You are allowed to make <strong>at most two</strong> late submissions on the programming assignments. You are allowed to make <strong>at most two</strong>
 late submissions on the programming assignments. This is total across all assignments and not on a  per-assignment basis.
 For example, you can use one late submission on homework #1 and homework #2 and then you’ll be out of late extensions. Please ask
@@ -334,13 +345,13 @@ ending up with a lower score on the assignment.</p>
 <p>This course will not have a required textbook; although, for those students who may find it helpful to know
 the topics we will discuss each week, readings will come from the text:</p>
 <ul class="simple">
-<li><p><em>The Linux Programming Interface: A Linux and UNIX System Programming Handbook by Michael Kerrisk</em></p></li>
-<li><p><em>Computer Systems: A Programmer’s Perspective (3rd Edition) by Bryant, &amp; Randal O’Hallaron</em></p></li>
+<li><p><em>Engineering a Compiler (Third Edition) by Keith Cooper and Linda Torczon</em></p></li>
 </ul>
 <p>and will be shown on the course schedule. Along with these readings and the lecture notes, students may
 find the following references helpful in understanding the course material:</p>
 <ul class="simple">
-<li><p><em>C Programming: A Modern Approach, 2nd Edition by K. N. King</em></p></li>
+<li><p><em>Compilers: Principles, Techniques, and Tools (Second Edition) by Alfred Aho, Monica Lam, Ravi Sethi, and Jeffrey Ullman</em></p></li>
+<li><p><em>The Go Programming Language by Alan A. A. Donovan and Brian W. Kernighan</em></p></li>
 </ul>
 </section>
 <section id="policies">

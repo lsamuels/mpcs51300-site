@@ -14,15 +14,50 @@ Syllabus
 
 Course Structure
 ----------------
-The course material will be split into six modules that will span 1-2 weeks through out the quarter. Each module looks at a different layer of a Unix system and explores its functionality and importance in the system: 
+The course material will be split into six modules that will span 1-2 weeks through out the quarter. Each module looks at a different phase of a compiler and explores its functionality and importance in the system: 
 
-- M1: The Unix Shell (Week 1-2): Learn how to interact with Unix through the command line, mastering essential commands, syntax, and scripting basics.
-- M2: Unix Processes and Management(Week 3 - 4): Look at the internal structures of programs and processes in Unix and how they are managed. 
-- M3: Interacting with the Unix Kernel(Week 5-6): Explore how user programs communicate with the kernel through system calls and how the kernel manages resources. 
-- M4: Unix File Systems and Networking in Unix (Week 7): Study how Unix organizes files and directories, with emphasis on permissions, links, and the virtual file system.Gain practical experience with network tools and commands, learning how Unix systems communicate over local and remote connections.
-- M5: Inter-Process Communication (Week 8): Understand how processes communication with each other. 
-- M6: Advanced Kernel Subsystems (Week 9): Examine advanced features such as memory management, device drivers. 
-The delivery of the course content will follow a flipped classroom model, where lecture material and course content will be provided in two ways:
+* **M1: Introduction to Compilers**
+  
+  This module provides an overview of what compilers do and why they are structured as multi-phase systems.
+  We examine the classic compiler pipeline and establish the roles and responsibilities of each stage,
+  setting the conceptual foundation for the rest of the course.
+
+* **M2: Compiler Front-End — Lexical Analysis (Scanning)**
+  
+  This module focuses on transforming raw source code into a stream of tokens through lexical analysis.
+  Students learn how scanners are designed, how regular expressions and finite automata are used,
+  and how lexical errors are detected and reported.
+
+* **M3: Compiler Front-End — Syntax Analysis**
+  
+  This module covers parsing, where token streams are structured into abstract syntax trees (ASTs)
+  according to a formal grammar. We study context-free grammars, parsing strategies,
+  and how syntactic errors are identified and recovered from.
+
+* **M4: Compiler Front-End — Semantic Analysis**
+  
+  This module addresses meaning beyond syntax, including name resolution, type checking,
+  and scope rules. Students implement semantic checks that ensure programs are well-formed
+  and consistent before code generation begins.
+
+* **M5: Compiler Front-End — Intermediate Representations & IR Lowering**
+  
+  This module introduces intermediate representations (IRs) as a bridge between high-level language
+  constructs and low-level code. We explore AST lowering, control-flow representations,
+  and how IR design choices affect optimization and code generation.
+
+* **M6: Compiler Back-End — Code Generation**
+  
+  This module focuses on translating IR into target-specific machine code or assembly.
+  Topics include instruction selection, register allocation, calling conventions,
+  and mapping abstract operations to concrete hardware instructions.
+
+* **M7: Compiler Optimizer — Overview of Optimizations**
+  
+  This module provides an overview of compiler optimizations that improve performance and efficiency
+  without changing program semantics. We study classic optimizations, their preconditions,
+  and how they fit into modern compiler pipelines.
+
 
 - **Synchronous content** (*i.e., in-person*): Each week during our normal class time, we will meet in person at the time and location designated above. The synchronous sessions will include:
 
@@ -36,53 +71,35 @@ Please see the `calendar <calendar.html>`__ for more details on what happens on 
 
 Coursework
 ~~~~~~~~~~~~~~~~~~~~~~~
+The course work consists of two early on homework assignments, attendance and building a quarter long project (i.e., a fully working compiler). The compiler will be built in stages, where each stage represents a milestone. 
 
-The course will include weekly homework, one midterm exam, attendance and projects: 
+-  **Homework** - The weekly homework assignments will contain practice problems to help enforce the concepts learned during a lecture.
 
-* **Homework** - The weekly homework assignments will contain practice problems to help enforce the concepts learned during a lecture.
-
-* **Milestones** - The course work for the second half of the course revolves around building a course project in two parts. Each part of the project is represented as a milestone. Details about the course project and its parts will be presented by the instructor later in the course.  
-
-* **Attendance** - In order to receive you full attendance weight, you must do the following 
+- **Compiler project** - There will be a single quarter-long project where you will  develop the components that make up a compiler: front-end (scanner, parser, type checker), back-end (code-generation), and optimizer. You need to submit the fully working project by the end of the quarter as specified via the assignment description. 
+- **Milestone** -  There will be milestones that will you need complete by certain due dates. These milestones check to ensure that you are making progress on the various components of the compiler. The grading of these milestones will be somewhat subjective in nature but each milestone description will provide a grading outline to help understand what needs to be completed by the milestone due date. 
+- **Attendance** - In order to receive you full attendance weight, you must do the following 
    1. Attend every lecture (either in-person or remotely). If you cannot attend a lecture then you must reach out to the instructor letting them know you won't be able to attend. 
+   
    2. You must watch any specified pre-recorded lectures. We will look at the statistics on Panopto to ensure you watch the videos. 
-
    As long as you continuously do those two main points you will receive full credit for attendance. 
 
-* **Exam** - There will be one exam in the course. Please see the *Exams* section for more details. 
-
-All homework will be due and out on **Wednesday @ 11:59pm**.  
+All homework and projects will be due on  **Tuesday @ 11:59pm**. I will post when they are available. Please note that I am normally busy on 
+Friday afternoons and weekends so I may not be available for additional help. Please make sure to take this into consideration as you manage the coursework in this class. 
 
 Please see the `Assignments Rubric <assignments/index.html>`__ page for
 more details on how the assignments will be graded.
 
-Exams 
-~~~~~~~~~~~~~~~~~~~~~~~
-There will be one exam in this course. The exam will be a mixture of coding exercises and short-answer questions. The exam will be in-person during our normal classroom time.
-
-+-------------+--------------+-----------------------------------------------+
-| Exam        | Time Limit   | Date                                          |
-+=============+==============+===============================================+
-| Quarter Exam| 120 minutes  |  **February 24th @ 7:30pm**                   |
-+-------------+--------------+-----------------------------------------------+
-
-The exam location is in our normal classroom at the same time. There are no make-up exam in this class. There also will not be any earlier exam taken unless due to extraordinary circumstances such as an medical emergency.
-
 Course Software 
 ~~~~~~~~~~~~~~~~~~~~~~~
-Bash and C will be the **required** language to code all programming assignment. You do not need to know the language in order to take this course. 
-If you haven't already learned it then you will learn it as the course progresses. I will provide a rationale for the languages during the 
-first lecture. **Please note this not a C programming class**. We will learn just enough of the C language to see how we can use it to to 
-develop applications that interacts with a Unix system. 
+You will have an option to code your assignments (and compiler project) in either: C/C++, Python, Java, or Go. You will need to make sure you have this software installed on your local machine. However, the code examples in lecture will be done in Go because the compiler you are building in the course is a subset of the language. If you haven’t already learned it then you will learn it as the course progresses. It’s a very small and simple language that prior students all had no difficulty learning. I will provide a rationale for the language during the first lecture.
 
 Please make sure you have following software installed for this course:
 
-- `Clang <https://clang.llvm.org>`__ If you are running on macOS or linux then you already have this installed. If you are running a Windows machine then you'll need to download a C compiler.
-- `Git <http://git-scm.com/downloads/>`__
--  Text editor (suggestion, not required): `Visual Studio Code <https://code.visualstudio.com>`__ 
--  IDE (suggestion, not required): `CLion <https://www.jetbrains.com/clion/>`__
+- `At least Golang 1.23 <https://go.dev/dl/>`__  (*You may also use any version of go from 1.18 and on.*)
+- `Git <https://git-scm.com/downloads/>`__
+- Text editor (suggestion, not required): `Visual Studio Code <https://code.visualstudio.com>`__
 
-The course software is also accessible via logging in remotely to a CS Linux Machine. We will explain how to do this during the first week of the quarter. 
+The course software is also accessible via logging in remotely to a CS Linux Machine. We will explain how to do this during the first week of the quarter. There might be additional software to install as the quarter progresses but the course staff will let you know how to install it. 
 
 Grading
 -------
@@ -90,15 +107,15 @@ Grading
 Your final grade will be based on the following:
 
 +----------------------------------------------+-----+
-| Homework 1-6 (5% each)                       | 30% |
+| Homework 1-2  (5% each)                      | 10% |
 +----------------------------------------------+-----+
-| Milestone 1                                  | 10% |
+| Milestone 1-3  (6% each)                     | 18% |
 +----------------------------------------------+-----+
-| Milestone 2                                  | 30% |
-+----------------------------------------------+-----+
-| Quarter Exam                                 | 35% |
+| Milestone 4 (Final Compiler Submission)      | 55% |
 +----------------------------------------------+-----+
 | Attendance                                   | 5%  |
++----------------------------------------------+-----+
+| Compiler Paper                               | 12% |
 +----------------------------------------------+-----+
 
 Grades are *not* curved in this class or, at least, not in the traditional sense.
@@ -124,6 +141,8 @@ a B+ is lowered).
 
 Late submissions
 ~~~~~~~~~~~~~~~~
+
+**You cannot use a late extension on the last milestone (i.e., Milestone 4) in the course!**
 
 You are allowed to make **at most two** late submissions on the programming assignments. You are allowed to make **at most two** 
 late submissions on the programming assignments. This is total across all assignments and not on a  per-assignment basis. 
@@ -207,14 +226,13 @@ Books
 This course will not have a required textbook; although, for those students who may find it helpful to know
 the topics we will discuss each week, readings will come from the text:
 
--  *The Linux Programming Interface: A Linux and UNIX System Programming Handbook by Michael Kerrisk*
--  *Computer Systems: A Programmer's Perspective (3rd Edition) by Bryant, & Randal O'Hallaron*
+-  *Engineering a Compiler (Third Edition) by Keith Cooper and Linda Torczon*
 
 and will be shown on the course schedule. Along with these readings and the lecture notes, students may
 find the following references helpful in understanding the course material:
 
--  *C Programming: A Modern Approach, 2nd Edition by K. N. King*
-
+-  *Compilers: Principles, Techniques, and Tools (Second Edition) by Alfred Aho, Monica Lam, Ravi Sethi, and Jeffrey Ullman*
+-  *The Go Programming Language by Alan A. A. Donovan and Brian W. Kernighan* 
 
 Policies
 --------        
@@ -234,6 +252,7 @@ Assessments and exams are designed to evaluate your understanding of concepts an
 Specifically, you are allowed to use Generative AI in this course as long as correct citation is provide: 
 
 - The use of AI tools, such as ChatGPT or Dall-E 2, for this course is allowed for specific assignments only when determined to be in support of the course learning goals. Assignments in which AI tools are permitted will be clearly identified by the instructor and noted in the assignment directions. You are not required to use AI tools, but if you choose to use them for any part of the assignment (from brainstorming to text editing), you must use proper citation (please use `APA citation format <https://apastyle.apa.org/blog/how-to-cite-chatgpt>`__  ). Failure to properly cite AI tools is considered a violation of the University of Chicago's Academic Honesty and Plagiarism policy. If you are unclear if something is an AI Tool, please check with your instructor.  (CCTL, UChicago) 
+
 
 
 **Improperly citing or no citation when a Generative AI resource was used in assignment will be treated as an academic misconduct case.**

@@ -3,5 +3,4 @@
 Modules
 ==============
 
-- `Module 1: Unix Shell <./m1/m1.html>`__
-
+- `M1: Introduction to Compilers  <./m1/m1.html>`__
