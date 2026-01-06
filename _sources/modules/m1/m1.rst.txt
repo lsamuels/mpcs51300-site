@@ -8,12 +8,16 @@ Pre-recorded Lectures
 ---------------------
 **Note: Professor Samuels will state on Ed when the precorded videos are ready to be viewed each week for a module.**
 
-The pre-recorded lectures are available here: `M1 Videos <>`_.
+The pre-recorded lectures are available here: `M1 Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=6f52619c-decd-4f05-843a-b3ca00e9d2ac>`_.
 You can also find the videos under the "Panopto" tab on the MPCS 51300 canvas site.
 
 The lectures are a series of approx 15-20 minute videos. **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
+ 
+Week 1 
+~~~~~~~~
+- Internal Structures for Compilers
+- Go Code Structure & Tips
 
--TBD 
 
 The slides presented in lecture and these videos are accessible on our Canvas Page. Click on the Files link and you then can download the m1.zip file.
 
@@ -42,4 +46,4 @@ As a reminder here are the dates and times for the synchronous session for this 
 
 Assignment
 ----------------------
-* `Homework #1 (Coming Soon) <>`__, due January 13th at 11:59pm CDT
+* `Homework #1 <../../assignments/hw1/index.html>`__, due Tuesday January 13th at 11:59pm CDT

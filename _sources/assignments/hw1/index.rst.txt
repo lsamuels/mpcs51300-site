@@ -2,48 +2,39 @@
 Homework #1 
 ==========================================
 
-**Due: Friday, October 10th at 11:59pm**
+**Due: Tuesday, January 13th at 11:59pm**
 
-This homework is intended to server as an introduction to bash shell scripting, basic Unix commands, and using filtering (i.e., text processing) commands to process text. 
-This assignment is not meant to cover everything in the bash scripting language or to use a large number of built-in utility commands. 
-It solely serves as a way for you to get familiar with working with the shell, Bash syntax, and basic utility commands.
+This homework is intended  to serve two main purposes: 
+
+1 Introduce the Go programming language.This assignment is not meant to cover the entire language. It solely serves as a way for you to get familiar with the Go syntax and the structure of Go programs.
+
+2 Build a **small execution model** for a simple programming language. The goal is to help you understand how **compilers represent and reason about programs**, not by
+working with text, but by working with *structured representations* of program elements.
+
+You will define types that represent:
+
+- Expressions
+- Statements
+- Programs
+
+You will also implement logic that verifies and executes programs using these representations.
+
+This assignment is intentionally designed to mirror how compilers organize programs internally.
+
+Please make sure to use the “Go by Example” and standard library websites:
+
+* `https://gobyexample.com <https://gobyexample.com>`__
+* `https://golang.org/pkg/ <https://golang.org/pkg/>`__
+
+Additionally, refer back to the module 1 slides that indicate the specific “Go by Example” pages you should read over. Please make sure you understand those pages before beginning your homework assignment.
 
 Getting started
-=================
-The following two sections explain the process of setting up your homework workspace for the course and how to retrieve your private Github repository.
-
-MPCS Unix Bootcamp
--------------------
-
-The **MPCS Unix Bootcamp** is a prerequisite for this course.  Before beginning this assignment, make sure to review *Modules 0-7*.  
-
-You can find the Unix Bootcamp materials on our Canvas page under  ``Files → Unix Bootcamp Materials``.  
-
-You may skip any modules after 7, since we will cover those topics later in this class.
-
-
-CS Linux Machine
--------------------
-You will need access to an Linux based machine when working on your homework assignments. You should not test your programs on macOS or 
-Windows Linux because these operating systems do not provide all utility commands necessary for completing this and possibly future assignments. Additionally, if they do provide a command then it may not contain all options that a Unix-like system provides.
-
-**We will use and grade all assignments on the CS Linux machines and all programming assignments must work correctly on these machines in order to receive credit.** 
-
-However, you can work locally on a Unix or Unix-like machine but ensure that you test your final solutions on a CS Linux machine.
-
-Please follow the instructions provided here
-
-* `Using Visual Studio Code and SSH <https://uchicago-cs.github.io/student-resource-guide/vscode/ssh.html>`__
-
-Creating Your Private Repository
----------------------------------
-
-For each assignment, a Git repository will be created for you on GitHub. However, before that repository can be created for you, you need to have a 
-GitHub account. If you do not yet have one, you can get an account here: https://github.com/join. 
+==============
+For each assignment, a Git repository will be created for you on GitHub. However, before that repository can be created for you, you need to have a GitHub account. If you do not yet have one, you can get an account here: https://github.com/join. 
 
 To actually get your private repository, you will need this invitation URL: 
 
-* **HW1 invitation (Please check the Post “HW 1 is ready” Ed)**
+- **Homework #1 is ready** (Posted on Ed)
 
 When you click on an invitation URL, you will have to complete the following steps:
 
@@ -61,518 +52,412 @@ When you click on an invitation URL, you will have to complete the following ste
 4. You now need to clone your repository (i.e., download it to your machine). 
     - Make sure you’ve set up `SSH access <https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh>`__ on your GitHub account.
     
-    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51082-aut25/hw1-GITHUB-USERNAME.git. 
+    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51300-win26/hw1-GITHUB-USERNAME.git. 
 
     - If you do not know how to use ``git clone`` to clone your repository then follow this guide that Github provides: `Cloning a Repository <https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository>`__
     
 
 If you run into any issues, or need us to make any manual adjustments to your registration, please let us know via Ed Discussion.
 
+High-Level Language Model
+==========================
 
-**IMPORTANT:** Eligible Commands & Bash
-========================================
-For this homework assignment, you are only allowed to use the following commands with or without using their options in your scripts.
+For this assignment, Your toy language supports:
 
-- Commands used in the Week 1, module 1 slides (i.e., ``m1_week1.pdf``)  
-- Commands presented in the Unix Bootcamp Modules 0-7 **only**
-- tr 
-- exit 
-
-**Using any other command not specified in this list will result in a major penalty for that specific problem**. I know there might be some better commands out there such as **``awk``**, and **``sed``** but we will first learn the basics and then use more advanced commands as we move along in the course. You are free to use the entirety of the bash scripting language but are restricted to using only the above commands within your script files.
-
-**If you have any questions about using a command ask on Ed before you use it**! **You must code all problems in the Bash scripting language. No other programming language or scripting language is allowed**.
-
-Warm-Up 
-=========
-Warm-up exercises are not graded and are meant to give you hints towards solving the actual homework problems. All solutions to warm-up problems that require coding are already in your repositories. 
-**Do not just look at the solution**! Try to solve the problem before looking at the solution. Please look in the hw1/warmup_solns directory to find these solutions.
-
-Warm-Up #0
-------------
-Before beginning the actual warm-up and homework problems, make sure you watch the prerecorded videos for module 1 and experiment with the `devhints cheat sheet <https://devhints.io/bash>`__  code-snippets while logged into a CS Linux machine. 
-
-Warm-Up #1
-------------
-In a file named ``warmup1.sh``, write a bash script that takes in a file as a command line argument. This file will only contain positive integers. 
-The script must find the maximum integer in the file. You can use the ``hw1/warmup/numbers.txt`` to test your script. 
-You can assume the file will only contain **positive integers**. The script should be ran as ``bash warmup1.sh FILE`` where ``FILE`` is the name of a file that contains only positive numbers. 
-For example :: 
-
-  bash warmup1.sh numbers.txt
-
-If the user forget to supply the file argument then print the error message ``"Error: no numbers file entered"`` and exit from the script immediately by running the command 
-``exit 1``.
-
-
-Warm-Up #2
+Expressions
 -----------
-In a file named ``warmup2.sh``, write a bash script that reads in a series of command line arguments that represent individuals associated with Uchicago. 
-Each command line argument has the following format: ``CNET:POSITION``, where ``CNET`` is a Uchicago CNET identifier and ``POSITION`` is the position of the individual at the university. For example, ::
-  
-  lamonts:faculty
-  borja:faculty
-  bob:student
+- Integer literals
+- Variables
+- Binary expressions (addition, subtraction, multiplication, and division)
 
-
-For example, running the script as such ::
-
-  bash warmup2.sh lamonts:faculty bob:student borja:faculty sue:student
-
-creates the directory shown in the image below 
-
-.. image:: ./warmup2.png
-
-Aside 1: Sorting with `sort -k..,..n` 
-======================================
-The `sort` command can sort text files by *fields* (columns) using `-k`.
-For CSV-like data, pair it with `-t','` to tell `sort` that fields are comma-separated.
-
-Key syntax
+Statements
 ----------
+- Variable declarations
+- Assignments
+- Print statements
 
-- **Field delimiter**: ``-t','`` sets the column separator to a comma.
-- **Sort key**: ``-kSTART,END`` selects the field range to sort by.
-   - Most common: ``-k2,2`` → sort by *only* column 2.
-   - Add ``n`` to sort **numerically** (otherwise it's lexical): ``-k2,2n``.
-- **Multiple keys**: provide more than one ``-k`` in priority order.
-  Example: ``-k2,2n -k3,3n -k5,5n`` sorts by col2, then col3, then col5.
+Programs
+--------
+- A program is a sequence of statements
+- Statements execute in order
+- Variables must be declared before they are used
 
-Cheat sheet
------------
-- One numeric key: ``sort -t',' -k2,2n``
-- Two keys: ``sort -t',' -k2,2n -k3,3n``
-- Three keys: ``sort -t',' -k2,2n -k3,3n -k5,5n``
-- Reverse on a key: add ``r`` to that key (e.g., ``-k2,2nr``)
+Your ``hw1`` repository already contains the following packages:
 
-Aside 2: CSV Parsing with IFS and while loop
-=============================================
+- ``expressions``
+- ``statements``
+- ``program``
 
-You can use the ``IFS`` (Internal Field Separator) variable in Bash to
-split fields from a CSV file. For example, suppose we have a file
-``data.csv`` with the following content::
+Each package will include a file(s) with the required interfaces and constructors discussed in the upcoming sections. 
 
-   Alice,24,Engineer
-   Bob,30,Designer
-   Carol,27,Manager
+Environment
+============
 
-We can parse it line by line using a ``while`` loop:
+During execution, the program uses an *environment*:
 
-.. code-block:: bash
+- A mapping from variable names to integer values
+- Represented as ``map[string]int``
 
-   # Read each line from data.csv
-   while IFS=, read -r name age role; do
-       echo "Name: $name, Age: $age, Role: $role"
-   done < data.csv
-
-Explanation:
-
-- ``IFS=,`` tells Bash to split each line by commas.
-- ``read -r name age role`` assigns each field to a variable.
-- ``done < data.csv`` feeds the CSV file into the loop.
-
-When run, the script prints::
-
-   Name: Alice, Age: 24, Role: Engineer
-   Name: Bob, Age: 30, Role: Designer
-   Name: Carol, Age: 27, Role: Manager
+The environment models the program's state as it executes.
 
 
-Homework Dataset 
-==================
-For all problems in this homework, you will use the street-cleaning dataset introduced in this week's pre-recorded video:
+Required Interfaces
+===================
 
-`1.5 – Demo: Shell-Scripting & Street Cleaning <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=d5bd8165-8af0-4d9e-81b4-b1fd011013b7>`__
+You **must** define the following interfaces exactly as shown.
 
-The original dataset (``orig_sched.csv``) is in the ``data/`` directory of your repository. 
+Expression Interface
+--------------------
 
-We've also included several modified versions of the dataset in ``data/`` to help you test your ``bash`` scripts. You may assume the following about any street-cleaning file provided to your scripts:
+Expressions compute values.
 
-- The file is always a **modification of the original dataset** supplied in ``data/orig_sched.csv``.
-- The file **always includes the header row**, and the **header is identical** to the original (same columns, same order, same names).
-- The **records themselves may change** (rows may be added/removed and/or modified), but the **schema does not**.
+.. code-block:: go
 
-.. note::
-   You should not need to handle arbitrary CSV layouts or missing headers. Focus your solutions on the exact column structure of the original file.
+   type Expression interface {
+       Evaluate(environment map[string]int) int
+   }
 
-Feel free to add additional modified datasets of the original dataset to help test your scripts. 
+This interface is already located in ``hw1/expressions/expression.go`` 
 
-Problem 1 - Count Unique Wards 
-===============================
-Inside ``p1/p1.sh``, write a Bash script that takes a *street-cleaning CSV file* as an argument and prints the **total number of unique wards** in the file. The script must accept exactly one argument: the path to the CSV (e.g., ``data/orig_sched.csv``). If **no file or too many files** are provided, the script must **exit with status 1** and print:
+Statement Interface
+-------------------
 
-.. code-block:: bash
+Statements perform actions.
 
-  Usage: p1.sh SCHEDULE_FILE
+.. code-block:: go
 
-Output should be a **single integer**: the number of distinct wards present in the file.
+   type Statement interface {
+       Execute(environment map[string]int)
+   }
 
-Examples
+This interface is already located in ``hw1/statements/statement.go`` 
+
+
+Required Constructors
+======================
+
+You **must** implement the following constructor functions.
+The function names and return types **must not change**, as they will be used by the provided tests.
+
+You are responsible for defining the concrete struct types that these constructors return.
+
+
+Expressions
 -------------
-Successful run:
 
-.. code-block:: bash
+Binary Expression
+~~~~~~~~~~~~~~~~~~
 
-   $ bash p1.sh ../data/orig_sched.csv
-   50
+A binary expression combines two expressions using an operator.
 
-No argument provided:
+.. code-block:: go
 
-.. code-block:: bash
+  type BinOp int
 
-   $ bash p1.sh
-   Usage: p1.sh SCHEDULE_FILE
-   $ echo $?
-   1
+  const (
+    ADD BinOp = iota
+    MULT
+    SUB
+    DIV
+  )
+   func NewBinaryExpr(operator BinOp, op1, op2 Expression) *Binary {
+       // TODO: Implement me
+   }
 
-Problem 2 -  Are Two Street-Cleaning Files Different? 
-======================================================
-Inside ``p2/p2.sh``, write a Bash script that takes **two** street-cleaning CSV files and reports whether they are **different**.
-
-You mus ``diff -q`` command to compare the two files. The ``-q`` for ``diff`` in short says *tell me if they differ, but don’t show the differences.* If the files are identical, ``diff -q`` prints nothing (just returns exit code 0).
-
-**Output**
-
-- Print **``YES``** if the files are different (``diff -q`` exits with status 1).
-- Print **``NO``** if the files are identical (``diff -q`` exits with status 0).
-- Do not include ``set -o errexit`` in this script file. 
-
-The script must accept **exactly two** arguments: the paths to the CSV files. If both files are **not** specified, the script must **exit with status 1** and print:
-
-.. code-block:: bash
-
-  Usage: p2.sh SCHEDULE_FILE1 SCHEDULE_FILE2
-
-The **only** output for valid comparisons should be either ``YES`` or ``NO`` (do not print any additional text).
-
-Examples
----------
-Identical files:
-
-.. code-block:: bash
-
-   $ bash p2.sh ../data/orig_sched.csv ../data/orig_sched.csv
-   NO
-
-Different files:
-
-.. code-block:: bash
+Integer Literal
+~~~~~~~~~~~~~~~
 
-   $ bash p2.sh ../data/orig_sched.csv ../data/sched_003.csv
-   YES
+An integer literal represents a fixed integer value.
 
-Missing arguments:
-
-.. code-block:: bash
+.. code-block:: go
 
-   $ bash p2.sh ../data/orig_sched.csv
-   Usage: p2.sh SCHEDULE_FILE1 SCHEDULE_FILE2
-   $ echo $?
-   1
+   func NewIntLit(value int) *IntLit {
+       // TODO: Implement me
+   }
 
+Variable Expression
+~~~~~~~~~~~~~~~~~~~
 
-Problem 3 - Sections per Ward
-===============================
-Inside ``p3/p3.sh``, write a Bash script that takes a street-cleaning CSV file and prints, **for each ward**, the **total number of unique sections** in that ward. The script must accept exactly **one** argument: the path to the CSV (e.g., ``data/orig_sched_modified.csv``). If **no file** is provided, the script must **exit with status 1** and print:
+A variable used as an expression produces the variable's current value.
 
-.. code-block:: bash
+.. code-block:: go
 
-  Usage: p3.sh SCHEDULE_FILE
+   func NewVariable(identifier string) *Variable {
+       // TODO: Implement Me 
+   }
 
-**Output format**: one ward per line as: ``WARD COUNT`` sorted in ascending order by ward number. 
 
-Examples
----------
-.. code-block:: bash
+- Place all concrete expression types in the ``hw1/expressions`` package
+- Define concrete types, methods and constructors in:
+   - The same files as the expression interface, **or**
+   - Separate files within the same package (e.g., ``binary.go``, ``inLiteral.go``)
 
-   $ bash p3.sh ../data/orig_sched.csv
-    1 11
-    2 7
-    3 13
-    4 15
-    5 17
-    6 18
-    7 17
-    8 23
-    9 20
-    10 17
-    11 12
-    12 11
-    13 27
-    14 18
-    15 10
-    16 25
-    17 25
-    18 20
-    19 25
-    20 19
-    21 24
-    22 14
-    23 23
-    24 11
-    25 10
-    26 12
-    27 18
-    28 14
-    29 14
-    30 15
-    31 11
-    32 20
-    33 13
-    34 6
-    35 12
-    36 13
-    37 15
-    38 26
-    39 23
-    40 19
-    41 32
-    42 5
-    43 8
-    44 11
-    45 25
-    46 9
-    47 20
-    48 11
-    49 13
-    50 14
 
-Missing arguments:
+Statements
+------------
 
-.. code-block:: bash
+Assignment Statement
+~~~~~~~~~~~~~~~~~~~~~
 
-   $ bash p3.sh
-   Usage: p3.sh SCHEDULE_FILE
-   $ echo $?
-   1
+An assignment updates the value of an existing variable.
 
+.. code-block:: go
 
-Problem 4 - Ward/Section Directory Pack
-=========================================
-Inside ``p4/p4.sh``, write a Bash script that, given a street-cleaning CSV, a **ward**, and a **section**, creates a top-level directory named from the ward/section (with **leading zeros**) and a month-by-month subfolder layout. Each month folder must contain a single file ``dates.txt`` holding the **DATES** string for that month.
+   func NewAssignment(lvalue string, expr expressions.Expression) *Assignment {
+       // TODO: Implement me
+   }
 
-Usage
-----------
+Declaration Statement
+~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: bash
+A declaration introduces a new variable, with an initial value.
 
-  Usage: p4.sh [-z] SCHEDULE_FILE WARD SECTION
+.. code-block:: go
 
-- ``SCHEDULE_FILE``: path to the CSV (e.g., ``data/orig_sched.csv``)
-- ``WARD``: ward number (integer)
-- ``SECTION``: section number (integer)
-- ``-z`` (optional): after creating the directory structure, zip it using the top-level name
-- If arguments are missing, print:
+   func NewDeclaration(identifier string, initValue expressions.Expression) *Declaration {
+       // TODO: Implement me
+   }
 
-  ``Usage: p4.sh [-z] SCHEDULE_FILE WARD SECTION``
+Print Statement
+~~~~~~~~~~~~~~~~
 
-  and **exit 1**.
+A print statement evaluates an expression and prints its value with a newline after it.
 
-- You can assume the ward/section provided as command line arguments do exist in the given file CSV.
+.. code-block:: go
 
+   func NewPrint(expression expressions.Expression) *Print {
+       // TODO: Implement me
+   }
 
-Naming & Structure Requirements
-----------------------------------
-- **Top-level directory name**: use two-digit, zero-padded ward and section with a clear prefix that starts with a ``W`` for the ward and ``S`` for the section, e.g.:
-  
-  - Ward 1, Section 3 → ``W01_S03``
-  - Ward 12, Section 9 → ``W12_S09``
+Place all concrete statement types in the ``hw1/statements`` package
 
-- **Month directories**: create a subdirectory **for each month that appears in the CSV for that ward/section**. The directory name must be the numeric month value with no leading zeros. 
+- Define concrete types, methods and constructors in:
+   - The same files as the statement interface, **or**
+   - Separate files within the same package (e.g., ``assignment.go``, ``print.go``)
 
-- **dates.txt**: inside each month directory, write **one file** named ``dates.txt`` whose content is the **exact DATES string** from the CSV for that ward/section/month (e.g., ``4,5``).
-  - If multiple rows exist for the same month, you may write the **first matching row's** DATES string. 
 
-- If ``-z`` is provided, create an archive named ``WXX_SYY.zip`` containing the whole tree.
-- Do not create a top-level directory if the ward and section given has no records in the given file. Additionally if a top-level directory is not created and the ``-z`` is provided then do not make a zip file. 
+Program Representation
+=======================
 
+A program consists of a sequence of statements.
 
-Examples
----------
+Constructor
+-----------
 
-Input:
+.. code-block:: go
 
-.. code-block:: bash
+   func NewProgram(stmts []statements.Statement) *Program {
+       // TODO: Implement me
+   }
+Place the constructor and its method inside the ``hw1/program/program.go`` file. 
 
-   $ p4.sh ../data/orig_sched.csv 1 1
 
-Creates:
+Program Execution
+-----------------
 
-.. code-block:: text
+You must implement an ``Execute`` method for ``Program``.
 
-   W01_S03/
-   ├── 4/
-   │   └── dates.txt        # The file contains only the string:  "4,5" (notice the double quotes must remain)
-   ├── 5/
-   │   └── dates.txt        # The file contains only the string: "29,30" (notice the double quotes must remain)
-   ├── 6/
-   │   └── dates.txt
-   └── 8/
-   │   └── dates.txt
-   └── 9/
-   │   └── dates.txt
-   └── 10/
-   │   └── dates.txt
-   └── 11/
-       └── dates.txt
-With zip:
+.. code-block:: go
 
-.. code-block:: bash
+   func (prog *Program) Execute() bool {
+   }
 
-   $ p4.sh -z ../data/orig_sched.csv 1 3
-   # Produces W01_S03/ ... and W01_S03.zip
+Execution Behavior
+~~~~~~~~~~~~~~~~~~
 
-**Hint**
-~~~~~~~~~
-When using the ``cut`` command with the ``-f`` option, you can select specific fields (columns) from a delimited file.  
-If you want to select all remaining columns starting from a specific field, you can use a dash (``-``) after the field number.  
-For example::
+The ``Execute`` method must:
 
-  cut -f3- data.txt
+1. **Validate the program**
+    - Ensure all variables are declared before use
+    - Ensure assignments only target declared variables
+    - Ensure variable expressions only reference declared variables
 
-This command selects the third field **and all fields after it** from each line of ``data.txt``.
+2. **Return a boolean result**
+    - Return ``true`` if **any error occurs**. If validation fails, execution must **not** proceed.
+    - Return ``false`` if **no errors occur**
 
+3. **Execute the program**
+    - Only execute the program *after* validation succeeds
+    - Statements execute in order
+    - The environment should be updated as execution proceeds
 
-Problem 5 - Print the Days 
-===========================
-Inside ``p5/p5.sh``, write a Bash script that, given a street-cleaning CSV file, a **ward**, a **section**, and a **month**, prints the days for that street cleaning for that month within the given ward and section. 
 
-Usage
-------
-.. code-block:: bash
 
-   p5.sh SCHEDULE_FILE WARD SECTION MONTH 
+Design Constraints
+====================
 
-- ``SCHEDULE_FILE``: path to the CSV (e.g., ``data/orig_sched.csv``)
-- ``WARD``: ward number (integer)
-- ``SECTION``: section number (integer)
-- ``MONTH``: month number (integer; e.g., 4 for April … 11 for November)
+- You must use:
+   - Interfaces for shared behavior
+   - Structs for concrete constructs
+- You may **not**:
+   - Hard-code logic using type switches in ``Program.Execute``
+   - Collapse all behavior into a single function
+- You **must**:
+   - Implement behavior through method calls on statements and expressions
 
-Requirements
----------------
-- If any argument is **missing**, print the exact usage string below and **exit 1**:
 
-  ``Usage: p5.sh SCHEDULE_FILE WARD SECTION MONTH``
+Testing
+========
 
-- Output: The days (each on its separate line) for street cleaning within the given month for the specified ward and section. Do not print anything if no days are found for that month within the given ward and section. 
+Inside ``hw1\program`` you are provided with:
 
-Examples
-----------
+- ``program_test.go``
 
-Days found:
+This test file will:
 
-.. code-block:: bash
+- Construct programs using the required constructors
+- Execute programs
+- Verify correctness of behavior
 
-   $ p5.sh data/orig_sched.csv 1 1 4 
-   4
-   5
 
-No days found:
+Running Tests 
+-----------------
+You can run all the tests cases by using ``go test``. For example, if you wanted to run all test cases  then go inside the ``program`` directory (i.e., ``cd program``) and execute the following command::
 
-.. code-block:: bash
+  go test -v
 
-   $ p5.sh data/orig_sched.csv 1 1 2 
-   $ 
+The ``-v`` runs the tests in ``verbose`` mode so you can more clearly see the tests you pass and fail. 
 
-Missing arguments:
+Your code must compile and pass all tests without modifying the test files.
 
-.. code-block:: bash
 
-   $ p5.sh data/orig_sched.csv 1 1 
-   Usage: p5.sh SCHEDULE_FILE WARD SECTION MONTH 
-   $ echo $?
-   1
+Design Hint: Separating Validation from Execution
+==================================================
 
-**Hint**
-~~~~~~~~~
-The ``tr`` command reads from standard input and **translates**, **squeezes**, or **deletes** characters, writing the result to standard output.  
+Before executing a program, you are required to verify that it is **valid**.
+For example:
 
-**Translate lowercase → uppercase:**
+- Variables must be declared before they are used
+- Assignments must target declared variables
+- Variable expressions must reference declared variables
 
-.. code-block:: bash
+One clean way to organize this logic is to **separate validation from execution**.
 
-   echo "hello, world" | tr 'a-z' 'A-Z'
-   # HELLO, WORLD
 
-**Replace spaces with newlines (split into one-per-line):**
+Augmenting Interfaces (Optional but Recommended)
+------------------------------------------------
 
-.. code-block:: bash
+You may find it useful to extend your existing interfaces with an additional method
+that checks whether execution is safe.
 
-   echo "alpha beta gamma" | tr ' ' '\n'
-   # alpha
-   # beta
-   # gamma
+For example, you might consider adding:
 
-**Squeeze repeated spaces to a single space (`-s`):**
+- A validation method for statements
+- A validation method for expressions
 
-.. code-block:: bash
+These methods can walk through the program structure and verify correctness
+*without* executing the program.
 
-   echo "a   b    c" | tr -s ' '
-   # a b c
 
-``-d``: **delete** all occurrences of the specified characters instead of translating.  
-  Example: remove commas from a stream:
+Tracking Declared Variables
+--------------------------------
 
-  .. code-block:: bash
+During validation, you need a way to track which variables have been declared.
 
-     echo "1,2,3" | tr -d ','
-     # -> 123
+A common approach is to use a map that represents a **set of variable names**:
 
-Running the Tests
-=================
-Inside your repository, there is a top-level ``tests/``  directory that contains tests for each homework problem (separated into their own directories). Each test within a test problem directory consists of:
+.. code-block:: go
 
-- ``testXX.in`` — one line with the exact command to run (paths are relative to the test folder).
-- ``testXX.ans`` — the expected output.
+   declared := map[string]struct{}{}
 
-the **last line** of ``testXX.ans`` is the **expected exit status**; all prior lines are the expected stdout.  
+In this map:
 
-Each test directory has a runner file ``run.sh`` that compares both stdout and exit status. A mismatch in either causes the test to fail. To run all the tests for a specific problem can run ``bash run.sh`` in that specific directory. For example, from the top-level directory of your repository, you can run the problem 1 tests by performing the following: 
+- The **keys** are variable names
+- The **values** are empty structs
 
-.. code-block:: bash
+This map answers the question:
+“Has this variable been declared yet?”
 
-   $ cd tests/p1
-   $ bash run.sh
 
-The runner will specify whether you passed a test case or if you failed it. Here's a sample structure of what to expect to see after running the ``run.sh`` file. 
+Why ``struct{}``?
+~~~~~~~~~~~~~~~~~~
 
-.. code-block:: text
+The empty struct type ``struct{}``:
 
-   test01 passed
-   test02 failed.
-          test02.in: bash ../../p1/p1.sh ../data/bad.csv
-          got: 1
-          expected: 2
-          exit status got: 1
-          exit status expected: 0
-   Total: 1/2
+- Takes **zero bytes** of storage
+- Carries no data
+- Exists only to indicate presence
 
-Run a single test (Problem 1)
------------------------------
-Each runner supports a ``-t`` flag to target one test by label (without ``.in``):
+This makes ``map[string]struct{}`` the idiomatic Go way to represent a **set**.
 
-.. code-block:: bash
 
-   $ cd tests/p1
-   $ bash run.sh -t test01
+Adding to the Environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Grading 
-=========
-Programming assignments will be graded according to a general rubric. Specifically, we will assign points for completeness, correctness, design, and style. (For more details on the categories, see our Assignment Rubric page.)
+To record that a variable has been declared:
 
-The exact weights for each category will vary from one assignment to another. For this assignment, the weights will be:
+.. code-block:: go
 
-- **Completeness**: 75%
-- **Correctness**: 15%
-- **Style/Design**: 10%
+   declared["x"] = struct{}{}
+
+To check whether a variable exists:
+
+.. code-block:: go
+
+   _, ok := declared["x"]
+   if !ok {
+       // variable was not declared
+   }
+
+
+Why This Design Helps
+--------------------------------
+
+Separating validation from execution:
+
+- Makes your code easier to reason about
+- Prevents partially executed programs
+- Mirrors how real compilers operate
+
+A compiler always checks correctness *before* it attempts to run or translate a program.
+
+
+Final Note
+-----------
+
+You are **not required** to use this exact design.
+However, if you find yourself mixing validation logic directly into execution,
+consider whether separating the two concerns might simplify your implementation.
+
+Grading
+========
+
+Programming assignments will be graded according to a general rubric.
+Specifically, we will assign points for completeness, correctness,
+design, and style.  (For more details on the categories, see our `Assignment
+Rubric page <../index.html>`__.)
+
+The exact weights for each category will vary from one assignment to
+another.  For this assignment, the weights will be:
+
+* **Completeness:** 80%
+* **Correctness:**  10%
+* **Design & Style** 10%
+
+
+Design, Style and Cleaning up
+==============================
+
+Before you submit your final solution, you should, remove
+
+* any ``Printf`` statements that you added for debugging purposes and
+* all in-line comments of the form: "YOUR CODE HERE" and "TODO ..."
+* Think about your function decomposition. No code duplication. This homework assignment is relatively small so this shouldn't be a major problem but could be in certain problems. 
+
+Go does not have a strict style guide. However, use your best judgment from prior programming experience about style. Did you use good
+variable names?  Do you have any lines that are too long, etc.
+
+As you clean up, you should periodically save your file and run your
+code through the tests to make sure that you have not broken it in the
+process.
+
 
 Submission
 ===========
-
-Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Homework #1" assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
-  
-Depending on the assignment, once you submit your work, an "autograder" will run. This autograder should produce the same test results as when you run the code yourself; if it doesn't, please let us know so we can look into it. A few other notes: 
+Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Homework #1" assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.A few other notes: 
 
 - You are allowed to make as many submissions as you want before the deadline.
 - Please make sure you have read and understood our :ref:`Late Submission Policy <late_submissions>`. 
-- Your completeness score is determined solely based on the automated tests, but we may adjust your score if you attempt to pass tests by rote (e.g., by writing code that hard-codes the expected output for each possible test input).
-- Gradescope will report the test score it obtains when running your code. If there is a discrepancy between the score you get when running our grader script, and the score reported by Gradescope, please let us know so we can take a look at it.
+- Your completeness score is determined solely based on the automated tests, but we may adjust your score if you attempt to pass tests by rote (e.g., by writing code that hard-codes the expected output for each possible test input). 
+
+
