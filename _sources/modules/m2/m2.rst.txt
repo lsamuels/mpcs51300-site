@@ -34,7 +34,7 @@ Synchronous Sessions (In-person Lecture)
 As a reminder here are the dates and times for the synchronous session for this module:
 
 - Dates/Times
-   - **Wednesday January 12th 2:20am-4:20pm** 
+   - **Wednesday January 12th 2:30am-4:20pm** 
 - Session Outline 
    - Overview of Lexical Analysis
    - Introduction to Regular Expressions
