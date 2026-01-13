@@ -12,7 +12,6 @@ You can also find the videos under the "Panopto" tab on the MPCS 51300 canvas si
 
 The lectures are a series of approx 15-20 minute videos. **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
 
-* 2.0 - Automating NFA Construction
 * 2.1 - Converting a NFA to DFA
 * 2.2 - Coding a Scanner
  
