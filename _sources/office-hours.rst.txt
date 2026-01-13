@@ -42,4 +42,16 @@ Here is the information that you will see when the hybrid/remote office hours po
     let us know if you would prefer not to do this. You will know when you are coming up soon because 
     the instructor or TA will click the “Resolved” button to indicate we have completed a session.
 
-TBD
++-----------+-----------------+--------------------------+-------------------------------------+
++ **Day**   | **Time**        | **Who**                  | **Type (Location)**                 | 
++-----------+-----------------+--------------------------+-------------------------------------+
+| Monday    | 11:30am-1:00pm  | Skye Soss                | In-person (JCL Common Area 2A)      |
++-----------+-----------------+--------------------------+-------------------------------------+
+| Monday    | 4:30pm-6:00pm   | Lamont Samuels           |  Hybrid (JCL 398D/Zoom)             |     
++-----------+-----------------+--------------------------+-------------------------------------+
+| Tuesday   | 2:30pm-4:00pm   | Skye Soss                | In-person (JCL Common Area 2A)      | 
++-----------+-----------------+--------------------------+-------------------------------------+
+| Wednesday | 11:00am-12:30pm | Daniel Sheeler           |  Remote (Zoom)                      | 
++-----------+-----------------+--------------------------+-------------------------------------+
+| Thursday  | 11:00am-12:30pm | Daniel Sheeler           |  Remote (Zoom )                     | 
++-----------+-----------------+--------------------------+-------------------------------------+
