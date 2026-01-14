@@ -43,4 +43,4 @@ Assignment
 ----------------------
 Assignments are always **due** on Tuesday evenings. 
 
-* `Homework #2 <../../assignments/hw/index.html>`__, due January 20th at 11:59pm CDT
+* `Homework #2 <../../assignments/hw2/index.html>`__, due January 20th at 11:59pm CDT

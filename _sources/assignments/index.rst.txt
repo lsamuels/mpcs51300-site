@@ -4,6 +4,7 @@ Assignments
 ==============
 
 - `Homework #1  <./hw1/index.html>`__, due January 13th at 11:59pm CDT
+- `Homework #2  <./hw2/index.html>`__, due January 20th at 11:59pm CDT
 
 
 Compiler Documents 

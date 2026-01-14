@@ -42,9 +42,9 @@ The Cal Language
 -----------------
 For this assignment, we will build a direct-coded scanner for a simple toy language called **Cal**. The informal specification of the language is described below (a more formal specification will be provided in a future lecture): 
 
-1. The only values in the language are integers. An integer is either **zero** or a number beginning with 1 to 9 followed by zero or more digits (i.e., 0 to 9). All integers are positive. 
+1. The only values in the language are integers. An integer is either **zero** or a number beginning with 1 to 9 followed by zero or more digits (i.e., 0 to 9). 
 
-2. The language contains variables (i.e., identifiers). Each identifier must begin with a letter from the English alphabet. The letter can be capitalized or lowercase. An identifier can contain zero or more integer digits (0 to 9), lowercase or uppercase English letters following the first letter. 
+2. The language contains variables (i.e., identifiers). Each identifier must begin with a letter from the English alphabet. The letter can be capitalized or lowercase. An identifier can contain zero or more  digits (0 to 9), lowercase or uppercase English letters following the first letter. 
 
 3. The language contains arithmetic expressions that work on integer values. The operators for these expressions are ``+`` (addition), ``-`` (subtraction), ``*`` (multiplication), and ``/`` (division). Expressions can contain a mixture of literal integers and variables as operands to the operators.   
 
@@ -68,21 +68,21 @@ Here are a few examples of **Cal** programs
 * Sample 2 
 .. code-block:: none
 
-  let a = 4; 
-  a = 7; 
+  let a=4; 
+  a=7; 
   print a; 
 
 * Sample 3
 .. code-block:: none
 
   let a = 4 + 12 * 123 - 34 / 6; print a; 
-  let c = a + 4; 
+  let c=a+4; 
   print c; 
 
 
 Programming Question: Simple Scanner 
 -------------------------------------
-As mentioned in the previous section, you will implement a direct-coded scanner for the **Cal** language. **You must build the scanner using the method described in the M2 videos.** As you may recall, here are the steps to implement the scanner: 
+As mentioned in the previous section, you will implement a direct-coded scanner for the **Cal** language. As you may recall, here are the steps to implement the scanner: 
 
 1. Write down the RE for the input language
 2. Build a big NFA
@@ -98,8 +98,8 @@ To help you get started with the structure of scanner, we have provided some Go 
   type TokenType string
 
   const (
-    ILLEGAL = "ILLEGAL"
-    INT     = "INT"
+    INT  = "INT"
+    PLUS = "+"
   )
 
   type Token struct {
@@ -123,20 +123,20 @@ The actual implementation of the scanner will be defined in the ``hw2/template/s
         return scanner
     }
 
-    func (l *Scanner) NextToken() token.Token {
+    func (l *Scanner) NextToken() *token.Token {
        // TODO: Implement Me
-       return token.Token{token.INT, "0"} 
+       return &token.Token{token.INT, "0"} 
     }
 
 You may update the ``Scanner`` struct with additional fields to help you implement the scanner. The ``New`` initializes and allocates a new scanner.  You should think of the argument ``input`` as the entire source code for a Cal program. You want to hold on to this input because you'll use it in the ``NextToken()`` function. However, You may modify this function as you please. The ``NextToken`` function represents the token stream described in lecture. Each time the function is called it returns the next token identified from the ``input`` source code. You can modify this code as you please. 
 
 You will need to define a ``main`` program that will produce string representations for your token types when provided with a **Cal** source code. You do need to include line numbers as metadata along with any value data for token types that should tag along the associated value. You do not have to include column numbers. An example of this is shown in the next section.
 
-**You MUST not use any type of regular expression packages, libraries, etc., to build your scanner. You will handwrite your regulars expressions and DFA and then directly implement the DFA in your language of choice. If you are confused by this then please ask questions on Ed.**
+**You MUST not use any type of regular expression packages, libraries, etc., to build your scanner. If you are confused by this then please ask questions on Ed.**
 
 **Handling Errors**: If your scanner recognizes an illegal token then the scanner must 
 
-1. Print all legal tokens up to and including the illegal token 
+1. Print all legal tokens up to illegal identification of the token. The code should then print an error message that indicates why the lexeme being processed is illegal.  
 2. Stop processing the file and quit. 
 
 .. note::
@@ -156,7 +156,15 @@ You will need to provide a ``README`` file that **clearly and explicitly** expla
   let c = a + 4;
   print c;
 
-then we can run the program as follows in Go and Python, assuming your scannerâ€™s main code lives in a file ``scanner.go/ scanner.py``
+and a bad Cal program named ``bad1.cal`` that contains the following code: 
+
+.. code-block:: go 
+  
+  let a = 23; 
+  let 934bad = a; 
+
+
+then we can run the program as follows in Go and Python, assuming your scanner's main code lives in a file ``scanner.go/ scanner.py``
 
 .. code-block:: console 
 
@@ -177,22 +185,26 @@ then we can run the program as follows in Go and Python, assuming your scannerâ€
   ID(3, "c")
   SEMICOLON(3)
 
-  $ python3 scanner.py simple1.cal
+  $ python3 scanner.py bad1.cal
   LET(1)
   ID(1, "a")
   EQUALS(1)
   INT_LIT(1,23)
   SEMICOLON(1)
   LET(2)
-  ID(2, "c")
-  EQUALS(2)
-  ID(2, "a")
-  PLUS(2)
-  INT_LIT(2,4)
-  SEMICOLON(2)
-  PRINT(3)
-  ID(3, "c")
-  SEMICOLON(3)
+  Illegal INT_LIT token found(2, "934") encountered a 'b' instead of a digit. 
+
+Your error messages do not need to exactly match what is shown above. They simply need to indicate that a lexeme could not be classified as a valid token with a reason. To help clarify, here is what the Python lexer returns in this case:
+
+.. code-block:: python3 
+
+  >>> a = 23
+  >>> 934bad = a
+  File "<stdin>", line 1
+    934bad = a
+      ^
+  SyntaxError: invalid decimal literal
+
 
 How you organize the structure of your code in your repository is up to you. You can also ``git rm`` the template code for your final submission.
 

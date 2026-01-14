@@ -152,8 +152,8 @@
 <h2>The Cal Language<a class="headerlink" href="#the-cal-language" title="Link to this heading">¶</a></h2>
 <p>For this assignment, we will build a direct-coded scanner for a simple toy language called <strong>Cal</strong>. The informal specification of the language is described below (a more formal specification will be provided in a future lecture):</p>
 <ol class="arabic simple">
-<li><p>The only values in the language are integers. An integer is either <strong>zero</strong> or a number beginning with 1 to 9 followed by zero or more digits (i.e., 0 to 9). All integers are positive.</p></li>
-<li><p>The language contains variables (i.e., identifiers). Each identifier must begin with a letter from the English alphabet. The letter can be capitalized or lowercase. An identifier can contain zero or more integer digits (0 to 9), lowercase or uppercase English letters following the first letter.</p></li>
+<li><p>The only values in the language are integers. An integer is either <strong>zero</strong> or a number beginning with 1 to 9 followed by zero or more digits (i.e., 0 to 9).</p></li>
+<li><p>The language contains variables (i.e., identifiers). Each identifier must begin with a letter from the English alphabet. The letter can be capitalized or lowercase. An identifier can contain zero or more  digits (0 to 9), lowercase or uppercase English letters following the first letter.</p></li>
 <li><p>The language contains arithmetic expressions that work on integer values. The operators for these expressions are <code class="docutils literal notranslate"><span class="pre">+</span></code> (addition), <code class="docutils literal notranslate"><span class="pre">-</span></code> (subtraction), <code class="docutils literal notranslate"><span class="pre">*</span></code> (multiplication), and <code class="docutils literal notranslate"><span class="pre">/</span></code> (division). Expressions can contain a mixture of literal integers and variables as operands to the operators.</p></li>
 <li><p>The language contains three types of statements. Each statement ends with a semicolon (<code class="docutils literal notranslate"><span class="pre">;</span></code>). The following are the three types of statements:</p>
 <ul class="simple">
@@ -177,8 +177,8 @@
 <ul class="simple">
 <li><p>Sample 2</p></li>
 </ul>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>let a = 4;
-a = 7;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>let a=4;
+a=7;
 print a;
 </pre></div>
 </div>
@@ -186,14 +186,14 @@ print a;
 <li><p>Sample 3</p></li>
 </ul>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>let a = 4 + 12 * 123 - 34 / 6; print a;
-let c = a + 4;
+let c=a+4;
 print c;
 </pre></div>
 </div>
 </section>
 <section id="programming-question-simple-scanner">
 <h2>Programming Question: Simple Scanner<a class="headerlink" href="#programming-question-simple-scanner" title="Link to this heading">¶</a></h2>
-<p>As mentioned in the previous section, you will implement a direct-coded scanner for the <strong>Cal</strong> language. <strong>You must build the scanner using the method described in the M2 videos.</strong> As you may recall, here are the steps to implement the scanner:</p>
+<p>As mentioned in the previous section, you will implement a direct-coded scanner for the <strong>Cal</strong> language. As you may recall, here are the steps to implement the scanner:</p>
 <ol class="arabic simple">
 <li><p>Write down the RE for the input language</p></li>
 <li><p>Build a big NFA</p></li>
@@ -205,8 +205,8 @@ print c;
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span><span class="w"> </span><span class="nx">TokenType</span><span class="w"> </span><span class="kt">string</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="nx">ILLEGAL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ILLEGAL&quot;</span>
-<span class="w">  </span><span class="nx">INT</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;INT&quot;</span>
+<span class="w">  </span><span class="nx">INT</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;INT&quot;</span>
+<span class="w">  </span><span class="nx">PLUS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;+&quot;</span>
 <span class="p">)</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">Token</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -227,18 +227,18 @@ print c;
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">scanner</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">l</span><span class="w"> </span><span class="o">*</span><span class="nx">Scanner</span><span class="p">)</span><span class="w"> </span><span class="nx">NextToken</span><span class="p">()</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Token</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">l</span><span class="w"> </span><span class="o">*</span><span class="nx">Scanner</span><span class="p">)</span><span class="w"> </span><span class="nx">NextToken</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">token</span><span class="p">.</span><span class="nx">Token</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="c1">// TODO: Implement Me</span>
-<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Token</span><span class="p">{</span><span class="nx">token</span><span class="p">.</span><span class="nx">INT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">}</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">token</span><span class="p">.</span><span class="nx">Token</span><span class="p">{</span><span class="nx">token</span><span class="p">.</span><span class="nx">INT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>You may update the <code class="docutils literal notranslate"><span class="pre">Scanner</span></code> struct with additional fields to help you implement the scanner. The <code class="docutils literal notranslate"><span class="pre">New</span></code> initializes and allocates a new scanner.  You should think of the argument <code class="docutils literal notranslate"><span class="pre">input</span></code> as the entire source code for a Cal program. You want to hold on to this input because you’ll use it in the <code class="docutils literal notranslate"><span class="pre">NextToken()</span></code> function. However, You may modify this function as you please. The <code class="docutils literal notranslate"><span class="pre">NextToken</span></code> function represents the token stream described in lecture. Each time the function is called it returns the next token identified from the <code class="docutils literal notranslate"><span class="pre">input</span></code> source code. You can modify this code as you please.</p>
 <p>You will need to define a <code class="docutils literal notranslate"><span class="pre">main</span></code> program that will produce string representations for your token types when provided with a <strong>Cal</strong> source code. You do need to include line numbers as metadata along with any value data for token types that should tag along the associated value. You do not have to include column numbers. An example of this is shown in the next section.</p>
-<p><strong>You MUST not use any type of regular expression packages, libraries, etc., to build your scanner. You will handwrite your regulars expressions and DFA and then directly implement the DFA in your language of choice. If you are confused by this then please ask questions on Ed.</strong></p>
+<p><strong>You MUST not use any type of regular expression packages, libraries, etc., to build your scanner. If you are confused by this then please ask questions on Ed.</strong></p>
 <p><strong>Handling Errors</strong>: If your scanner recognizes an illegal token then the scanner must</p>
 <ol class="arabic simple">
-<li><p>Print all legal tokens up to and including the illegal token</p></li>
+<li><p>Print all legal tokens up to illegal identification of the token. The code should then print an error message that indicates why the lexeme being processed is illegal.</p></li>
 <li><p>Stop processing the file and quit.</p></li>
 </ol>
 <div class="admonition note">
@@ -251,6 +251,11 @@ print c;
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">let</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">23</span><span class="p">;</span>
 <span class="nx">let</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 <span class="nx">print</span><span class="w"> </span><span class="nx">c</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>and a bad Cal program named <code class="docutils literal notranslate"><span class="pre">bad1.cal</span></code> that contains the following code:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">let</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">23</span><span class="p">;</span>
+<span class="nx">let</span><span class="w"> </span><span class="mi">934</span><span class="nx">bad</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>then we can run the program as follows in Go and Python, assuming your scanner’s main code lives in a file <code class="docutils literal notranslate"><span class="pre">scanner.go/</span> <span class="pre">scanner.py</span></code></p>
@@ -271,22 +276,23 @@ print c;
 <span class="go">ID(3, &quot;c&quot;)</span>
 <span class="go">SEMICOLON(3)</span>
 
-<span class="gp">$ </span>python3<span class="w"> </span>scanner.py<span class="w"> </span>simple1.cal
+<span class="gp">$ </span>python3<span class="w"> </span>scanner.py<span class="w"> </span>bad1.cal
 <span class="go">LET(1)</span>
 <span class="go">ID(1, &quot;a&quot;)</span>
 <span class="go">EQUALS(1)</span>
 <span class="go">INT_LIT(1,23)</span>
 <span class="go">SEMICOLON(1)</span>
 <span class="go">LET(2)</span>
-<span class="go">ID(2, &quot;c&quot;)</span>
-<span class="go">EQUALS(2)</span>
-<span class="go">ID(2, &quot;a&quot;)</span>
-<span class="go">PLUS(2)</span>
-<span class="go">INT_LIT(2,4)</span>
-<span class="go">SEMICOLON(2)</span>
-<span class="go">PRINT(3)</span>
-<span class="go">ID(3, &quot;c&quot;)</span>
-<span class="go">SEMICOLON(3)</span>
+<span class="go">Illegal INT_LIT token found(2, &quot;934&quot;) encountered a &#39;b&#39; instead of a digit.</span>
+</pre></div>
+</div>
+<p>Your error messages do not need to exactly match what is shown above. They simply need to indicate that a lexeme could not be classified as a valid token with a reason. To help clarify, here is what the Python lexer returns in this case:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">934</span><span class="n">bad</span> <span class="o">=</span> <span class="n">a</span>
+<span class="go">File &quot;&lt;stdin&gt;&quot;, line 1</span>
+<span class="go">  934bad = a</span>
+<span class="go">    ^</span>
+<span class="go">SyntaxError: invalid decimal literal</span>
 </pre></div>
 </div>
 <p>How you organize the structure of your code in your repository is up to you. You can also <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code> the template code for your final submission.</p>
