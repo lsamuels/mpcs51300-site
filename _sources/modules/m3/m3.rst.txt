@@ -7,17 +7,19 @@ Pre-recorded Lectures
 ---------------------
 **Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.**
 
-The pre-recorded lectures are available here: `M3 Videos <...>`_.
+The pre-recorded lectures are available here: `M3 Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=9ed9d0bf-65da-4002-9e26-b3d801455bbd>`_.
 You can also find the videos under the "Panopto" tab on the MPCS 51300 canvas site.
 
 The lectures are a series of approx 15-20 minute videos. **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
 
 Week 3 Videos 
 ~~~~~~~~~~~~~~ 
-- 3.1 Parsing Overview & Recursive Decent Parser
-- 3.2 Auto-generating a parser and lexer using ANTLR (Part 1)
-- 3.3 Auto-generating a parser and lexer using ANTLR (Part 2)
-- 3.4 Auto-generating a parser and lexer using ANTLR (Part 3)
+- 3.0 Introduction Syntax Analysis 
+- 3.1 Ambiguous Grammars 
+- 3.2 Parsing Overview & Recursive Decent Parser
+- 3.3 Auto-generating a parser and lexer using ANTLR (Part 1)
+- 3.4 Auto-generating a parser and lexer using ANTLR (Part 2)
+- 3.5 Auto-generating a parser and lexer using ANTLR (Part 3)
  
 The slides presented in these videos are accessible in the upstream repository and canvas.
 
