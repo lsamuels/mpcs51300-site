@@ -2,7 +2,7 @@
 Milestone #1: Front-End (Scanner & Parser)  
 ==========================================
 
-**Due: Friday February 3rd at 11:59pm**
+**Due: Tuesday February 3rd at 11:59pm**
 
 This milestone will require you to get started implementing the front-end for the compiler. 
 
