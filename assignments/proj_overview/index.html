@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Language Overview &#8212; MPCS 51300 - Compilers  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=0bf093e7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chiweb.css?v=9805d56b" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="../../_static/rmsearch.js?v=9704a757"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          MPCS 51300</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../syllabus.html">Syllabus</a></li>
+                <li><a href="../../calendar.html">Calendar</a></li>
+                <li><a href="../../modules/index.html">Modules</a></li>
+                <li><a href="../index.html">Assignments</a></li>
+                <li><a href="../../office-hours.html">Office Hours</a></li>
+                <li><a href="https://uchicago-cs.github.io/student-resource-guide/">CS Student Resources</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">Language Overview</a><ul>
+<li><a class="reference internal" href="#golite-grammar">GoLite Grammar</a></li>
+<li><a class="reference internal" href="#lexical-analysis-information">Lexical Analysis Information</a></li>
+<li><a class="reference internal" href="#language-semantics">Language Semantics</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="sourcelink">
+  <a href="../../_sources/assignments/proj_overview/index.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <section id="language-overview">
+<h1>Language Overview<a class="headerlink" href="#language-overview" title="Link to this heading">¶</a></h1>
+<p>This page provides an overview of the language you will be working with throughout the quarter. This quarter you will be building an optimizing compiler for a subset of the Go language that we are calling <strong>Golite</strong>, which will have very similar syntax and semantics to Go. However, certain aspects of the syntax and semantics will differ and be more restrictive than normal Go syntax so please make sure you read over the EBNF grammar carefully and fully understand the semantics of the language. Your first task is to make sure you understand the EBNF grammar for Golite.</p>
+<p>All programs in this language are command-line applications that are coded in a single file (with any name). The file extension must be <code class="docutils literal notranslate"><span class="pre">.golite</span></code>. If you wish to run your Golite programs using the Go compiler (i.e., for testing purposes) then change the extension to <code class="docutils literal notranslate"><span class="pre">.go</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document may be updated throughout the quarter. Please pay close attention to Ed for announcements about updates to this document.</p>
+</div>
+<section id="golite-grammar">
+<h2>GoLite Grammar<a class="headerlink" href="#golite-grammar" title="Link to this heading">¶</a></h2>
+<p>The following CFG grammar partially describes the Golite syntax. In the EBNF below, non-terminals are highlighted in blue with a <code class="docutils literal notranslate"><span class="pre">=</span></code> instead of an <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> as shown in class. You’ll notice a series of semi-colons lined up at the end of each line in the EBNF. Please ignore those semi-colons because they are needed to signal the end of a production. The language does contain semicolons to signal the end of a statement but those are terminals and are indicated as <code class="docutils literal notranslate"><span class="pre">';'</span></code>. The terminals are highlighted in green with single quotes. Don’t be frighten by the length of the grammar. We are just being very explicit about everything but the language is relatively small in comparison to the full Go language. Additional notation is provided in the below chart.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td rowspan="2"><p><strong>Usage</strong></p></td>
+<td rowspan="2"><p><strong>Notation</strong></p></td>
+<td rowspan="2"><p><strong>Meaning</strong></p></td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>Definition</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">=</span></code></p></td>
+<td><p>The definition of a production</p></td>
+</tr>
+<tr class="row-even"><td><p>Repetition</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{...}</span></code></p></td>
+<td><p>Zero or more occurrences of the symbol(s) defined in the braces.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Optional</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[...]</span></code></p></td>
+<td><p>The symbol(s) defined in subscript brackets are not required to appear.</p></td>
+</tr>
+<tr class="row-even"><td><p>Grouping</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(...)</span></code></p></td>
+<td><p>Any terminal symbol from within this group is valid.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Please make sure to post on Ed if you do not understand the notation below. Do not just assume. We will help clarify.</p>
+<div class="highlight-EBNF notranslate"><div class="highlight"><pre><span></span><span class="k">Program </span><span class="o">=</span> <span class="k">Types Declarations Functions </span><span class="s1">&#39;eof&#39;</span>                                                      <span class="p">;</span>
+<span class="k">Types </span><span class="o">=</span> <span class="p">{</span><span class="k">TypeDeclaration</span><span class="p">}</span>                                                                         <span class="p">;</span>
+<span class="k">TypeDeclaration </span><span class="o">=</span> <span class="s1">&#39;type&#39;</span> <span class="s1">&#39;id&#39;</span> <span class="s1">&#39;struct&#39;</span> <span class="s1">&#39;{&#39;</span> <span class="k">Fields </span><span class="s1">&#39;}&#39;</span> <span class="s1">&#39;;&#39;</span>                                         <span class="p">;</span>
+<span class="k">Fields </span><span class="o">=</span> <span class="k">Decl </span><span class="s1">&#39;;&#39;</span> <span class="p">{</span><span class="k">Decl </span><span class="s1">&#39;;&#39;</span><span class="p">}</span>                                                                      <span class="p">;</span>
+<span class="k">Decl </span><span class="o">=</span> <span class="s1">&#39;id&#39;</span> <span class="k">Type                                                                                  </span><span class="p">;</span>
+<span class="k">Type </span><span class="o">=</span> <span class="s1">&#39;int&#39;</span> <span class="p">|</span> <span class="s1">&#39;bool&#39;</span> <span class="p">|</span> <span class="s1">&#39;*&#39;</span> <span class="s1">&#39;id&#39;</span>                                                                  <span class="p">;</span>
+<span class="k">Declarations </span><span class="o">=</span> <span class="p">{</span><span class="k">Declaration</span><span class="p">}</span>                                                                      <span class="p">;</span>
+<span class="k">Declaration </span><span class="o">=</span> <span class="s1">&#39;var&#39;</span> <span class="k">Ids Type </span><span class="s1">&#39;;&#39;</span>                                                                  <span class="p">;</span>
+<span class="k">Ids </span><span class="o">=</span> <span class="s1">&#39;id&#39;</span> <span class="p">{</span><span class="s1">&#39;,&#39;</span> <span class="s1">&#39;id&#39;</span><span class="p">}</span>                                                                             <span class="p">;</span>
+<span class="k">Functions </span><span class="o">=</span> <span class="p">{</span><span class="k">Function</span><span class="p">}</span>                                                                            <span class="p">;</span>
+<span class="k">Function </span><span class="o">=</span> <span class="s1">&#39;func&#39;</span> <span class="s1">&#39;id&#39;</span> <span class="k">Parameters </span><span class="p">[</span><span class="k">ReturnType</span><span class="p">]</span> <span class="s1">&#39;{&#39;</span> <span class="k">Declarations Statements </span><span class="s1">&#39;}&#39;</span>                    <span class="p">;</span>
+<span class="k">Parameters </span><span class="o">=</span> <span class="s1">&#39;(&#39;</span> <span class="p">[</span> <span class="k">Decl </span><span class="p">{</span><span class="s1">&#39;,&#39;</span> <span class="k">Decl</span><span class="p">}]</span> <span class="s1">&#39;)&#39;</span>                                                           <span class="p">;</span>
+<span class="k">ReturnType </span><span class="o">=</span> <span class="k">type                                                                                 </span><span class="p">;</span>
+<span class="k">Statements </span><span class="o">=</span> <span class="p">{</span><span class="k">Statement</span><span class="p">}</span>                                                                          <span class="p">;</span>
+<span class="k">Statement </span><span class="o">=</span> <span class="k">Assignment </span><span class="p">|</span> <span class="k">Print </span><span class="p">|</span> <span class="k">Read </span><span class="p">|</span>  <span class="k">Delete </span><span class="p">|</span> <span class="k">Conditional </span><span class="p">|</span> <span class="k">Loop </span><span class="p">|</span> <span class="k">Return </span><span class="p">|</span> <span class="k">Invocation        </span><span class="p">;</span>
+<span class="k">Block </span><span class="o">=</span> <span class="s1">&#39;{&#39;</span> <span class="k">Statements </span><span class="s1">&#39;}&#39;</span>                                                                        <span class="p">;</span>
+<span class="k">Delete </span><span class="o">=</span> <span class="s1">&#39;delete&#39;</span> <span class="k">Expression </span><span class="s1">&#39;;&#39;</span>                                                                  <span class="p">;</span>
+<span class="k">Read </span><span class="o">=</span> <span class="s1">&#39;scan&#39;</span> <span class="k">LValue  </span><span class="s1">&#39;;&#39;</span>                                                                         <span class="p">;</span>
+<span class="k">Assignment </span><span class="o">=</span> <span class="k">LValue </span><span class="s1">&#39;=&#39;</span> <span class="k">Expression  </span><span class="s1">&#39;;&#39;</span>                                                           <span class="p">;</span>
+<span class="k">Print </span><span class="o">=</span> <span class="s1">&#39;printf&#39;</span> <span class="s1">&#39;(&#39;</span> <span class="s1">&#39;string&#39;</span> <span class="p">{</span> <span class="s1">&#39;,&#39;</span> <span class="k">Expression</span><span class="p">}</span> <span class="s1">&#39;)&#39;</span>  <span class="s1">&#39;;&#39;</span>                                          <span class="p">;</span>
+<span class="k">Conditional </span><span class="o">=</span> <span class="s1">&#39;if&#39;</span> <span class="s1">&#39;(&#39;</span> <span class="k">Expression </span><span class="s1">&#39;)&#39;</span> <span class="k">Block </span><span class="p">[</span><span class="s1">&#39;else&#39;</span> <span class="k">Block</span><span class="p">]</span>                                        <span class="p">;</span>
+<span class="k">Loop </span><span class="o">=</span> <span class="s1">&#39;for&#39;</span> <span class="s1">&#39;(&#39;</span> <span class="k">Expression </span><span class="s1">&#39;)&#39;</span> <span class="k">Block                                                             </span><span class="p">;</span>
+<span class="k">Return </span><span class="o">=</span> <span class="s1">&#39;return&#39;</span> <span class="p">[</span><span class="k">Expression</span><span class="p">]</span> <span class="s1">&#39;;&#39;</span>                                                                <span class="p">;</span>
+<span class="k">Invocation </span><span class="o">=</span> <span class="s1">&#39;id&#39;</span> <span class="k">Arguments </span><span class="s1">&#39;;&#39;</span>                                                                   <span class="p">;</span>
+<span class="k">Arguments </span><span class="o">=</span> <span class="s1">&#39;(&#39;</span> <span class="p">[</span><span class="k">Expression </span><span class="p">{</span><span class="s1">&#39;,&#39;</span> <span class="k">Expression</span><span class="p">}]</span> <span class="s1">&#39;)&#39;</span>                                                 <span class="p">;</span>
+<span class="k">LValue </span><span class="o">=</span> <span class="s1">&#39;id&#39;</span> <span class="p">{</span><span class="s1">&#39;.&#39;</span> <span class="s1">&#39;id&#39;</span><span class="p">}</span>                                                                          <span class="p">;</span>
+<span class="k">Expression </span><span class="o">=</span> <span class="k">BoolTerm </span><span class="p">{</span><span class="s1">&#39;||&#39;</span> <span class="k">BoolTerm</span><span class="p">}</span>                                                             <span class="p">;</span>
+<span class="k">BoolTerm </span><span class="o">=</span> <span class="k">EqualTerm </span><span class="p">{</span><span class="s1">&#39;&amp;&amp;&#39;</span> <span class="k">EqualTerm</span><span class="p">}</span>                                                             <span class="p">;</span>
+<span class="k">EqualTerm </span><span class="o">=</span>  <span class="k">RelationTerm </span><span class="p">{(</span><span class="s1">&#39;==&#39;</span><span class="p">|</span> <span class="s1">&#39;!=&#39;</span><span class="p">)</span> <span class="k">RelationTerm</span><span class="p">}</span>                                             <span class="p">;</span>
+<span class="k">RelationTerm </span><span class="o">=</span> <span class="k">SimpleTerm </span><span class="p">{(</span><span class="s1">&#39;&gt;&#39;</span><span class="p">|</span> <span class="s1">&#39;&lt;&#39;</span> <span class="p">|</span> <span class="s1">&#39;&lt;=&#39;</span> <span class="p">|</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">)</span> <span class="k">SimpleTerm</span><span class="p">}</span>                                   <span class="p">;</span>
+<span class="k">SimpleTerm </span><span class="o">=</span> <span class="k">Term </span><span class="p">{(</span><span class="s1">&#39;+&#39;</span><span class="p">|</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="k">Term</span><span class="p">}</span>                                                               <span class="p">;</span>
+<span class="k">Term </span><span class="o">=</span> <span class="k">UnaryTerm </span><span class="p">{(</span><span class="s1">&#39;*&#39;</span><span class="p">|</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="k">UnaryTerm</span><span class="p">}</span>                                                           <span class="p">;</span>
+<span class="k">UnaryTerm </span><span class="o">=</span> <span class="s1">&#39;!&#39;</span> <span class="k">SelectorTerm </span><span class="p">|</span> <span class="s1">&#39;-&#39;</span> <span class="k">SelectorTerm </span><span class="p">|</span> <span class="k">SelectorTerm                                    </span><span class="p">;</span>
+<span class="k">SelectorTerm </span><span class="o">=</span> <span class="k">Factor </span><span class="p">{</span><span class="s1">&#39;.&#39;</span> <span class="s1">&#39;id&#39;</span><span class="p">}</span>                                                                  <span class="p">;</span>
+<span class="k">Factor </span><span class="o">=</span> <span class="s1">&#39;(&#39;</span> <span class="k">Expression </span><span class="s1">&#39;)&#39;</span> <span class="p">|</span> <span class="s1">&#39;id&#39;</span> <span class="p">[</span><span class="k">Arguments</span><span class="p">]</span> <span class="p">|</span> <span class="s1">&#39;number&#39;</span> <span class="p">|</span> <span class="s1">&#39;new&#39;</span> <span class="k">id </span><span class="p">|</span> <span class="s1">&#39;true&#39;</span> <span class="p">|</span> <span class="s1">&#39;false&#39;</span> <span class="p">|</span> <span class="s1">&#39;nil&#39;</span>   <span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="lexical-analysis-information">
+<h2>Lexical Analysis Information<a class="headerlink" href="#lexical-analysis-information" title="Link to this heading">¶</a></h2>
+<p>The following rules provides additional information needed for lexical analysis:</p>
+<ul class="simple">
+<li><p>A valid program ends with an end-of-file indicator (EOF).</p></li>
+<li><p>An identifier (i.e., <code class="docutils literal notranslate"><span class="pre">'id'</span></code>) token must begin with a letter from the English alphabet. The letter can be capitalized or lowercase. Following the first character, an <code class="docutils literal notranslate"><span class="pre">'id'</span></code> token can contain zero or more alphanumeric characters (i.e., numerical digits (<code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">9</span></code>), lowercase or uppercase English letters).</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">'number'</span></code> token is an integer, where an integer is either <strong>zero</strong> or a number beginning with 1 to 9 followed by zero or more digits (i.e., 0 to 9).</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">'string'</span></code> token is a specific token needed for printing. It contains zero or more characters. A string is always embedded within double quotes (<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>).</p></li>
+<li><p>For Golite, A token is formed by taking the longest possible sequence of characters. Whitespace (i.e., one or more spaces, tabs, or newlines) may precede or follow any token. For example, <code class="docutils literal notranslate"><span class="pre">&quot;a=1&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">=</span> <span class="pre">1&quot;</span></code> are equivalent. Whitespace does delimit tokens. For example, <code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;</span></code> is one token whereas <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">bc&quot;</span></code> is two tokens.</p></li>
+<li><p>A comment begins with <code class="docutils literal notranslate"><span class="pre">//</span></code> and consists of all characters up to a new line. We do not have multiline comments in this language.</p></li>
+</ul>
+</section>
+<section id="language-semantics">
+<h2>Language Semantics<a class="headerlink" href="#language-semantics" title="Link to this heading">¶</a></h2>
+<p>The semantics for GoLite are provide informally. Please ask questions on Ed if you need clarification.</p>
+<ul class="simple">
+<li><p><strong>Scoping</strong>: local declarations and parameters may hide global declarations (and functions), but a local declaration may not redefine a parameter.</p></li>
+<li><dl class="simple">
+<dt><strong>Identifiers within the same scope can not be redeclared</strong>:</dt><dd><ul>
+<li><p>Global variables with the same name cannot be defined (compiler produces an error)</p></li>
+<li><p>Local variables of the same function cannot be defined (compiler produces an error)</p></li>
+<li><p>Two <code class="docutils literal notranslate"><span class="pre">struct</span></code> definitions with same name cannot be defined (compiler produces an error)</p></li>
+<li><p>Two fields within a struct cannot be defined (compiler produces an error)</p></li>
+<li><p>Two functions with the same name cannot be defined (compiler produces an error)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>The entry point into a program begins in the a function named <code class="docutils literal notranslate"><span class="pre">main</span></code> that takes no arguments. All valid programs must define a <code class="docutils literal notranslate"><span class="pre">main</span></code> function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span></code> type may only include fields of the primitive types and <code class="docutils literal notranslate"><span class="pre">struct</span></code> types defined in the file. You must also allow fields of its own type.</p></li>
+<li><p>The conditional expression for the <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span></code> statements must be a boolean expression.</p></li>
+<li><p>Assignment statements require the left-hand side and right-hand side to have same type. However, <code class="docutils literal notranslate"><span class="pre">nil</span></code> can be defined to any <code class="docutils literal notranslate"><span class="pre">struct</span></code> type.</p></li>
+<li><p>All <code class="docutils literal notranslate"><span class="pre">struct</span></code> values must be defined with the <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">id</span></code> syntax. <code class="docutils literal notranslate"><span class="pre">id</span></code> must be equal to a struct name and cannot be an <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">bool</span></code>. All <code class="docutils literal notranslate"><span class="pre">struct</span></code> values in the language are pointers to their types. You can not use the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> to make a pointer to a struct in Golite. At the code generation phase, The <code class="docutils literal notranslate"><span class="pre">new</span></code> syntax evaluates to a reference (i.e., a pointer to a memory address) to store a value of the specific type.</p></li>
+<li><p>Unlike in Go where there is garbage collection, all allocated memory in Golite must be freed (i.e., deallocated) by the programmer. A programmer deallocates memory that was allocated with the <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">id</span></code> syntax by calling <code class="docutils literal notranslate"><span class="pre">delete</span> <span class="pre">Expression</span></code>. During the code generation phase, <code class="docutils literal notranslate"><span class="pre">Expression</span></code> must reference a struct value (i.e.,  an address to a struct value).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.</span></code> operator is used to access a field in a <code class="docutils literal notranslate"><span class="pre">struct</span></code> value.  All <code class="docutils literal notranslate"><span class="pre">id</span></code> strings that follow a <code class="docutils literal notranslate"><span class="pre">.</span></code> must be fields of the corresponding <code class="docutils literal notranslate"><span class="pre">struct</span></code> definition.</p></li>
+<li><p>All arguments in the language are passed by value (including pointers to <code class="docutils literal notranslate"><span class="pre">struct</span></code> values).</p></li>
+<li><p>GoLite only allows the reading and printing of integer values. <code class="docutils literal notranslate"><span class="pre">'scan'`</span></code> reads in an integer from standard input. The <code class="docutils literal notranslate"><span class="pre">printf</span></code> keyword is used to print out the value of integer along with a formatted literal string. <code class="docutils literal notranslate"><span class="pre">'int'</span></code> values are the only values in Golite that can be printed. Strings are not actual values or types in Golite. However, you can define a literal strings in the format string argument to the <code class="docutils literal notranslate"><span class="pre">printf</span></code> function. Use a <code class="docutils literal notranslate"><span class="pre">%d</span></code> to represent the placeholder for the integer in the literal string. There must be an equal number of placeholders to the number of variable expression arguments to <code class="docutils literal notranslate"><span class="pre">printf</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">printf(&quot;%d=%d\n&quot;,4,5);</span></code> is correct but <code class="docutils literal notranslate"><span class="pre">printf(&quot;%d%d%d&quot;,4);</span></code> is incorrect. The only placeholder inside printf can only be <code class="docutils literal notranslate"><span class="pre">&quot;%d&quot;</span></code> and whitespace characters are allowed (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;&quot;\n&quot;</span></code> for newlines).</p></li>
+<li><p>All arithmetic and relational operators require integer operands.</p></li>
+<li><p>Equality operators require operands of <code class="docutils literal notranslate"><span class="pre">'int'</span></code> or <code class="docutils literal notranslate"><span class="pre">struct</span></code> type. The operands must have the same type. <code class="docutils literal notranslate"><span class="pre">struct</span></code> values are compared by address.</p></li>
+<li><p>Boolean operators require boolean operands.</p></li>
+<li><p>The language does not require <a class="reference external" href="https://en.wikipedia.org/wiki/Short-circuit_evaluation">Short-Circuiting</a> via boolean expressions.</p></li>
+<li><p>Any function with a return type must return a valid value (of its return type) along all control flow paths. Each function with no return type must not return a value.</p></li>
+</ul>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021-2025, University of Chicago.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.3.7.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

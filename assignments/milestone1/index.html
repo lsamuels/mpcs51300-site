@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Milestone #1 &#8212; MPCS 51082 - Introduction to Unix Systems  documentation</title>
+    <title>Milestone #1: Front-End (Scanner &amp; Parser) &#8212; MPCS 51300 - Compilers  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=0bf093e7" />
     <link rel="stylesheet" type="text/css" href="../../_static/chiweb.css?v=9805d56b" />
@@ -37,7 +37,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="../../index.html">
-          MPCS 51082</a>
+          MPCS 51300</a>
         <span class="navbar-text navbar-version pull-left"><b></b></span>
       </div>
 
@@ -92,38 +92,26 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li><a class="reference internal" href="#">Milestone #1</a><ul>
-<li><a class="reference internal" href="#cs-linux-machine">CS Linux Machine</a></li>
-<li><a class="reference internal" href="#creating-your-private-repository">Creating Your Private Repository</a><ul>
-<li><a class="reference internal" href="#msh-a-unix-like-shell"><code class="docutils literal notranslate"><span class="pre">msh</span></code>: A Unix-like shell</a><ul>
-<li><a class="reference internal" href="#task-0-understanding-the-repository-structure">Task 0: Understanding the Repository Structure</a></li>
+<li><a class="reference internal" href="#">Milestone #1: Front-End (Scanner &amp; Parser)</a><ul>
+<li><a class="reference internal" href="#working-individually-or-as-a-pair">Working Individually or as a Pair</a></li>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#language-overview-golite">Language Overview: GoLite</a></li>
+<li><a class="reference internal" href="#compiler-structure">Compiler Structure</a></li>
+<li><a class="reference internal" href="#using-an-updated-version-of-go-on-cs-linux-servers">Using an Updated Version of Go on CS Linux Servers</a><ul>
+<li><a class="reference internal" href="#connecting-to-a-jammy-node">Connecting to a Jammy Node</a></li>
+<li><a class="reference internal" href="#using-go-1-22">Using Go 1.22</a></li>
+<li><a class="reference internal" href="#making-the-change-permanent">Making the Change Permanent</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#task-2-shell-module-shell-h-and-shell-c">Task 2: Shell Module (<code class="docutils literal notranslate"><span class="pre">shell.h</span></code> and <code class="docutils literal notranslate"><span class="pre">shell.c</span></code>)</a><ul>
-<li><a class="reference internal" href="#alloc-shell-function"><code class="docutils literal notranslate"><span class="pre">alloc_shell</span></code> function</a></li>
-<li><a class="reference internal" href="#parse-tok-function"><code class="docutils literal notranslate"><span class="pre">parse_tok</span></code> function</a></li>
-<li><a class="reference internal" href="#separate-args-function"><code class="docutils literal notranslate"><span class="pre">separate_args</span></code> function</a></li>
-<li><a class="reference internal" href="#evaluate-function"><code class="docutils literal notranslate"><span class="pre">evaluate</span></code> function</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#multiple-jobs">Multiple Jobs</a></li>
-<li><a class="reference internal" href="#background-jobs">Background Jobs</a></li>
-<li><a class="reference internal" href="#exit-shell-function"><code class="docutils literal notranslate"><span class="pre">exit_shell</span></code> function</a><ul>
-<li><a class="reference internal" href="#task-2-job-module-job-h-and-job-c">Task 2: Job Module (<code class="docutils literal notranslate"><span class="pre">job.h</span></code> and <code class="docutils literal notranslate"><span class="pre">job.c</span></code>)</a></li>
-<li><a class="reference internal" href="#task-3-the-executable-program-msh-c">Task 3: The Executable Program (<code class="docutils literal notranslate"><span class="pre">msh.c</span></code>)</a><ul>
-<li><a class="reference internal" href="#getline"><code class="docutils literal notranslate"><span class="pre">getline()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#building-the-msh-executable">Building the <code class="docutils literal notranslate"><span class="pre">msh</span></code> executable</a></li>
-<li><a class="reference internal" href="#sample-runs">Sample Runs</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#task-3-build-sh">Task 3: <code class="docutils literal notranslate"><span class="pre">build.sh</span></code></a></li>
-<li><a class="reference internal" href="#testing">Testing</a></li>
-<li><a class="reference internal" href="#grading">Grading</a></li>
+<li><a class="reference internal" href="#compiler-implementation-languages">Compiler Implementation Languages</a></li>
+<li><a class="reference internal" href="#milestone-requirement-scanner-parser">Milestone Requirement: Scanner &amp; Parser</a><ul>
+<li><a class="reference internal" href="#task-0-learning-antlr">Task 0: Learning ANTLR</a></li>
+<li><a class="reference internal" href="#task-1-implementing-the-lexer-using-antlr">Task 1: Implementing the Lexer using ANTLR</a></li>
+<li><a class="reference internal" href="#task-2-implement-the-parser-and-the-abstract-syntax-tree-ast">Task 2: Implement the Parser and the Abstract Syntax Tree (AST)</a></li>
+<li><a class="reference internal" href="#grading-and-what-to-submit">Grading and What to Submit</a></li>
 <li><a class="reference internal" href="#submission">Submission</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -136,45 +124,34 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <section id="milestone-1">
-<h1>Milestone #1<a class="headerlink" href="#milestone-1" title="Link to this heading">¶</a></h1>
-<p><strong>Due:  Wednesday December 3rd at 11:59pm</strong></p>
-<p>In this assignment, we will begin implementing the course project: a shell program. This assignment focuses on understanding the repository structure and getting the initial parsing of the shell commands correct.</p>
-<section id="cs-linux-machine">
-<h2>CS Linux Machine<a class="headerlink" href="#cs-linux-machine" title="Link to this heading">¶</a></h2>
-<p>You will need access to an Linux based machine when working on your homework assignments. You should not test your programs on macOS or
-Windows Linux because these operating systems do not provide all utility commands necessary for completing this and possibly future assignments.
-Additionally, if they do provide a command then it may not contain all options that a Unix-like system provides.
-<strong>We will use and grade all assignments on the CS Linux machines and all programming assignments must work correctly on these machines.</strong>
-However, you can work locally on a Unix or Unix-like machine but ensure that you test your final solutions on a CS Linux machine.</p>
-<p>Please follow the instructions provided here</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://uchicago-cs.github.io/student-resource-guide/vscode/ssh.html">Using Visual Studio Code and SSH</a></p></li>
-</ul>
+  <section id="milestone-1-front-end-scanner-parser">
+<h1>Milestone #1: Front-End (Scanner &amp; Parser)<a class="headerlink" href="#milestone-1-front-end-scanner-parser" title="Link to this heading">¶</a></h1>
+<p><strong>Due: Friday February 3rd at 11:59pm</strong></p>
+<p>This milestone will require you to get started implementing the front-end for the compiler.</p>
+<section id="working-individually-or-as-a-pair">
+<h2>Working Individually or as a Pair<a class="headerlink" href="#working-individually-or-as-a-pair" title="Link to this heading">¶</a></h2>
+<p>You are allowed to work <strong>alone</strong> or in teams of <strong>two</strong> for the compiler project. Before creating your repository via the invitation, you will first need to</p>
+<ol class="arabic simple">
+<li><p>Decide if you want to work alone or find a partner in the class.</p></li>
+<li><p>Come up with a fun team name or if you are working alone a name for your compiler. Be creative (if you wish)!</p></li>
+<li><p>The first person (or yourself if you are working alone) to accept the Github classroom invite will enter in the team name. If working in a pair, the second group member will need to click on their team name in-order to join the repository.</p></li>
+</ol>
+<p>Once you have done these two steps, then you can move on to Getting started section.</p>
 </section>
-<section id="creating-your-private-repository">
-<h2>Creating Your Private Repository<a class="headerlink" href="#creating-your-private-repository" title="Link to this heading">¶</a></h2>
-<p>For each assignment, a Git repository will be created for you on GitHub. However, before that repository can be created for you, you need to have a
-GitHub account. If you do not yet have one, you can get an account here: <a class="reference external" href="https://github.com/join">https://github.com/join</a>.</p>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
+<p>A Git repository will be created for you on GitHub. However, before that repository can be created for you, you need to have a GitHub account. If you do not yet have one, you can get an account here: <a class="reference external" href="https://github.com/join">https://github.com/join</a>.</p>
 <p>To actually get your private repository, you will need this invitation URL:</p>
 <ul class="simple">
-<li><p><strong>Project invitation (Please check the Post Project (Milestone #1) is ready” Ed)</strong></p></li>
+<li><p>Compiler Project Invitation (Please check the Post “Compiler Project is ready” Ed)</p></li>
 </ul>
 <p>When you click on an invitation URL, you will have to complete the following steps:</p>
 <ol class="arabic simple">
-<li><p>You will need to select your CNetID from a list. This will allow us to know what student is associated with each GitHub account. This step is only done for the very first invitation you accept.</p></li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you are on the waiting list for this course you will not have a repository made for you until you are admitted into the course. I will post the starter code on Ed so you can work on the assignment until you are admitted into the course.</p>
-</div>
-<ol class="arabic simple" start="2">
-<li><p>You must click “Accept this assignment” or your repository will not actually be created.</p></li>
-<li><p>After accepting the assignment, Github will take a few minutes to create your repository. You should receive an email from Github when your repository is ready. Normally, it’s ready within seconds and you can just refresh the page.</p></li>
+<li><p>See step 3 in “Working Individually or as a Pair” section for the first step.</p></li>
 <li><dl class="simple">
 <dt>You now need to clone your repository (i.e., download it to your machine).</dt><dd><ul class="simple">
 <li><p>Make sure you’ve set up <a class="reference external" href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">SSH access</a> on your GitHub account.</p></li>
-<li><p>For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: <a class="reference external" href="mailto:git&#37;&#52;&#48;github&#46;com">git<span>&#64;</span>github<span>&#46;</span>com</a>:mpcs51082-aut25/msh-GITHUB-USERNAME.git.</p></li>
+<li><p>For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: <a class="reference external" href="mailto:git&#37;&#52;&#48;github&#46;com">git<span>&#64;</span>github<span>&#46;</span>com</a>:mpcs51300-win26/proj-TEAM_NAME-GITHUB-USERNAME.git.</p></li>
 <li><p>If you do not know how to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> to clone your repository then follow this guide that Github provides: <a class="reference external" href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository">Cloning a Repository</a></p></li>
 </ul>
 </dd>
@@ -182,393 +159,211 @@ GitHub account. If you do not yet have one, you can get an account here: <a clas
 </li>
 </ol>
 <p>If you run into any issues, or need us to make any manual adjustments to your registration, please let us know via Ed Discussion.</p>
-<section id="msh-a-unix-like-shell">
-<h3><code class="docutils literal notranslate"><span class="pre">msh</span></code>: A Unix-like shell<a class="headerlink" href="#msh-a-unix-like-shell" title="Link to this heading">¶</a></h3>
-<p>For the last three assignments, you will apply what you have learned in the course to build your own Unix-like shell called <code class="docutils literal notranslate"><span class="pre">msh</span></code> (i.e., MPCS shell). This shell will not include everything that the <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell provides; however, many of the topics covered in the course will be implemented within <code class="docutils literal notranslate"><span class="pre">msh</span></code>.
-Each assignment represents reaching a milestone for the project, where each will be a continuation of the prior that entails adding additional components to the shell.</p>
-<p>The first task in implementing <code class="docutils literal notranslate"><span class="pre">msh</span></code> is understanding the repository structure of the shell, which is described in the next section.</p>
-<section id="task-0-understanding-the-repository-structure">
-<h4>Task 0: Understanding the Repository Structure<a class="headerlink" href="#task-0-understanding-the-repository-structure" title="Link to this heading">¶</a></h4>
-<p>Since the building of the shell spans multiple assignments, all remaining assignments will work out of the <code class="docutils literal notranslate"><span class="pre">msh-GITHUB-USERNAME</span></code> repository you created above. The initial contents of your repository has the following structure</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">├── bin</span>
-<span class="go">├── data</span>
-<span class="go">├── include</span>
-<span class="go">│   ├── job.h</span>
-<span class="go">│   └── shell.h</span>
-<span class="go">├── README.md</span>
-<span class="go">├── Makefile</span>
-<span class="go">├── scripts</span>
-<span class="go">│   └── build.sh</span>
-<span class="go">├── src</span>
-<span class="go">│   ├── job.c</span>
-<span class="go">│   ├── msh.c</span>
-<span class="go">│   └── shell.c</span>
-<span class="go">└── tests</span>
-</pre></div>
-</div>
-<p>The repository structure is similar to most small C projects in industry. The contents of each directory is explained below:</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">bin</span></code> directory - will include the <code class="docutils literal notranslate"><span class="pre">msh</span></code> executable that is generated by the <code class="docutils literal notranslate"><span class="pre">gcc</span></code> compiler when compiling all source files together.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> directory - includes any auxiliary data files needed by the testcases. You are also allowed to place test data files in this directory for testing purposes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">include</span></code> directory - contains all the include files for the modules associated with building the <code class="docutils literal notranslate"><span class="pre">msh</span></code> executable. <strong>Only header files (i.e., ``.h`` files) are allowed in this directory</strong>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> file - contains documentation about the repository and instructions for building the shell. We will revisit this file in a later assignment.</p></li>
-</ol>
-<p>5. <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> file - This is an optional file that makes it easy to  compile multiple C files together. We will not cover Makefiles in this course; however, if you are familiar with them then you can implement it in this file. Otherwise, you can ignore this file.
-7. <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory - You will still be writing bash scripts along with building the shell. All script files for <code class="docutils literal notranslate"><span class="pre">msh</span></code> must be placed in this directory. For this assignment you will work with <code class="docutils literal notranslate"><span class="pre">build.sh</span></code>, which is explained in a later section.
-8. <code class="docutils literal notranslate"><span class="pre">src</span></code> directory - includes all the source files for the modules you will implement. <strong>Only source files (i.e., ``.c`` files) are allowed in this directory</strong>.
-9. <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory - contains the testcases for testing the various modules created for the shell.</p>
-<p>As we move along, we will be adding more files and data to the repository each milestone.</p>
 </section>
+<section id="language-overview-golite">
+<h2>Language Overview: GoLite<a class="headerlink" href="#language-overview-golite" title="Link to this heading">¶</a></h2>
+<p>Please make sure you read over the document that describes the language we will be implementing this quarter: <a class="reference external" href="../proj_overview/index.html">Language Overview</a></p>
 </section>
-<section id="task-2-shell-module-shell-h-and-shell-c">
-<h3>Task 2: Shell Module (<code class="docutils literal notranslate"><span class="pre">shell.h</span></code> and <code class="docutils literal notranslate"><span class="pre">shell.c</span></code>)<a class="headerlink" href="#task-2-shell-module-shell-h-and-shell-c" title="Link to this heading">¶</a></h3>
-<p>The actual logic for the shell and its state will be implemented in a separate module defined in <code class="docutils literal notranslate"><span class="pre">shell.c</span></code> and <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>. To get started, the following code is already in your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code> file:</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="c1">// Represents the state of the shell</span>
-<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">msh</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="cm">/** TODO: IMPLEMENT **/</span>
-<span class="p">}</span><span class="n">msh_t</span><span class="p">;</span>
-
-<span class="k">extern</span><span class="w"> </span><span class="n">msh_t</span><span class="w"> </span><span class="o">*</span><span class="n">shell</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>The state of the shell is contained within the <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> definition. You will need to add fields to this definition as you implement the <code class="docutils literal notranslate"><span class="pre">shell</span></code> module. The <code class="docutils literal notranslate"><span class="pre">extern</span></code> states that the global variables <code class="docutils literal notranslate"><span class="pre">shell</span></code> is defined in the separate in file. Inside the <code class="docutils literal notranslate"><span class="pre">shell.c</span></code> you will see the actual global variable the represents the shell state</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">msh_t</span><span class="w"> </span><span class="o">*</span><span class="n">shell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>This is the global variable you will use to represent the shell state.</p>
-<section id="alloc-shell-function">
-<h4><code class="docutils literal notranslate"><span class="pre">alloc_shell</span></code> function<a class="headerlink" href="#alloc-shell-function" title="Link to this heading">¶</a></h4>
-<p>Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
-<span class="cm">* alloc_shell: allocates and initializes the state of the shell</span>
-<span class="cm">*</span>
-<span class="cm">* max_jobs: The maximum number of jobs that can be in existence at any point in time.</span>
-<span class="cm">*</span>
-<span class="cm">* max_line: The maximum number of characters that can be entered for any specific command line.</span>
-<span class="cm">*</span>
-<span class="cm">* max_history: The maximum number of saved history commands for the shell.</span>
-<span class="cm">*</span>
-<span class="cm">* Returns: a msh_t pointer that is allocated and initialized</span>
-<span class="cm">*/</span>
-<span class="n">msh_t</span><span class="w"> </span><span class="o">*</span><span class="nf">alloc_shell</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">max_jobs</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">max_line</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">max_history</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>This function allocates (i..e, <code class="docutils literal notranslate"><span class="pre">malloc</span></code>), initializes and returns a pointer to a <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> value. The shell has limits to the number of jobs in existence, the maximum number of characters that can be entered in on the command line and how many previous commands are stored in its history, All these are represented by the parameters to the function (i.e., <code class="docutils literal notranslate"><span class="pre">max_jobs</span></code>, <code class="docutils literal notranslate"><span class="pre">max_line</span></code> and <code class="docutils literal notranslate"><span class="pre">max_history</span></code>) respectively. Ensure that you save these values inside your state definition (i.e., <code class="docutils literal notranslate"><span class="pre">msh_t</span></code>) because you will need to reference them in later functions. If any of these parameters are equal to <code class="docutils literal notranslate"><span class="pre">0</span></code> then you will use the following default values for the corresponding limits:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_LINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_JOBS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_HISTORY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>You will call this function later in the <code class="docutils literal notranslate"><span class="pre">msh.c</span></code> file to allocate a new shell state.</p>
-<p>Place the implementation of this function inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
-</section>
-<section id="parse-tok-function">
-<h4><code class="docutils literal notranslate"><span class="pre">parse_tok</span></code> function<a class="headerlink" href="#parse-tok-function" title="Link to this heading">¶</a></h4>
-<p>Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm">* parse_tok: Continuously retrieves separate commands from the provided command line until all commands are parsed</span>
-<span class="cm">*</span>
-<span class="cm">* line:  the command line to parse, which may include multiple commands. If line is NULL then parse_tok continues parsing the previous command line.</span>
-<span class="cm">*</span>
-<span class="cm">* job_type: Specifies whether the parsed command is a background (sets the value of 0 at the address of job_type) or foreground job (sets the value of 1 at the address of job_type). If no job is returned then assign the value at the address to -1</span>
-<span class="cm">*</span>
-<span class="cm">* Returns: NULL no other commands can be parsed; otherwise, it returns a parsed command from the command line.</span>
-<span class="cm">*</span>
-<span class="cm">* Please note this function does modify the ``line`` parameter.</span>
-<span class="cm">*/</span>
-<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">parse_tok</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">job_type</span><span class="p">);</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">msh</span></code> shell contains two special characters that separate multiple commands (i.e., jobs) on the same command line: <code class="docutils literal notranslate"><span class="pre">;</span></code> (foreground job) and <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> (background job). A <code class="docutils literal notranslate"><span class="pre">msh</span></code> command line could contain a single job on the command line as such</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ls -la</span>
-</pre></div>
-</div>
-<p>or multiple jobs on a single command line as such</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ls -la &amp; cd .. ; cat file.txt</span>
-</pre></div>
-</div>
-<p>where the above command line contains three separate jobs: <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-la</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code>, and <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">file.txt</span></code></p>
-<p>This function is similar to <code class="docutils literal notranslate"><span class="pre">strtok</span></code> such that it continuously retrieves and returns the jobs on a command line that are separated by <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">;</span></code>. For each returned job, it will place a <code class="docutils literal notranslate"><span class="pre">1</span></code> at the address <code class="docutils literal notranslate"><span class="pre">job_type</span></code> points to if the job is a <strong>foreground job</strong>; otherwise, it places <code class="docutils literal notranslate"><span class="pre">0</span></code> at that address to represent the job is a <strong>background job</strong>. If the <code class="docutils literal notranslate"><span class="pre">line</span></code> argument is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, similar to <code class="docutils literal notranslate"><span class="pre">strtok</span></code>, it continues to parse the previous command line. For example, here’s a sample code showing how <code class="docutils literal notranslate"><span class="pre">parse_tok</span></code> should work</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cmd_line</span><span class="o">=</span><span class="s">&quot;ls -la &amp; cd .. ; cat file.txt&quot;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
-<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">job</span><span class="p">;</span>
-<span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse_tok</span><span class="p">(</span><span class="n">cmd_line</span><span class="p">,</span><span class="o">&amp;</span><span class="n">type</span><span class="p">);</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;job=%s, type=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">job</span><span class="p">,</span><span class="n">type</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints job=ls -la type=0</span>
-<span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse_tok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="o">&amp;</span><span class="n">type</span><span class="p">);</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;job=%s, type=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">job</span><span class="p">,</span><span class="n">type</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints job=cd .. type=1</span>
-<span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse_tok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="o">&amp;</span><span class="n">type</span><span class="p">);</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;job=%s, type=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">job</span><span class="p">,</span><span class="n">type</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints job=cat file.txt type=1</span>
-<span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse_tok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="o">&amp;</span><span class="n">type</span><span class="p">);</span><span class="w"> </span><span class="c1">// job = NULL  type = -1</span>
-<span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse_tok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="o">&amp;</span><span class="n">type</span><span class="p">);</span><span class="w"> </span><span class="c1">// Still job = NULL  type = -1</span>
-</pre></div>
-</div>
-<p>We recommend that you keep an internal pointer of the <code class="docutils literal notranslate"><span class="pre">line</span></code> parameter in a <a class="reference external" href="https://www.geeksforgeeks.org/static-variables-in-c/">static variable</a> and reuse as means to return back the portions of the string. One way to implement this function is to place null characters <code class="docutils literal notranslate"><span class="pre">\0</span></code> at the locations where you find a <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">;</span></code>
-and return the address of the element the represents the beginning of the next job to return. You can return the address of an array element as follows: <code class="docutils literal notranslate"><span class="pre">&amp;array[NUM]</span></code> where <code class="docutils literal notranslate"><span class="pre">NUM</span></code> is the valid index. For example, <code class="docutils literal notranslate"><span class="pre">&amp;array[2]</span></code> returns the address of the third element in the array (assuming 0 indexing).</p>
-<p>Place the implementation of this function inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
-</section>
-<section id="separate-args-function">
-<h4><code class="docutils literal notranslate"><span class="pre">separate_args</span></code> function<a class="headerlink" href="#separate-args-function" title="Link to this heading">¶</a></h4>
-<p>Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm">* separate_args: Separates the arguments of command and places them in an allocated array returned by this function</span>
-<span class="cm">*</span>
-<span class="cm">* line: the command line to separate. This function assumes only a single command that takes in zero or more arguments.</span>
-<span class="cm">*</span>
-<span class="cm">* argc: Stores the number of arguments produced at the memory location of the argc pointer.</span>
-<span class="cm">*</span>
-<span class="cm">* is_builtin: true if the command is a built-in command; otherwise false.</span>
-<span class="cm">*</span>
-<span class="cm">* Returns: NULL is line contains no arguments; otherwise, a newly allocated array of strings that represents the arguments of the command (similar to argv). Make sure the array includes a NULL value in its last location.</span>
-<span class="cm">* Note: The user is responsible for freeing the memory return by this function!</span>
-<span class="cm">*/</span>
-<span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="nf">separate_args</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">*</span><span class="n">is_builtin</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>This function separates out each word in the provided <code class="docutils literal notranslate"><span class="pre">line</span></code> and places them in a newly allocated array of strings with the command name always being at index 0. <code class="docutils literal notranslate"><span class="pre">msh</span></code> assumes words on the command line are separated by one or more whitespace characters.  This function assumes <code class="docutils literal notranslate"><span class="pre">line</span></code> is a single job (i.e., <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-la</span></code> and not <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-la;</span> <span class="pre">cd</span> <span class="pre">..</span></code>).
-It places the number of arguments it found (including the program name) at the address of <code class="docutils literal notranslate"><span class="pre">argc</span></code>. The last element in the returned array must contain a <code class="docutils literal notranslate"><span class="pre">NULL</span></code> value. For now, ignore <code class="docutils literal notranslate"><span class="pre">is_builtin</span></code>. We will come back to the <code class="docutils literal notranslate"><span class="pre">is_builtin</span></code> in a future milestone. Here’s a sample code showing how <code class="docutils literal notranslate"><span class="pre">separate_args</span></code> should work</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cmd_line</span><span class="p">[]</span><span class="o">=</span><span class="s">&quot;ls -la /mpcs51082-aut25&quot;</span>
-<span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">argc</span>
-<span class="n">argv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">separate_args</span><span class="p">(</span><span class="n">cmd_line</span><span class="p">,</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">);</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"> </span><span class="c1">// prints ls</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"> </span><span class="c1">// prints -la</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"> </span><span class="c1">// prints  /mpcs51082-aut25</span>
-<span class="c1">//Please note there is an argv[3] that should contain NULL!</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">);</span><span class="w"> </span><span class="c1">// prints 3</span>
-<span class="n">argv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">separate_args</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">);</span><span class="w">  </span><span class="c1">// argv = NULL</span>
-</pre></div>
-</div>
-<p>Place the implementation of this function inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
-</section>
-<section id="evaluate-function">
-<h4><code class="docutils literal notranslate"><span class="pre">evaluate</span></code> function<a class="headerlink" href="#evaluate-function" title="Link to this heading">¶</a></h4>
-<p><strong>*Before implementing ``evaluate``, implement the job module, which is explained in **Task 2: Job Module (``job.h`` and ``job.c``)</strong>. After implementing Task 2,  come back to implement the remainder of the shell module.
-Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
-<span class="cm">* evaluate - executes the provided command line string</span>
-<span class="cm">*</span>
-<span class="cm">* shell - the current shell state value</span>
-<span class="cm">*</span>
-<span class="cm">* line - the command line string to evaluate</span>
-<span class="cm">*</span>
-<span class="cm">* Returns: non-zero if the command executed wants the shell program to close. Otherwise, a 0 is returned.</span>
-<span class="cm">*/</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">msh_t</span><span class="w"> </span><span class="o">*</span><span class="n">shell</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">line</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>This function executes the job(s) provided in the <code class="docutils literal notranslate"><span class="pre">line</span></code> parameters</p>
-<p>the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> function <strong>must</strong> be updated as follows:</p>
-<ol class="arabic simple">
-<li><p>Create a new child process using <code class="docutils literal notranslate"><span class="pre">fork()</span></code> that will handle the execution of the current job.</p></li>
-<li><p>Have the parent add the newly created job to the jobs array.</p></li>
-<li><p>The child process will then call <code class="docutils literal notranslate"><span class="pre">execve(...)</span></code> to execute the job.</p></li>
-<li><p>The parent process will blocking using <code class="docutils literal notranslate"><span class="pre">waitpid(...)</span></code> or <code class="docutils literal notranslate"><span class="pre">wait(...)</span></code> (you choose) until the child process completes.</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">line</span></code> surpasses the maximum number of characters on the line then print: <code class="docutils literal notranslate"><span class="pre">error:</span> <span class="pre">reached</span> <span class="pre">the</span> <span class="pre">maximum</span> <span class="pre">line</span> <span class="pre">limit</span></code>.</p></li>
-<li><p>Once the child process terminates, the parent process must delete the job from the jobs array.</p></li>
-</ol>
-<p>Assuming the <code class="docutils literal notranslate"><span class="pre">msh-lamonts</span></code> directory is a copy of the <code class="docutils literal notranslate"><span class="pre">msh</span></code> repository, then running the <code class="docutils literal notranslate"><span class="pre">/usr/bin/ls</span> <span class="pre">msh-lamonts</span></code> now evaluates to the following</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">msh&gt; /usr/bin/ls msh-lamonts</span>
-<span class="go">bin  data  include  README.md  saqs  scripts  src  tests</span>
-</pre></div>
-</div>
-<p>Notice how we had to provide the full path to the <code class="docutils literal notranslate"><span class="pre">ls</span></code> executable (i.e., <code class="docutils literal notranslate"><span class="pre">/usr/bin/ls</span></code> and not just the <code class="docutils literal notranslate"><span class="pre">ls</span></code>). This is required since our shell currently is not looking at the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable to find executables. Thus, when you are testing your <code class="docutils literal notranslate"><span class="pre">msh</span></code> shell currently you must provide the full executable.</p>
-</section>
-</section>
-</section>
-<section id="multiple-jobs">
-<h2>Multiple Jobs<a class="headerlink" href="#multiple-jobs" title="Link to this heading">¶</a></h2>
-<p>What happens if you have multiple jobs on the same command line? For example,</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">msh&gt; /usr/bin/ls msh-lamonts; /usr/bin/printf &quot;%02d/%02d/%02d\n&quot; 2 2 2023</span>
-</pre></div>
-</div>
-<p>then this must cause the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> function to run the jobs sequentially after each other. The shell goes through the five steps described above for the first job (i.e., <code class="docutils literal notranslate"><span class="pre">msh&gt;</span> <span class="pre">/usr/bin/ls</span> <span class="pre">msh-lamonts</span></code>), and then does the steps again for the subsequent jobs that are running in the foreground (i.e., <code class="docutils literal notranslate"><span class="pre">/usr/bin/printf</span> <span class="pre">&quot;%02d/%02d/%02d\n&quot;</span> <span class="pre">2</span> <span class="pre">2</span> <span class="pre">2023</span></code>). Thus, the following above command produces</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">msh&gt; /usr/bin/ls msh-lamonts; /usr/bin/printf &quot;%02d/%02d/%02d\n&quot; 2 2 2023</span>
-<span class="go">bin  data  include  README.md  saqs  scripts  src  tests</span>
-<span class="go">02/02/2023</span>
-</pre></div>
-</div>
-</section>
-<section id="background-jobs">
-<h2>Background Jobs<a class="headerlink" href="#background-jobs" title="Link to this heading">¶</a></h2>
-<p>We will implement Background jobs in Milestone 2.</p>
-<p>Place the implementation of <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
-</section>
-<section id="exit-shell-function">
-<h2><code class="docutils literal notranslate"><span class="pre">exit_shell</span></code> function<a class="headerlink" href="#exit-shell-function" title="Link to this heading">¶</a></h2>
-<p>Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
-<span class="cm">* exit_shell - Closes down the shell by deallocating the shell state.</span>
-<span class="cm">*</span>
-<span class="cm">* shell - the current shell state value</span>
-<span class="cm">*</span>
-<span class="cm">*/</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">exit_shell</span><span class="p">(</span><span class="n">msh_t</span><span class="w"> </span><span class="o">*</span><span class="n">shell</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>This function simply deallocates any memory allocated within the shell state. For now, make sure to <code class="docutils literal notranslate"><span class="pre">free</span></code> any state data allocated you called with <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and make sure to free the <code class="docutils literal notranslate"><span class="pre">shell</span></code> variable. For this assignment, you may have not allocated any memory other than the <code class="docutils literal notranslate"><span class="pre">shell</span></code> variable itself, which is fine.</p>
-<p>Place the implementation of this function inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
-<section id="task-2-job-module-job-h-and-job-c">
-<h3>Task 2: Job Module (<code class="docutils literal notranslate"><span class="pre">job.h</span></code> and <code class="docutils literal notranslate"><span class="pre">job.c</span></code>)<a class="headerlink" href="#task-2-job-module-job-h-and-job-c" title="Link to this heading">¶</a></h3>
-<p>The job module will contain information about the current jobs (i.e., foreground and/or background jobs) in existence. You are free to implement this module as you wish; we provide some helpful tips.</p>
-<p>The implementation must be defined in a file <code class="docutils literal notranslate"><span class="pre">src/job.c</span></code> and its header in <code class="docutils literal notranslate"><span class="pre">include/job.h</span></code>. The header <strong>must</strong> contain the following definitions where you can add new fields but cannot delete or rename these types:</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef _JOB_H_</span>
-<span class="cp">#define _JOB_H_</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
-
-<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">job_state</span><span class="p">{</span><span class="n">FOREGROUND</span><span class="p">,</span><span class="w"> </span><span class="n">BACKGROUND</span><span class="p">,</span><span class="w"> </span><span class="n">SUSPENDED</span><span class="p">,</span><span class="w"> </span><span class="n">UNDEFINED</span><span class="p">}</span><span class="w"> </span><span class="n">job_state_t</span><span class="p">;</span>
-
-<span class="c1">// Represents a job in a shell.</span>
-<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">job</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cmd_line</span><span class="p">;</span><span class="w">     </span><span class="c1">// The command line for this specific job.</span>
-<span class="w">    </span><span class="n">job_state_t</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w">  </span><span class="c1">// The current state for this job</span>
-<span class="w">    </span><span class="kt">pid_t</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span><span class="w">          </span><span class="c1">// The process id for this job</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">jid</span><span class="p">;</span><span class="w">            </span><span class="c1">// The job number for this job</span>
-<span class="p">}</span><span class="n">job_t</span><span class="p">;</span>
-
-<span class="cp">#endif</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">enum</span> <span class="pre">job_state</span></code> is an enumeration type that allows you to assign the <code class="docutils literal notranslate"><span class="pre">job_state_t</span></code> field to one of those defined constants. It provides better code readability. For example,</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">job_t</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
-<span class="n">job_state_t</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FOREGROUND</span><span class="p">;</span>
-<span class="n">job</span><span class="p">.</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>To help you get started thinking about how to design and incorporate this module into the shell module, we recommend the following:</p>
-<ol class="arabic simple">
-<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> typedef in the <code class="docutils literal notranslate"><span class="pre">shell.h</span></code> include a new field <code class="docutils literal notranslate"><span class="pre">job_t</span> <span class="pre">*jobs</span></code> to represent an array jobs that are running in the shell.</p></li>
-<li><p>When allocating the <code class="docutils literal notranslate"><span class="pre">job_t</span> <span class="pre">*jobs</span></code>, we recommend you allocate it to the size of <code class="docutils literal notranslate"><span class="pre">max_jobs</span></code> (i.e., the parameter from <code class="docutils literal notranslate"><span class="pre">alloc_shell</span></code>). You may not use every element in the array; however, it will make it easier to add,delete, and modify jobs in the array. After creating the jobs array, you should intialize every element to a value such that you know that element is an empty location in the job. For example, assign every <code class="docutils literal notranslate"><span class="pre">cmd_line</span></code> field for each element in the array to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. This way, when trying to add a new job to the array you know that location in the array is empty. When you remove a job from the array, make sure you that at the end you make <a href="#id1"><span class="problematic" id="id2">``</span></a>cmd_line = NULL``for that specific element.</p></li>
-<li><p>Define a <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">add_job(job_t</span> <span class="pre">*jobs,</span> <span class="pre">int</span> <span class="pre">max_jobs,</span> <span class="pre">pid_t</span> <span class="pre">pid,</span> <span class="pre">job_state_t</span> <span class="pre">state,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*cmd_line)</span></code> function that adds a new job to the array. Reminder if there are no more jobs left to allocate (i.e., <code class="docutils literal notranslate"><span class="pre">max_jobs</span></code> has been reached) then this function should return a false; otherwise, true to indicate the job was added.</p></li>
-<li><p>Define a  <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">delete_job(job_t</span> <span class="pre">*jobs,</span> <span class="pre">pid_t</span> <span class="pre">pid)</span></code> function to remove a job from the array of jobs based on the <code class="docutils literal notranslate"><span class="pre">pid_t</span></code> provided. You should think about the return value for this function. Make sure to reset the location in the array where the job was deleted. As I mentioned earlier this could be setting <code class="docutils literal notranslate"><span class="pre">cmd_line=NULL</span></code> at that location.</p></li>
-<li><p>Define a <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">free_jobs(job_t</span> <span class="pre">*jobs,</span> <span class="pre">int</span> <span class="pre">max_jobs)</span></code> function to deallocate the jobs array.</p></li>
-</ol>
-<p>The above suggestions are <strong>not required</strong> and you are free to design the library as you wish as long as it has at least the above skeleton code. You can make modifications to the headers defined above, add new functions, etc. However, for each function prototype in the <code class="docutils literal notranslate"><span class="pre">job.h</span></code> file, you must provide documentation for that function.</p>
-</section>
-<section id="task-3-the-executable-program-msh-c">
-<h3>Task 3: The Executable Program (<code class="docutils literal notranslate"><span class="pre">msh.c</span></code>)<a class="headerlink" href="#task-3-the-executable-program-msh-c" title="Link to this heading">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">msh</span></code> program will work similarly to <code class="docutils literal notranslate"><span class="pre">bash</span></code> command where it will act as a interactive <strong>REPL (Read-Eval-Print Loop)</strong>, where it will allow the user to enter in a command line (i.e., input), evaluate the command line, and print the result of running the command line back to the console console. The <code class="docutils literal notranslate"><span class="pre">msh</span></code> program
-will continuously perform this REPL mechanism until the user enters <code class="docutils literal notranslate"><span class="pre">exit</span></code>. Most prompts for a shell such as bash looks like something like <code class="docutils literal notranslate"><span class="pre">lamonts&#64;linux2:~$</span></code>, where it might have the machine logged in under along with current directory and a <code class="docutils literal notranslate"><span class="pre">$</span></code>. For <code class="docutils literal notranslate"><span class="pre">msh</span></code>, it will <strong>always</strong> have the prompt: <code class="docutils literal notranslate"><span class="pre">msh&gt;</span></code>.</p>
-<p>Inside the <code class="docutils literal notranslate"><span class="pre">src/msh.c</span></code>, you will implement a <code class="docutils literal notranslate"><span class="pre">main</span></code> function along with any helper functions you wish that must have the following</p>
-<ol class="arabic simple">
-<li><p>Handle the following <strong>optional</strong> command line arguments: <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">NUMBER</span></code>, <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">NUMBER</span></code>, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">NUMBER</span></code>. The <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">NUMBER</span></code> represents the maximum number of command lines to store in the shell history. <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">NUMBER</span></code> represents the maximum number of jobs that can be in existence at any point in time and <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">NUMBER</span></code> represents the maximum number of characters that can be entered in for a single command line. These can be entered in any order and you must ensure that <code class="docutils literal notranslate"><span class="pre">NUMBER</span></code> is a positive integer (i.e., an integer greater than zero). <strong>Please note we are not implementing the functionality of -j and -s in this assignment but will in future assignments</strong>. However, you still need to  handle these arguments in this assignment. I recommend looking at <a class="reference external" href="https://www.geeksforgeeks.org/getopt-function-in-c-to-parse-command-line-arguments/">getopt()</a> to make it easy to process the options and <code class="docutils literal notranslate"><span class="pre">sscanf</span></code> to easily determine if the <code class="docutils literal notranslate"><span class="pre">NUMBER</span></code> is an actual number. If any additional command line arguments are specified or an <strong>optional</strong> command line argument is not correctly formatted then the program must <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">1</span></code> and print the usage state: <code class="docutils literal notranslate"><span class="pre">usage:</span> <span class="pre">msh</span> <span class="pre">[-s</span> <span class="pre">NUMBER]</span> <span class="pre">[-j</span> <span class="pre">NUMBER]</span> <span class="pre">[-l</span> <span class="pre">NUMBER]</span></code>. <strong>Do not print anything else out</strong>.</p></li>
-<li><p>Allocate and initialize a <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> state (i.e., call <code class="docutils literal notranslate"><span class="pre">allocate_shell</span></code>). If the user did not supply a optional command line argument then a <code class="docutils literal notranslate"><span class="pre">0</span></code> is passed in for that specific limit parameter (i.e., the shell will use the default value for that specific limit). This is the global variable mentioned in the previous section <code class="docutils literal notranslate"><span class="pre">msh_t</span> <span class="pre">*shell</span></code>. This means you will need to <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">&quot;shell.h&quot;</span></code> to get access to this variable in order to allocate and initialize the variable.</p></li>
-<li><p>Using the allocated <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> state, implement the <em>REPL</em> mechanism where it will prompt the user to enter in a command line, call the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> function of the shell module to execute the command. The program will continuously allow the user to enter in command lines until they enter <code class="docutils literal notranslate"><span class="pre">exit</span></code>, which should close down the shell and exit.</p></li>
-<li><p>If std-in closes then close down the shell and exit. We will explain how to check if stdin closes in the next section.</p></li>
-</ol>
-<section id="getline">
-<h4><code class="docutils literal notranslate"><span class="pre">getline()</span></code><a class="headerlink" href="#getline" title="Link to this heading">¶</a></h4>
-<p>The C <code class="docutils literal notranslate"><span class="pre">getline(char</span> <span class="pre">**lineptr,</span> <span class="pre">size_t</span> <span class="pre">*restrict</span> <span class="pre">n,FILE</span> <span class="pre">*restrict</span> <span class="pre">stream)</span></code> function reads an entire line from stream. The <code class="docutils literal notranslate"><span class="pre">getline()</span></code> stores the contents of a single line into the argument <code class="docutils literal notranslate"><span class="pre">lineptr</span></code>. The <code class="docutils literal notranslate"><span class="pre">*lineptr</span></code> is null-terminated and includes the newline character, if one was found.
-If <code class="docutils literal notranslate"><span class="pre">*lineptr</span></code> is set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> before the call, then <code class="docutils literal notranslate"><span class="pre">getline()</span></code> will allocate the string for storing the line. This string should be freed by the user program even if <code class="docutils literal notranslate"><span class="pre">getline()</span></code> failed. For example, take a look at the following code:</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#define _GNU_SOURCE</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">nRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getline</span><span class="p">(</span><span class="o">&amp;</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">nRead</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Retrieved line of length %zd with contents:%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nRead</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">);</span><span class="w"> </span><span class="c1">//Remove this printf in your shell. It it only here for demonstration purposes.</span>
-<span class="w">        </span><span class="c1">//The getline function keeps the \n at the end so we remove by assigning the null character at that location.</span>
-<span class="w">         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="n">nRead</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">){</span>
-<span class="w">          </span><span class="n">line</span><span class="p">[</span><span class="n">nRead</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="c1">// Done using line so I must free it!!</span>
-<span class="w">        </span><span class="n">free</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">//Make sure to reset line back to null for the next line</span>
-<span class="w">        </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
-<span class="w">        </span><span class="n">nRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getline</span><span class="p">(</span><span class="o">&amp;</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>For the purposes of this assignment, we can grab the entire contents being read in from standard input using <code class="docutils literal notranslate"><span class="pre">getline</span></code> within a while loop. <code class="docutils literal notranslate"><span class="pre">getline</span></code> will return <code class="docutils literal notranslate"><span class="pre">-1</span></code> once it has reached the end of the stream (i.e., std-in has closed). Otherwise,
-it returns the number of characters on the line (<code class="docutils literal notranslate"><span class="pre">nRead</span></code>). Notice that line is always set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> before we call <code class="docutils literal notranslate"><span class="pre">getline</span></code>. This is a requirement for this assignment so we can allocate a new string for each line from the stream. Make sure to always free
-the line after you are done using it. Also notice that when calling <code class="docutils literal notranslate"><span class="pre">getline</span></code> we pass in <code class="docutils literal notranslate"><span class="pre">&amp;line</span></code> and <code class="docutils literal notranslate"><span class="pre">&amp;len</span></code>. This is required to make sure it can successfully place in the contents. Note that <code class="docutils literal notranslate"><span class="pre">len</span></code> is not the number of characters on the line but rather it is the length of an internal buffer to hold the characters.
-You can ignore that value for this assignment; however, you still need to pass it in to call <code class="docutils literal notranslate"><span class="pre">getline</span></code>. Make sure to include <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">_GNU_SOURCE</span></code> because it is required to use <code class="docutils literal notranslate"><span class="pre">getline</span></code>.</p>
-</section>
-</section>
-<section id="building-the-msh-executable">
-<h3>Building the <code class="docutils literal notranslate"><span class="pre">msh</span></code> executable<a class="headerlink" href="#building-the-msh-executable" title="Link to this heading">¶</a></h3>
-<p>Since the source and header files are in different directories you need to tell the compiler (i.e., <code class="docutils literal notranslate"><span class="pre">gcc</span></code>) where they are located. Here’s a simple way to do it:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>gcc<span class="w"> </span>-I./include/<span class="w"> </span>-o<span class="w"> </span>./bin/msh<span class="w"> </span>src/*.c
-</pre></div>
-</div>
-<p><strong>This assumes you are in the root directory of your repository</strong>! The <code class="docutils literal notranslate"><span class="pre">-I</span></code> flag tells the compiler were the user-defined header files are located. Running this code will then place the <code class="docutils literal notranslate"><span class="pre">msh</span></code> executable in the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory.</p>
-</section>
-<section id="sample-runs">
-<h3>Sample Runs<a class="headerlink" href="#sample-runs" title="Link to this heading">¶</a></h3>
-<p>Here are few sample runs of the <code class="docutils literal notranslate"><span class="pre">msh</span></code> shell at this point in its development. Please note that all sample runs assumes you are running and building the program from the root directory of your repository:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>gcc<span class="w"> </span>-I./include/<span class="w"> </span>-o<span class="w"> </span>./bin/msh<span class="w"> </span>src/*.c
-<span class="gp">$ </span><span class="nb">alias</span><span class="w"> </span><span class="nv">msh</span><span class="o">=</span>./bin/msh
-<span class="gp">$ </span>msh
-<span class="go">msh&gt;/usr/bin/ls -l</span>
-<span class="go">total 29</span>
-<span class="go">-rwxrwx--- 1 lamonts lamonts 50048 Nov 10 09:38 msh</span>
-<span class="go">msh&gt; /usr/bin/echo &quot;This is the MPCS shell&quot;</span>
-<span class="go">&quot;This is the MPCS shell&quot;</span>
-<span class="go">msh&gt; exit</span>
-<span class="gp">$ </span>msh<span class="w"> </span>-l<span class="w"> </span>lamont<span class="w"> </span>-s<span class="w"> </span><span class="m">45</span>
-<span class="go">usage: msh [-s NUMBER] [-j NUMBER] [-l NUMBER]</span>
-<span class="gp">$ </span>msh<span class="w"> </span>-s<span class="w"> </span><span class="m">45</span><span class="w"> </span>-j<span class="w"> </span><span class="m">0</span>
-<span class="go">usage: msh [-s NUMBER] [-j NUMBER] [-l NUMBER]</span>
-<span class="gp">$ </span>msh<span class="w"> </span>-l<span class="w"> </span>-j
-<span class="go">usage: msh [-s NUMBER] [-j NUMBER] [-l NUMBER]</span>
-<span class="gp">$ </span>msh<span class="w"> </span>-l<span class="w"> </span><span class="m">5</span>
-<span class="go">msh&gt; ls -la /mpcs;</span>
-<span class="go">error: reached the maximum line limit</span>
-<span class="go">msh&gt; exit</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="task-3-build-sh">
-<h2>Task 3: <code class="docutils literal notranslate"><span class="pre">build.sh</span></code><a class="headerlink" href="#task-3-build-sh" title="Link to this heading">¶</a></h2>
-<p>Inside the <code class="docutils literal notranslate"><span class="pre">scripts/build.sh</span></code> write a bash script that builds the <code class="docutils literal notranslate"><span class="pre">msh</span></code> executable and places it inside the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory. Use the information from the <em>Building the ``msh`` executable</em> section above. This really should only be one to three lines of code. If you are using a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> then you can call <code class="docutils literal notranslate"><span class="pre">make</span></code> function from within here.</p>
-<p><strong>Note: The script must work relative to executing it from within the scripts directory.</strong> For example,</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">~/msh-lamonts/scripts$ source build.sh</span>
-</pre></div>
-</div>
-<p>This should build the executable <code class="docutils literal notranslate"><span class="pre">msh</span></code> and place it inside the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory.</p>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
-<p>Inside your <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory, you can test your <code class="docutils literal notranslate"><span class="pre">shell</span></code> library by running the tests inside the <code class="docutils literal notranslate"><span class="pre">test_seperate_args</span></code>  and <code class="docutils literal notranslate"><span class="pre">test_parse_tok.c</span></code>. For example, here’s how to build <code class="docutils literal notranslate"><span class="pre">test_parse_tok</span></code>,</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>tests
-<span class="gp">$ </span>gcc<span class="w"> </span>-I../include/<span class="w"> </span>-o<span class="w"> </span>test_parse_tok<span class="w"> </span>../src/shell.c<span class="w"> </span>../src/job.c<span class="w"> </span>test_parse_tok.c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./test_parse_tok
-</pre></div>
-</div>
-<p>You can do the same for <code class="docutils literal notranslate"><span class="pre">test_seperate_args.c</span></code>.</p>
-<p>You can test the running of the <code class="docutils literal notranslate"><span class="pre">msh</span></code> program by running the tests inside <code class="docutils literal notranslate"><span class="pre">tests/milestone1</span></code>. Specifically, you can do the following</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>tests/milestone1
-<span class="gp">$ </span>bash<span class="w"> </span>test_msh.sh<span class="w"> </span><span class="c1">#Make sure the msh executable is built first and is inside the bin directory (i.e., bin/msh)</span>
-</pre></div>
-</div>
-<p>Please let Professor Samuels know if there is any issues running these tests on Ed.</p>
-</section>
-<section id="grading">
-<h2>Grading<a class="headerlink" href="#grading" title="Link to this heading">¶</a></h2>
-<p>Programming assignments will be graded according to a general rubric. Specifically, we will assign points for completeness, correctness, design, and style. (For more details on the categories, see our Assignment Rubric page.)</p>
-<p>The exact weights for each category will vary from one assignment to another. For this assignment, the weights will be:</p>
+<section id="compiler-structure">
+<h2>Compiler Structure<a class="headerlink" href="#compiler-structure" title="Link to this heading">¶</a></h2>
+<p>To help with code modularity, we will provided a specific repository structure throughout the implementation of the compiler. You are able to include additional directories and files to help with your implementation. <strong>You are not allowed to use any external third-party libraries unless Professor Samuels specifically gives you permission to do so</strong>. You may only use the libraries provided in the standard library of your chosen language. If you think you need to use an external library then ask before using it; not adhering to this requirement will result in a <strong>major</strong> penalty on this milestone and the final submission of the compiler.</p>
+<p>The initial contents of the repository includes directories and files needed to help you get started implementing the front-end of the compiler. Lets review these directories now:</p>
 <ul class="simple">
-<li><p><strong>Completeness</strong>: 70%</p></li>
-<li><p><strong>Correctness</strong>: 20%</p></li>
-<li><p><strong>Design/Style</strong>: 10%</p></li>
+<li><p><strong>ast</strong> - This directory is currently empty. You will place your AST node files in this directory.</p></li>
+<li><p><strong>benchmarks</strong> - Throughout the implementation of the compiler, you can place sample Golite programs in this directory to help test the various phases. Professor Samuels will provide additional more robust benchmark tests.</p></li>
+<li><p><strong>golite</strong> - The directory that includes the <code class="docutils literal notranslate"><span class="pre">main</span></code> driver for the compiler (i.e., the file that includes the main function or entry point code into the compiler).</p></li>
+<li><p><strong>grammars</strong> - The directory that will contain the ANTLR grammar files and the full ANTLR runtime jar file (i.e., <code class="docutils literal notranslate"><span class="pre">antlr-4.11.1-complete.jar</span></code>). <strong>Please note, we are aware there is a more updated version of the ANTLR jar; however, you will not need this updated version for this course</strong>. If you are running ANTLR locally then you will need to install Java and Java Runtime on your local machine: <a class="reference external" href="https://www.oracle.com/java/technologies/downloads/">Install Java Runtime</a> . The Java is already installed on the linux servers. You will also see a file called <code class="docutils literal notranslate"><span class="pre">generate.sh</span></code>. This is a bash script used to generate the lexer and parser. Right now, it’s preset to produce Go code but you can change the <code class="docutils literal notranslate"><span class="pre">Dlanguage=YOUR_LANGUAGE</span></code> flag to your specific language. When ran, the <code class="docutils literal notranslate"><span class="pre">generate.sh</span></code> file will automatically place the generated lexer and parser files into the <strong>parser</strong> and <strong>lexer</strong> directories.</p></li>
+<li><p><strong>lexer</strong> - The directory contains the autogenerated lexer files. Additionally, you will need to write code to connect the autogenerated code into the your compiler implementation.</p></li>
+<li><p><strong>parser</strong> - The directory contains the autogenerated parser files. Additionally, you will need to write code to connect the autogenerated code into the your compiler implementation.</p></li>
+<li><p><strong>build.sh</strong> - You are required to write a bash script that fully builds the compiler into an executable. This script must also call any other scripts that generate/build any additional components of the compiler. If you using a language that does not build an executable (i.e., Python), then just generating/building all the required components is fine. You will provide instructions in the README file that explains how to run your compiler.</p></li>
+<li><p><strong>README</strong> - This document provide specific instructions to run your compiler on the CS Linux Servers. You must be detailed and explicit with these instructions. Please break these instructions down into specific steps (ie.. Step 1, 2, 3, etc.). Also provide instructions on how to run a a program and specify flags. Failing to provide a straight-forward way of executing your compiles will result in significant deductions to your score.</p></li>
 </ul>
+<p><strong>You are not allowed to change this default structure</strong>. However, you can add additional and files and directories as you wish. <strong>If you need to change this default structure for your language of choice then please reach out to Professor Samuels for permission</strong>. The reason for this structure is that it makes all projects consistent and easier to grade and provide feedback. As we build each phase of the compiler, we will state the additional required directories.</p>
+</section>
+<section id="using-an-updated-version-of-go-on-cs-linux-servers">
+<h2>Using an Updated Version of Go on CS Linux Servers<a class="headerlink" href="#using-an-updated-version-of-go-on-cs-linux-servers" title="Link to this heading">¶</a></h2>
+<p>The default version of Go installed on the CS Linux servers is <strong>Go 1.13</strong>, which is quite old.
+For this course, you should use a more recent version of Go.</p>
+<p>Updated versions of Go are available on the newer <strong>jammy</strong> server nodes. These nodes are named
+<code class="docutils literal notranslate"><span class="pre">jammy0</span></code> through <code class="docutils literal notranslate"><span class="pre">jammy7</span></code> and are similar in spirit to the  <em>focal</em> nodes.</p>
+<section id="connecting-to-a-jammy-node">
+<h3>Connecting to a Jammy Node<a class="headerlink" href="#connecting-to-a-jammy-node" title="Link to this heading">¶</a></h3>
+<p>First, connect to the CS Linux servers using SSH (replace <code class="docutils literal notranslate"><span class="pre">CNETID</span></code> with your own):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">CNETID</span><span class="nd">@linux</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">uchicago</span><span class="o">.</span><span class="n">edu</span>
+</pre></div>
+</div>
+<p>Once logged in, SSH into one of the jammy nodes (you may choose any node from <code class="docutils literal notranslate"><span class="pre">jammy0</span></code> to <code class="docutils literal notranslate"><span class="pre">jammy7</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">jammy0</span>
+</pre></div>
+</div>
+<p>The first time you connect, you may be asked to confirm adding the host to your SSH known hosts
+(you should answer <strong>yes</strong>). You will then be prompted for your password.</p>
+<p>After this, you should be logged into a jammy server.</p>
+</section>
+<section id="using-go-1-22">
+<h3>Using Go 1.22<a class="headerlink" href="#using-go-1-22" title="Link to this heading">¶</a></h3>
+<p>On the jammy nodes, Go 1.22 is installed but not enabled by default. To use it, update your
+<code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=/usr/lib/go-1.22/bin:$PATH
+</pre></div>
+</div>
+<p>You should now be able to compile and run your Go programs using Go 1.22, which is perfectly
+acceptable for this course.</p>
+<p>To verify that you are using the correct version of Go, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">version</span>
+</pre></div>
+</div>
+<p>You should see output similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">version</span> <span class="n">go1</span><span class="mf">.22.2</span> <span class="n">linux</span><span class="o">/</span><span class="n">amd64</span>
+</pre></div>
+</div>
+</section>
+<section id="making-the-change-permanent">
+<h3>Making the Change Permanent<a class="headerlink" href="#making-the-change-permanent" title="Link to this heading">¶</a></h3>
+<p>If you do not want to re-run the <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PATH=...</span></code> command every time you log in, you may add
+that line to your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=/usr/lib/go-1.22/bin:$PATH
+</pre></div>
+</div>
+</section>
+</section>
+<section id="compiler-implementation-languages">
+<h2>Compiler Implementation Languages<a class="headerlink" href="#compiler-implementation-languages" title="Link to this heading">¶</a></h2>
+<p>You are required to implement the entire compiler in one of the following languages:</p>
+<ol class="arabic simple">
+<li><p>Java</p></li>
+<li><p>C++</p></li>
+<li><p>Java (or one of its dialects)</p></li>
+<li><p>Python 3</p></li>
+<li><p>Go</p></li>
+</ol>
+<p><strong>You are not allowed to implement the compiler in any other language</strong>. We recommend you implement the compiler in <strong>Go</strong> since Professor Samuels and TA will be able to help you faster. Implementing, the compiler in other languages may result in the course staff not fully be able to help quickly fix problems. <strong>Please keep in mind that building and fixing errors in your compiler will be your sole responsibility but the course staff will help in any way possible</strong>.</p>
+</section>
+<section id="milestone-requirement-scanner-parser">
+<h2>Milestone Requirement: Scanner &amp; Parser<a class="headerlink" href="#milestone-requirement-scanner-parser" title="Link to this heading">¶</a></h2>
+<p>The main requirements for this milestone is the following</p>
+<ol class="arabic simple">
+<li><p>Working ANTLR generated lexer.</p></li>
+<li><p>Working ANTLR generated parser.</p></li>
+<li><p>AST Construction from the ANTLR generated parse tree.</p></li>
+</ol>
+<p>You must use ANTLR (ANother Tool for Language Recognition) to build your scanner (i.e., lexer) and parser. The grammar files must be placed inside the <code class="docutils literal notranslate"><span class="pre">grammars</span></code> directory. We already have created this directory for you and have placed the ANTLR jar file inside this directory.</p>
+<section id="task-0-learning-antlr">
+<h3>Task 0: Learning ANTLR<a class="headerlink" href="#task-0-learning-antlr" title="Link to this heading">¶</a></h3>
+<p>Your first task is to understand ANTLR system by reading over it’s documentation:</p>
+<p><a class="reference external" href="https://github.com/antlr/antlr4/blob/master/doc/index.md">ANTLR4 Docs</a></p>
+<p>You are required to read over all the sections under the <strong>Sections</strong> area, with the exception of these sections:</p>
+<ul class="simple">
+<li><p>Unicode U+FFFF, U+10FFFF character streams</p></li>
+<li><p>Parsing binary streams</p></li>
+<li><p>Parser and lexer interpreters</p></li>
+<li><p>Resources</p></li>
+</ul>
+<p>Professor Samuels will shortly post a video explaining how you can implement the Cal language using ANTLR and connecting it to a compiler implementation. <strong>However, We want you to first read over these docs before watching the video so you understand better what’s happening in the video</strong>.</p>
+</section>
+<section id="task-1-implementing-the-lexer-using-antlr">
+<h3>Task 1: Implementing the Lexer using ANTLR<a class="headerlink" href="#task-1-implementing-the-lexer-using-antlr" title="Link to this heading">¶</a></h3>
+<p>Assume the following Golite program is defined in a file <code class="docutils literal notranslate"><span class="pre">simple.golite</span></code> inside the <code class="docutils literal notranslate"><span class="pre">benchmarks/simple/</span></code> directory:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="mi">2</span>
+<span class="mi">3</span><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
+<span class="mi">4</span>
+<span class="mi">5</span><span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="mi">6</span>
+<span class="mi">7</span><span class="w">   </span><span class="nx">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">);</span>
+<span class="mi">8</span>
+<span class="mi">9</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>For the lexer, the compiler must read in a Golite program and produce a token stream that will be provided to the parser. The default execution of the compiler at this point is to just run the lexer and parser. However, add a flag <code class="docutils literal notranslate"><span class="pre">-l</span></code> to command line arguments such that it will print out each token on a separate line for a given program. With the <code class="docutils literal notranslate"><span class="pre">-l</span></code> command the execution of the compiler stops at the end of lexing.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to think about your function decomposition inside driver file because you will be adding more command line arguments to the compiler as the quarter progresses.</p>
+</div>
+<p>Assuming you are inside the driver <code class="docutils literal notranslate"><span class="pre">golite</span></code> directory, a sample run using <code class="docutils literal notranslate"><span class="pre">simple.golite</span></code> is as follows ($: is just mimicking the command line)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span>:<span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>golite.go<span class="w"> </span>-l<span class="w"> </span>../benchmarks/simple/simple.golite
+<span class="go">Token.FUNC(1)</span>
+<span class="go">Token.IDENT(1, &quot;main&quot;)</span>
+<span class="go">Token.LPAREN(1)</span>
+<span class="go">Token.RPAREN(1)</span>
+<span class="go">Token.LBRACE(1)</span>
+<span class="go">Token.VAR(3)</span>
+<span class="go">Token.IDENT(3, &quot;a&quot;)</span>
+<span class="go">Token.INT(3)</span>
+<span class="go">Token.SEMICOLON(3)</span>
+<span class="go">... (I&#39;m not printing them all out but you get the idea)</span>
+</pre></div>
+</div>
+<p><strong>Your output does not have to look like the above output</strong>. We just want to see a series of tokens being printed out to verify that your scanner is working. You can print and format the output as you wish. Your implementation must go under a specific directory dedicated to the lexer (e.g. <code class="docutils literal notranslate"><span class="pre">lexer</span></code> directory) along with the generated lexer code. Please note you will need to write more code to incorporate the generated lexer into your compiler.</p>
+</section>
+<section id="task-2-implement-the-parser-and-the-abstract-syntax-tree-ast">
+<h3>Task 2: Implement the Parser and the Abstract Syntax Tree (AST)<a class="headerlink" href="#task-2-implement-the-parser-and-the-abstract-syntax-tree-ast" title="Link to this heading">¶</a></h3>
+<p>For the parser, the compiler must read in a Golite program and parse through the input source code. This will require that you connect your lexer code to your parser code. For this milestone, you must also design and construct an abstract syntax tree based on the language specification and formal grammar. You must determine the appropriate representations for your nodes based on the formal grammar and the AST will be the final output for this milestone.  To help you with this construction, here are few nodes you should think about defining:</p>
+<ul class="simple">
+<li><p><strong>Statement nodes</strong>: Create a node for each type of statement in the grammar. Additionally, we recommend that you define a <code class="docutils literal notranslate"><span class="pre">Statement</span></code> interface that all statement nodes can inherit methods unique to statements.</p></li>
+<li><p><strong>Expression nodes</strong>: Create a <code class="docutils literal notranslate"><span class="pre">BinaryExpr</span></code>, <code class="docutils literal notranslate"><span class="pre">UnaryExpr</span></code> and <code class="docutils literal notranslate"><span class="pre">FieldExpr</span></code> nodes to handle binary expressions (i.e., integer and boolean), unary expressions, and field expressions (e.g., <code class="docutils literal notranslate"><span class="pre">mystruct.coords.x</span></code>). We also recommend that you define an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> interface that all expression nodes can inherit methods unique to expressions. Also define a <code class="docutils literal notranslate"><span class="pre">Variable</span></code> (i.e., identifiers) node, which is also considered an expression.  <strong>DO NOT</strong> define a node for each type of term (e.g., <code class="docutils literal notranslate"><span class="pre">BoolTerm</span></code> and <code class="docutils literal notranslate"><span class="pre">SimpleTerm</span></code> etc.) seem in the grammar. These all represent the forming of binary expressions so you can handle them easily by generating binary expression nodes.</p></li>
+<li><p><strong>Literal nodes</strong>: For each type of literal value (i.e., integer, boolean, etc.), define a node that represents that type of literal value. Since literals are expressions, they should also inherit from your <code class="docutils literal notranslate"><span class="pre">Expression</span></code> interface.</p></li>
+<li><p><strong>Left hand-side value</strong>: Every assignment statement has a left-hand side (i.e., an l-value). You should define a node that can handle l-values that are just identifiers (e.g., <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>) and field l-values (e.g., <code class="docutils literal notranslate"><span class="pre">point.x</span></code> and <code class="docutils literal notranslate"><span class="pre">point.y</span></code>).</p></li>
+<li><p><strong>I/O and allocation nodes</strong>: Define nodes for reading (i.e., <code class="docutils literal notranslate"><span class="pre">'scan'</span></code>) and printing (i.e., <code class="docutils literal notranslate"><span class="pre">'printf'</span></code>) along with nodes to handle memory allocation/deallocation (i.e., <code class="docutils literal notranslate"><span class="pre">new</span></code> and <code class="docutils literal notranslate"><span class="pre">delete</span></code>).</p></li>
+<li><p><strong>Top-level nodes</strong>: Define specific node for a <em>type declaration, **function*</em>, and the all encompassing <em>program</em> node.</p></li>
+</ul>
+<p>You may define a few more nodes then this but these suggestions should cover most node definitions you’ll need in your AST. Please refer back to the lecture slides and videos for tips and suggestions about the AST construction. Place all node definitions inside the <code class="docutils literal notranslate"><span class="pre">ast</span></code> directory. We recommend having a single file for each node definition. For example, if you are implementing your language in Go then your <code class="docutils literal notranslate"><span class="pre">ast</span></code> will have files such as: <code class="docutils literal notranslate"><span class="pre">program.go</span></code>, <code class="docutils literal notranslate"><span class="pre">function.go</span></code>, <code class="docutils literal notranslate"><span class="pre">type_decl.go</span></code>, etc.</p>
+<p>At this point, the default output of the compiler will print out the AST. <strong>We are not requiring a specific printing format</strong>. You are free to print the AST as you wish. However, you must define  <code class="docutils literal notranslate"><span class="pre">String()</span></code> methods for each AST node to print out its representation as string. If there is an error in the lexing or parsing of a program then the compiler must produce a formatted syntax error(s). The syntax error message must be formatted as follows</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">syntax error(LINE_NUMBER, COLUMN_NUMER): MESSAGE</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">LINE_NUMBER</span></code> is the line number, <code class="docutils literal notranslate"><span class="pre">COLUMN_NUMBER</span></code> is the column number where the error occurred. The <code class="docutils literal notranslate"><span class="pre">MESSAGE</span></code> is a helpful error message. You can either collect all possible errors in the program or exit early if you find one syntax error (the latter is easier to implement).</p>
+<p>Assume the following Golite program is defined in a file <code class="docutils literal notranslate"><span class="pre">bad.golite</span></code> inside the <code class="docutils literal notranslate"><span class="pre">benchmarks/bad/</span></code> directory:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="mi">2</span>
+<span class="mi">3</span><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">bool</span><span class="p">;</span>
+<span class="mi">4</span>
+<span class="mi">5</span><span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">+</span><span class="p">;</span>
+<span class="mi">6</span>
+<span class="mi">7</span><span class="w">   </span><span class="nx">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">);</span>
+<span class="mi">8</span>
+<span class="mi">9</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Assuming you are inside the driver <code class="docutils literal notranslate"><span class="pre">golite</span></code> directory, a sample run using <code class="docutils literal notranslate"><span class="pre">simple.golite</span></code> and <code class="docutils literal notranslate"><span class="pre">bad.golite</span></code> is as follows ($: is just mimicking the command line)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span>:<span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>golite.go<span class="w"> </span>../benchmarks/simple/simple.golite
+<span class="go">  func main() {</span>
+<span class="go">    var a int;</span>
+<span class="go">    a = 3 + 4 + 5;</span>
+<span class="go">    printf(&quot;%d&quot;, a);</span>
+<span class="go">  }</span>
+
+<span class="gp">$</span>:<span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>golite.go<span class="w"> </span>../benchmarks/bad/bad.golite
+<span class="go">syntax error(5,3): expected expression on right-hand side but found &#39;+&#39;</span>
+</pre></div>
+</div>
+<p>The message does not have to match the one above. You can just use the message you get back from ANTLR. Notice the default execution of the compiler at this point is just running through both the lexer then the parser. Additionally, the print out of the AST looks very similar to the original source code. You should try to do the same in your implementation; however, it does not to be exact but close to the original source code.</p>
+</section>
+<section id="grading-and-what-to-submit">
+<h3>Grading and What to Submit<a class="headerlink" href="#grading-and-what-to-submit" title="Link to this heading">¶</a></h3>
+<p>You must provide the following to get full credit for this milestone:</p>
+<ol class="arabic simple">
+<li><p>Submit a few Golite programs (e.g., <code class="docutils literal notranslate"><span class="pre">simple1.golite</span></code>, <code class="docutils literal notranslate"><span class="pre">simple2.golite</span></code>, etc.) that verifies your lexer and parser are running correctly.</p></li>
+<li><p>Make sure to explicitly fill out the README file as explained above.</p></li>
+</ol>
+<p>The milestone is 6% of your grade and the exact weights for grading are:</p>
+<ul class="simple">
+<li><p><strong>6% credit</strong>: Parses everything correctly with a few minor errors.</p></li>
+<li><p><strong>5% credit</strong>: 75% and above of all tokens are being identified and parsed correctly.</p></li>
+<li><p><strong>4%-3% credit</strong>: 74%-50% of all tokens are being identified and parsed correctly.</p></li>
+<li><p><strong>3%-0% credit</strong>: No solution provided or less than 50% of the tokens in the language are being identified.</p></li>
+</ul>
+<p>We will verify “correctness” by checking the output of your AST from parsing.</p>
 </section>
 <section id="submission">
-<h2>Submission<a class="headerlink" href="#submission" title="Link to this heading">¶</a></h2>
-<p>Before submitting, make sure you’ve added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the “Milestone #1” assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on “Github” and then  “Connect to Github” to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be “main” or “master”) for this course.</p>
-<p>Depending on the assignment, once you submit your work, an “autograder” will run. This autograder should produce the same test results as when you run the code yourself; if it doesn’t, please let us know so we can look into it. A few other notes:</p>
-<ul class="simple">
-<li><p>You are allowed to make as many submissions as you want before the deadline.</p></li>
-<li><p>Please make sure you have read and understood our <a class="reference internal" href="../../syllabus.html#late-submissions"><span class="std std-ref">Late Submission Policy</span></a>.</p></li>
-<li><p>Your completeness score is determined solely based on the automated tests, but we may adjust your score if you attempt to pass tests by rote (e.g., by writing code that hard-codes the expected output for each possible test input).</p></li>
-<li><p>Gradescope will report the test score it obtains when running your code. If there is a discrepancy between the score you get when running our grader script, and the score reported by Gradescope, please let us know so we can take a look at it.</p></li>
-</ul>
+<h3>Submission<a class="headerlink" href="#submission" title="Link to this heading">¶</a></h3>
+<p>Before submitting, make sure you’ve added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the “Milestone #1” assignment page via two ways,</p>
+<ol class="arabic simple">
+<li><p><strong>Uploading from Github directly (recommended way)</strong>: You can link your Github account to your Gradescope account and upload the correct repository based on
+the homework assignment. When you submit your homework, a pop window will appear. Click on “Github” and then  “Connect to Github” to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be “main” or “master”) for this course.</p></li>
+<li><p><strong>Uploading via a Zip file</strong>: You can also upload a zip file of the assignment directory.</p></li>
+</ol>
+</section>
 </section>
 </section>
 

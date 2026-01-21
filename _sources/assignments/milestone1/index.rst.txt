@@ -1,520 +1,288 @@
 ==========================================
-Milestone #1
+Milestone #1: Front-End (Scanner & Parser)  
 ==========================================
 
-**Due:  Wednesday December 3rd at 11:59pm**
+**Due: Friday February 3rd at 11:59pm**
 
-In this assignment, we will begin implementing the course project: a shell program. This assignment focuses on understanding the repository structure and getting the initial parsing of the shell commands correct.  
+This milestone will require you to get started implementing the front-end for the compiler. 
 
-CS Linux Machine
-~~~~~~~~~~~~~~~~~
-You will need access to an Linux based machine when working on your homework assignments. You should not test your programs on macOS or 
-Windows Linux because these operating systems do not provide all utility commands necessary for completing this and possibly future assignments. 
-Additionally, if they do provide a command then it may not contain all options that a Unix-like system provides.
-**We will use and grade all assignments on the CS Linux machines and all programming assignments must work correctly on these machines.** 
-However, you can work locally on a Unix or Unix-like machine but ensure that you test your final solutions on a CS Linux machine.
+Working Individually or as a Pair 
+==================================
+You are allowed to work **alone** or in teams of **two** for the compiler project. Before creating your repository via the invitation, you will first need to 
 
-Please follow the instructions provided here
+1. Decide if you want to work alone or find a partner in the class. 
+2. Come up with a fun team name or if you are working alone a name for your compiler. Be creative (if you wish)!
+3. The first person (or yourself if you are working alone) to accept the Github classroom invite will enter in the team name. If working in a pair, the second group member will need to click on their team name in-order to join the repository. 
 
-* `Using Visual Studio Code and SSH <https://uchicago-cs.github.io/student-resource-guide/vscode/ssh.html>`__
+Once you have done these two steps, then you can move on to Getting started section. 
 
-Creating Your Private Repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For each assignment, a Git repository will be created for you on GitHub. However, before that repository can be created for you, you need to have a 
-GitHub account. If you do not yet have one, you can get an account here: https://github.com/join. 
+Getting started
+================
+A Git repository will be created for you on GitHub. However, before that repository can be created for you, you need to have a GitHub account. If you do not yet have one, you can get an account here: https://github.com/join. 
 
 To actually get your private repository, you will need this invitation URL: 
 
-* **Project invitation (Please check the Post Project (Milestone #1) is ready” Ed)**
+*  Compiler Project Invitation (Please check the Post “Compiler Project is ready” Ed)
 
 When you click on an invitation URL, you will have to complete the following steps:
 
-1. You will need to select your CNetID from a list. This will allow us to know what student is associated with each GitHub account. This step is only done for the very first invitation you accept.
-
-.. note::
-
-   If you are on the waiting list for this course you will not have a repository made for you until you are admitted into the course. I will post the starter code on Ed so you can work on the assignment until you are admitted into the course. 
-
-
-2. You must click “Accept this assignment” or your repository will not actually be created.
-
-3. After accepting the assignment, Github will take a few minutes to create your repository. You should receive an email from Github when your repository is ready. Normally, it's ready within seconds and you can just refresh the page. 
-
-4. You now need to clone your repository (i.e., download it to your machine). 
+1. See step 3 in "Working Individually or as a Pair" section for the first step. 
+2. You now need to clone your repository (i.e., download it to your machine). 
     - Make sure you’ve set up `SSH access <https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh>`__ on your GitHub account.
     
-    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51082-aut25/msh-GITHUB-USERNAME.git. 
+    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51300-win26/proj-TEAM_NAME-GITHUB-USERNAME.git. 
 
     - If you do not know how to use ``git clone`` to clone your repository then follow this guide that Github provides: `Cloning a Repository <https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository>`__
     
-
 If you run into any issues, or need us to make any manual adjustments to your registration, please let us know via Ed Discussion.
 
+Language Overview: GoLite 
+=========================
+Please make sure you read over the document that describes the language we will be implementing this quarter: `Language Overview <../proj_overview/index.html>`__
 
-``msh``: A Unix-like shell
-============================
-For the last three assignments, you will apply what you have learned in the course to build your own Unix-like shell called ``msh`` (i.e., MPCS shell). This shell will not include everything that the ``bash`` shell provides; however, many of the topics covered in the course will be implemented within ``msh``.  
-Each assignment represents reaching a milestone for the project, where each will be a continuation of the prior that entails adding additional components to the shell.  
+Compiler Structure 
+==================
+To help with code modularity, we will provided a specific repository structure throughout the implementation of the compiler. You are able to include additional directories and files to help with your implementation. **You are not allowed to use any external third-party libraries unless Professor Samuels specifically gives you permission to do so**. You may only use the libraries provided in the standard library of your chosen language. If you think you need to use an external library then ask before using it; not adhering to this requirement will result in a **major** penalty on this milestone and the final submission of the compiler. 
 
-The first task in implementing ``msh`` is understanding the repository structure of the shell, which is described in the next section.
+The initial contents of the repository includes directories and files needed to help you get started implementing the front-end of the compiler. Lets review these directories now:
 
+- **ast** - This directory is currently empty. You will place your AST node files in this directory. 
 
-Task 0: Understanding the Repository Structure
-------------------------------------------------
-Since the building of the shell spans multiple assignments, all remaining assignments will work out of the ``msh-GITHUB-USERNAME`` repository you created above. The initial contents of your repository has the following structure 
+- **benchmarks** - Throughout the implementation of the compiler, you can place sample Golite programs in this directory to help test the various phases. Professor Samuels will provide additional more robust benchmark tests. 
 
-.. code-block:: console  
+- **golite** - The directory that includes the ``main`` driver for the compiler (i.e., the file that includes the main function or entry point code into the compiler).
 
-  ├── bin
-  ├── data
-  ├── include
-  │   ├── job.h
-  │   └── shell.h
-  ├── README.md
-  ├── Makefile 
-  ├── scripts
-  │   └── build.sh
-  ├── src
-  │   ├── job.c
-  │   ├── msh.c
-  │   └── shell.c
-  └── tests
-    
+- **grammars** - The directory that will contain the ANTLR grammar files and the full ANTLR runtime jar file (i.e., ``antlr-4.11.1-complete.jar``). **Please note, we are aware there is a more updated version of the ANTLR jar; however, you will not need this updated version for this course**. If you are running ANTLR locally then you will need to install Java and Java Runtime on your local machine: `Install Java Runtime <https://www.oracle.com/java/technologies/downloads/>`__ . The Java is already installed on the linux servers. You will also see a file called ``generate.sh``. This is a bash script used to generate the lexer and parser. Right now, it’s preset to produce Go code but you can change the ``Dlanguage=YOUR_LANGUAGE`` flag to your specific language. When ran, the ``generate.sh`` file will automatically place the generated lexer and parser files into the **parser** and **lexer** directories.
 
-The repository structure is similar to most small C projects in industry. The contents of each directory is explained below:
+- **lexer** - The directory contains the autogenerated lexer files. Additionally, you will need to write code to connect the autogenerated code into the your compiler implementation.
 
+- **parser** - The directory contains the autogenerated parser files. Additionally, you will need to write code to connect the autogenerated code into the your compiler implementation.
 
-1. ``bin`` directory - will include the ``msh`` executable that is generated by the ``gcc`` compiler when compiling all source files together. 
-2. ``data`` directory - includes any auxiliary data files needed by the testcases. You are also allowed to place test data files in this directory for testing purposes. 
-3. ``include`` directory - contains all the include files for the modules associated with building the ``msh`` executable. **Only header files (i.e., ``.h`` files) are allowed in this directory**. 
-4. ``README.md`` file - contains documentation about the repository and instructions for building the shell. We will revisit this file in a later assignment. 
-5. ``Makefile`` file - This is an optional file that makes it easy to  compile multiple C files together. We will not cover Makefiles in this course; however, if you are familiar with them then you can implement it in this file. Otherwise, you can ignore this file. 
-7. ``scripts`` directory - You will still be writing bash scripts along with building the shell. All script files for ``msh`` must be placed in this directory. For this assignment you will work with ``build.sh``, which is explained in a later section. 
-8. ``src`` directory - includes all the source files for the modules you will implement. **Only source files (i.e., ``.c`` files) are allowed in this directory**. 
-9. ``tests`` directory - contains the testcases for testing the various modules created for the shell. 
+- **build.sh** - You are required to write a bash script that fully builds the compiler into an executable. This script must also call any other scripts that generate/build any additional components of the compiler. If you using a language that does not build an executable (i.e., Python), then just generating/building all the required components is fine. You will provide instructions in the README file that explains how to run your compiler.
 
-As we move along, we will be adding more files and data to the repository each milestone.
+- **README** - This document provide specific instructions to run your compiler on the CS Linux Servers. You must be detailed and explicit with these instructions. Please break these instructions down into specific steps (ie.. Step 1, 2, 3, etc.). Also provide instructions on how to run a a program and specify flags. Failing to provide a straight-forward way of executing your compiles will result in significant deductions to your score.
 
+**You are not allowed to change this default structure**. However, you can add additional and files and directories as you wish. **If you need to change this default structure for your language of choice then please reach out to Professor Samuels for permission**. The reason for this structure is that it makes all projects consistent and easier to grade and provide feedback. As we build each phase of the compiler, we will state the additional required directories.
 
+Using an Updated Version of Go on CS Linux Servers
+=================================================
 
-Task 2: Shell Module (``shell.h`` and ``shell.c``) 
-====================================================
+The default version of Go installed on the CS Linux servers is **Go 1.13**, which is quite old.  
+For this course, you should use a more recent version of Go.
 
-The actual logic for the shell and its state will be implemented in a separate module defined in ``shell.c`` and ``shell.h``. To get started, the following code is already in your ``shell.h`` file: 
+Updated versions of Go are available on the newer **jammy** server nodes. These nodes are named
+``jammy0`` through ``jammy7`` and are similar in spirit to the  *focal* nodes. 
 
-.. code-block:: C 
+Connecting to a Jammy Node
+--------------------------
 
-  // Represents the state of the shell 
-  typedef struct msh {
-     /** TODO: IMPLEMENT **/ 
-  }msh_t;
+First, connect to the CS Linux servers using SSH (replace ``CNETID`` with your own):
 
-  extern msh_t *shell; 
+::
 
+    ssh CNETID@linux.cs.uchicago.edu
 
-The state of the shell is contained within the ``msh_t`` definition. You will need to add fields to this definition as you implement the ``shell`` module. The ``extern`` states that the global variables ``shell`` is defined in the separate in file. Inside the ``shell.c`` you will see the actual global variable the represents the shell state 
+Once logged in, SSH into one of the jammy nodes (you may choose any node from ``jammy0`` to ``jammy7``):
 
-.. code-block:: C 
+::
 
-  msh_t *shell = NULL; 
+    ssh jammy0
 
-This is the global variable you will use to represent the shell state. 
+The first time you connect, you may be asked to confirm adding the host to your SSH known hosts
+(you should answer **yes**). You will then be prompted for your password.
 
+After this, you should be logged into a jammy server.
 
-``alloc_shell`` function 
--------------------------
+Using Go 1.22
+-------------
 
-Inside your ``shell.h``, copy the following function prototype: 
+On the jammy nodes, Go 1.22 is installed but not enabled by default. To use it, update your
+``PATH`` environment variable as follows:
 
-.. code-block:: c 
-  
-  /*
-  * alloc_shell: allocates and initializes the state of the shell
-  * 
-  * max_jobs: The maximum number of jobs that can be in existence at any point in time. 
-  * 
-  * max_line: The maximum number of characters that can be entered for any specific command line.   
-  * 
-  * max_history: The maximum number of saved history commands for the shell. 
-  * 
-  * Returns: a msh_t pointer that is allocated and initialized  
-  */
-  msh_t *alloc_shell(int max_jobs, int max_line, int max_history); 
+::
 
-This function allocates (i..e, ``malloc``), initializes and returns a pointer to a ``msh_t`` value. The shell has limits to the number of jobs in existence, the maximum number of characters that can be entered in on the command line and how many previous commands are stored in its history, All these are represented by the parameters to the function (i.e., ``max_jobs``, ``max_line`` and ``max_history``) respectively. Ensure that you save these values inside your state definition (i.e., ``msh_t``) because you will need to reference them in later functions. If any of these parameters are equal to ``0`` then you will use the following default values for the corresponding limits:
+    export PATH=/usr/lib/go-1.22/bin:$PATH
 
-.. code-block:: c 
+You should now be able to compile and run your Go programs using Go 1.22, which is perfectly
+acceptable for this course.
 
-  const int MAX_LINE = 1024;
-  const int MAX_JOBS = 16; 
-  const int MAX_HISTORY = 10; 
-  
-You will call this function later in the ``msh.c`` file to allocate a new shell state. 
+To verify that you are using the correct version of Go, run:
 
-Place the implementation of this function inside ``src/shell.c``. 
+::
 
-``parse_tok`` function 
--------------------------
+    go version
 
-Inside your ``shell.h``, copy the following function prototype: 
+You should see output similar to:
 
-.. code-block:: c 
-  
-  /**
-  * parse_tok: Continuously retrieves separate commands from the provided command line until all commands are parsed   
-  * 
-  * line:  the command line to parse, which may include multiple commands. If line is NULL then parse_tok continues parsing the previous command line. 
-  *  
-  * job_type: Specifies whether the parsed command is a background (sets the value of 0 at the address of job_type) or foreground job (sets the value of 1 at the address of job_type). If no job is returned then assign the value at the address to -1
-  * 
-  * Returns: NULL no other commands can be parsed; otherwise, it returns a parsed command from the command line.
-  *         
-  * Please note this function does modify the ``line`` parameter. 
-  */
-  char *parse_tok(char *line, int *job_type); 
+::
 
-``msh`` shell contains two special characters that separate multiple commands (i.e., jobs) on the same command line: ``;`` (foreground job) and ``&`` (background job). A ``msh`` command line could contain a single job on the command line as such  
+    go version go1.22.2 linux/amd64
 
-.. code-block:: console 
-
-  ls -la 
-
-or multiple jobs on a single command line as such 
-
-.. code-block:: console 
-
-  ls -la & cd .. ; cat file.txt 
-
-where the above command line contains three separate jobs: ``ls -la``, ``cd ..``, and ``cat file.txt`` 
-
-This function is similar to ``strtok`` such that it continuously retrieves and returns the jobs on a command line that are separated by ``&`` and ``;``. For each returned job, it will place a ``1`` at the address ``job_type`` points to if the job is a **foreground job**; otherwise, it places ``0`` at that address to represent the job is a **background job**. If the ``line`` argument is ``NULL``, similar to ``strtok``, it continues to parse the previous command line. For example, here's a sample code showing how ``parse_tok`` should work 
-
-.. code-block:: C 
-
-  char *cmd_line="ls -la & cd .. ; cat file.txt"
-  int type; 
-  char *job; 
-  job = parse_tok(cmd_line,&type); 
-  printf("job=%s, type=%d\n",job,type); // prints job=ls -la type=0
-  job = parse_tok(NULL,&type); 
-  printf("job=%s, type=%d\n",job,type); // prints job=cd .. type=1
-  job = parse_tok(NULL,&type); 
-  printf("job=%s, type=%d\n",job,type); // prints job=cat file.txt type=1
-  job = parse_tok(NULL,&type); // job = NULL  type = -1
-  job = parse_tok(NULL,&type); // Still job = NULL  type = -1 
-
-
-We recommend that you keep an internal pointer of the ``line`` parameter in a `static variable <https://www.geeksforgeeks.org/static-variables-in-c/>`__ and reuse as means to return back the portions of the string. One way to implement this function is to place null characters ``\0`` at the locations where you find a ``&`` and ``;`` 
-and return the address of the element the represents the beginning of the next job to return. You can return the address of an array element as follows: ``&array[NUM]`` where ``NUM`` is the valid index. For example, ``&array[2]`` returns the address of the third element in the array (assuming 0 indexing).  
-
-Place the implementation of this function inside ``src/shell.c``. 
-
-``separate_args`` function 
+Making the Change Permanent
 ---------------------------
 
-Inside your ``shell.h``, copy the following function prototype: 
+If you do not want to re-run the ``export PATH=...`` command every time you log in, you may add
+that line to your ``.bashrc`` file:
 
-.. code-block:: c 
-  
-  /**
-  * separate_args: Separates the arguments of command and places them in an allocated array returned by this function   
-  * 
-  * line: the command line to separate. This function assumes only a single command that takes in zero or more arguments. 
-  *  
-  * argc: Stores the number of arguments produced at the memory location of the argc pointer. 
-  *
-  * is_builtin: true if the command is a built-in command; otherwise false. 
-  * 
-  * Returns: NULL is line contains no arguments; otherwise, a newly allocated array of strings that represents the arguments of the command (similar to argv). Make sure the array includes a NULL value in its last location. 
-  * Note: The user is responsible for freeing the memory return by this function! 
-  */
-  char **separate_args(char *line, int *argc, bool *is_builtin); 
+::
 
-This function separates out each word in the provided ``line`` and places them in a newly allocated array of strings with the command name always being at index 0. ``msh`` assumes words on the command line are separated by one or more whitespace characters.  This function assumes ``line`` is a single job (i.e., ``ls -la`` and not ``ls -la; cd ..``).
-It places the number of arguments it found (including the program name) at the address of ``argc``. The last element in the returned array must contain a ``NULL`` value. For now, ignore ``is_builtin``. We will come back to the ``is_builtin`` in a future milestone. Here's a sample code showing how ``separate_args`` should work 
+    export PATH=/usr/lib/go-1.22/bin:$PATH
 
-.. code-block:: C 
 
-  char *cmd_line[]="ls -la /mpcs51082-aut25"
-  char **argv; 
-  int argc 
-  argv = separate_args(cmd_line,&argc);
-  printf("%s",argv[0]); // prints ls 
-  printf("%s",argv[1]); // prints -la 
-  printf("%s",argv[2]); // prints  /mpcs51082-aut25
-  //Please note there is an argv[3] that should contain NULL!
-  printf("%d", argc); // prints 3
-  argv = separate_args("",&argc);  // argv = NULL
+Compiler Implementation Languages 
+==================================
+You are required to implement the entire compiler in one of the following languages:
 
-Place the implementation of this function inside ``src/shell.c``. 
+1. Java 
+2. C++ 
+3. Java (or one of its dialects)
+4. Python 3
+5. Go 
 
-``evaluate`` function 
+**You are not allowed to implement the compiler in any other language**. We recommend you implement the compiler in **Go** since Professor Samuels and TA will be able to help you faster. Implementing, the compiler in other languages may result in the course staff not fully be able to help quickly fix problems. **Please keep in mind that building and fixing errors in your compiler will be your sole responsibility but the course staff will help in any way possible**.
+
+Milestone Requirement: Scanner & Parser 
+=========================================
+The main requirements for this milestone is the following 
+
+1. Working ANTLR generated lexer. 
+2. Working ANTLR generated parser. 
+3. AST Construction from the ANTLR generated parse tree. 
+
+You must use ANTLR (ANother Tool for Language Recognition) to build your scanner (i.e., lexer) and parser. The grammar files must be placed inside the ``grammars`` directory. We already have created this directory for you and have placed the ANTLR jar file inside this directory.
+
+
+Task 0: Learning ANTLR 
 -----------------------
-***Before implementing ``evaluate``, implement the job module, which is explained in **Task 2: Job Module (``job.h`` and ``job.c``)**. After implementing Task 2,  come back to implement the remainder of the shell module. 
-Inside your ``shell.h``, copy the following function prototype: 
+Your first task is to understand ANTLR system by reading over it's documentation:
 
-.. code-block:: c 
-  
-  /*
-  * evaluate - executes the provided command line string 
-  * 
-  * shell - the current shell state value 
-  * 
-  * line - the command line string to evaluate 
-  * 
-  * Returns: non-zero if the command executed wants the shell program to close. Otherwise, a 0 is returned. 
-  */
-  int evaluate(msh_t *shell, char *line); 
+`ANTLR4 Docs <https://github.com/antlr/antlr4/blob/master/doc/index.md>`__ 
 
-This function executes the job(s) provided in the ``line`` parameters
+You are required to read over all the sections under the **Sections** area, with the exception of these sections:
 
-the ``evaluate`` function **must** be updated as follows: 
+- Unicode U+FFFF, U+10FFFF character streams
+- Parsing binary streams
+- Parser and lexer interpreters
+- Resources
 
-1. Create a new child process using ``fork()`` that will handle the execution of the current job. 
-2. Have the parent add the newly created job to the jobs array. 
-3. The child process will then call ``execve(...)`` to execute the job. 
-4. The parent process will blocking using ``waitpid(...)`` or ``wait(...)`` (you choose) until the child process completes. 
-5.  If ``line`` surpasses the maximum number of characters on the line then print: ``error: reached the maximum line limit``. 
-6. Once the child process terminates, the parent process must delete the job from the jobs array. 
+Professor Samuels will shortly post a video explaining how you can implement the Cal language using ANTLR and connecting it to a compiler implementation. **However, We want you to first read over these docs before watching the video so you understand better what's happening in the video**.
 
-Assuming the ``msh-lamonts`` directory is a copy of the ``msh`` repository, then running the ``/usr/bin/ls msh-lamonts`` now evaluates to the following 
 
-.. code-block:: console 
+Task 1: Implementing the Lexer using ANTLR 
+-------------------------------------------
+Assume the following Golite program is defined in a file ``simple.golite`` inside the ``benchmarks/simple/`` directory:
 
-  msh> /usr/bin/ls msh-lamonts 
-  bin  data  include  README.md  saqs  scripts  src  tests
+.. code-block:: go
 
-Notice how we had to provide the full path to the ``ls`` executable (i.e., ``/usr/bin/ls`` and not just the ``ls``). This is required since our shell currently is not looking at the ``PATH`` environment variable to find executables. Thus, when you are testing your ``msh`` shell currently you must provide the full executable.
+    1  func main() { 
+    2
+    3    var a int; 
+    4
+    5    a = 3 + 4 + 5; 
+    6 
+    7   printf("%d", a); 
+    8 
+    9 }
 
-Multiple Jobs
-~~~~~~~~~~~~~~
-What happens if you have multiple jobs on the same command line? For example, 
+For the lexer, the compiler must read in a Golite program and produce a token stream that will be provided to the parser. The default execution of the compiler at this point is to just run the lexer and parser. However, add a flag ``-l`` to command line arguments such that it will print out each token on a separate line for a given program. With the ``-l`` command the execution of the compiler stops at the end of lexing.
+
+.. note::
+
+   Make sure to think about your function decomposition inside driver file because you will be adding more command line arguments to the compiler as the quarter progresses.
+
+Assuming you are inside the driver ``golite`` directory, a sample run using ``simple.golite`` is as follows ($: is just mimicking the command line)
 
 .. code-block:: console 
 
-  msh> /usr/bin/ls msh-lamonts; /usr/bin/printf "%02d/%02d/%02d\n" 2 2 2023 
+    $: go run golite.go -l ../benchmarks/simple/simple.golite
+    Token.FUNC(1)
+    Token.IDENT(1, "main")
+    Token.LPAREN(1)
+    Token.RPAREN(1)
+    Token.LBRACE(1)
+    Token.VAR(3)
+    Token.IDENT(3, "a")
+    Token.INT(3)
+    Token.SEMICOLON(3)
+    ... (I'm not printing them all out but you get the idea)
 
-then this must cause the ``evaluate`` function to run the jobs sequentially after each other. The shell goes through the five steps described above for the first job (i.e., ``msh> /usr/bin/ls msh-lamonts``), and then does the steps again for the subsequent jobs that are running in the foreground (i.e., ``/usr/bin/printf "%02d/%02d/%02d\n" 2 2 2023``). Thus, the following above command produces 
+**Your output does not have to look like the above output**. We just want to see a series of tokens being printed out to verify that your scanner is working. You can print and format the output as you wish. Your implementation must go under a specific directory dedicated to the lexer (e.g. ``lexer`` directory) along with the generated lexer code. Please note you will need to write more code to incorporate the generated lexer into your compiler.
+
+Task 2: Implement the Parser and the Abstract Syntax Tree (AST) 
+----------------------------------------------------------------
+For the parser, the compiler must read in a Golite program and parse through the input source code. This will require that you connect your lexer code to your parser code. For this milestone, you must also design and construct an abstract syntax tree based on the language specification and formal grammar. You must determine the appropriate representations for your nodes based on the formal grammar and the AST will be the final output for this milestone.  To help you with this construction, here are few nodes you should think about defining:
+
+
+- **Statement nodes**: Create a node for each type of statement in the grammar. Additionally, we recommend that you define a ``Statement`` interface that all statement nodes can inherit methods unique to statements.
+- **Expression nodes**: Create a ``BinaryExpr``, ``UnaryExpr`` and ``FieldExpr`` nodes to handle binary expressions (i.e., integer and boolean), unary expressions, and field expressions (e.g., ``mystruct.coords.x``). We also recommend that you define an ``Expression`` interface that all expression nodes can inherit methods unique to expressions. Also define a ``Variable`` (i.e., identifiers) node, which is also considered an expression.  **DO NOT** define a node for each type of term (e.g., ``BoolTerm`` and ``SimpleTerm`` etc.) seem in the grammar. These all represent the forming of binary expressions so you can handle them easily by generating binary expression nodes.
+- **Literal nodes**: For each type of literal value (i.e., integer, boolean, etc.), define a node that represents that type of literal value. Since literals are expressions, they should also inherit from your ``Expression`` interface.
+- **Left hand-side value**: Every assignment statement has a left-hand side (i.e., an l-value). You should define a node that can handle l-values that are just identifiers (e.g., ``x`` and ``y``) and field l-values (e.g., ``point.x`` and ``point.y``).
+- **I/O and allocation nodes**: Define nodes for reading (i.e., ``'scan'``) and printing (i.e., ``'printf'``) along with nodes to handle memory allocation/deallocation (i.e., ``new`` and ``delete``).
+- **Top-level nodes**: Define specific node for a *type declaration, **function**, and the all encompassing *program* node.
+
+You may define a few more nodes then this but these suggestions should cover most node definitions you’ll need in your AST. Please refer back to the lecture slides and videos for tips and suggestions about the AST construction. Place all node definitions inside the ``ast`` directory. We recommend having a single file for each node definition. For example, if you are implementing your language in Go then your ``ast`` will have files such as: ``program.go``, ``function.go``, ``type_decl.go``, etc.
+
+At this point, the default output of the compiler will print out the AST. **We are not requiring a specific printing format**. You are free to print the AST as you wish. However, you must define  ``String()`` methods for each AST node to print out its representation as string. If there is an error in the lexing or parsing of a program then the compiler must produce a formatted syntax error(s). The syntax error message must be formatted as follows
 
 .. code-block:: console 
 
-  msh> /usr/bin/ls msh-lamonts; /usr/bin/printf "%02d/%02d/%02d\n" 2 2 2023
-  bin  data  include  README.md  saqs  scripts  src  tests
-  02/02/2023
+  syntax error(LINE_NUMBER, COLUMN_NUMER): MESSAGE
 
-Background Jobs 
-~~~~~~~~~~~~~~~~
-We will implement Background jobs in Milestone 2. 
+where ``LINE_NUMBER`` is the line number, ``COLUMN_NUMBER`` is the column number where the error occurred. The ``MESSAGE`` is a helpful error message. You can either collect all possible errors in the program or exit early if you find one syntax error (the latter is easier to implement).
 
+Assume the following Golite program is defined in a file ``bad.golite`` inside the ``benchmarks/bad/`` directory:
 
-Place the implementation of ``evaluate`` inside ``src/shell.c``. 
+.. code-block:: go
 
+    1  func main() {
+    2
+    3    var a bool;
+    4
+    5    a = +;
+    6
+    7   printf("%d", a);
+    8
+    9 }
 
-``exit_shell`` function 
-~~~~~~~~~~~~~~~~~~~~~~~~
+Assuming you are inside the driver ``golite`` directory, a sample run using ``simple.golite`` and ``bad.golite`` is as follows ($: is just mimicking the command line)
 
-Inside your ``shell.h``, copy the following function prototype: 
+.. code-block:: console 
 
-.. code-block:: c 
-  
-  /*
-  * exit_shell - Closes down the shell by deallocating the shell state.  
-  * 
-  * shell - the current shell state value
-  * 
-  */
-  void exit_shell(msh_t *shell); 
-
-This function simply deallocates any memory allocated within the shell state. For now, make sure to ``free`` any state data allocated you called with ``malloc`` and make sure to free the ``shell`` variable. For this assignment, you may have not allocated any memory other than the ``shell`` variable itself, which is fine. 
-
-Place the implementation of this function inside ``src/shell.c``. 
-
-
-Task 2: Job Module (``job.h`` and ``job.c``) 
-=============================================
-The job module will contain information about the current jobs (i.e., foreground and/or background jobs) in existence. You are free to implement this module as you wish; we provide some helpful tips. 
-
-The implementation must be defined in a file ``src/job.c`` and its header in ``include/job.h``. The header **must** contain the following definitions where you can add new fields but cannot delete or rename these types: 
-
-.. code-block:: C 
-
-  #ifndef _JOB_H_
-  #define _JOB_H_ 
-
-  #include <sys/types.h>
-
-  typedef enum job_state{FOREGROUND, BACKGROUND, SUSPENDED, UNDEFINED} job_state_t; 
-
-  // Represents a job in a shell. 
-  typedef struct job {
-      char *cmd_line;     // The command line for this specific job. 
-      job_state_t state;  // The current state for this job 
-      pid_t pid;          // The process id for this job 
-      int jid;            // The job number for this job 
-  }job_t;
-
-  #endif 
-
-The ``enum job_state`` is an enumeration type that allows you to assign the ``job_state_t`` field to one of those defined constants. It provides better code readability. For example, 
-
-.. code-block:: C 
-
-  job_t job; 
-  job_state_t state = FOREGROUND; 
-  job.state = state; 
-
-To help you get started thinking about how to design and incorporate this module into the shell module, we recommend the following: 
-
-1. Inside the ``msh_t`` typedef in the ``shell.h`` include a new field ``job_t *jobs`` to represent an array jobs that are running in the shell. 
-2. When allocating the ``job_t *jobs``, we recommend you allocate it to the size of ``max_jobs`` (i.e., the parameter from ``alloc_shell``). You may not use every element in the array; however, it will make it easier to add,delete, and modify jobs in the array. After creating the jobs array, you should intialize every element to a value such that you know that element is an empty location in the job. For example, assign every ``cmd_line`` field for each element in the array to ``NULL``. This way, when trying to add a new job to the array you know that location in the array is empty. When you remove a job from the array, make sure you that at the end you make ``cmd_line = NULL``for that specific element.   
-3. Define a ``bool add_job(job_t *jobs, int max_jobs, pid_t pid, job_state_t state, const char *cmd_line)`` function that adds a new job to the array. Reminder if there are no more jobs left to allocate (i.e., ``max_jobs`` has been reached) then this function should return a false; otherwise, true to indicate the job was added. 
-4. Define a  ``bool delete_job(job_t *jobs, pid_t pid)`` function to remove a job from the array of jobs based on the ``pid_t`` provided. You should think about the return value for this function. Make sure to reset the location in the array where the job was deleted. As I mentioned earlier this could be setting ``cmd_line=NULL`` at that location. 
-5. Define a ``void free_jobs(job_t *jobs, int max_jobs)`` function to deallocate the jobs array. 
-
-The above suggestions are **not required** and you are free to design the library as you wish as long as it has at least the above skeleton code. You can make modifications to the headers defined above, add new functions, etc. However, for each function prototype in the ``job.h`` file, you must provide documentation for that function.
-
-
-Task 3: The Executable Program (``msh.c``) 
-============================================
-
-The ``msh`` program will work similarly to ``bash`` command where it will act as a interactive **REPL (Read-Eval-Print Loop)**, where it will allow the user to enter in a command line (i.e., input), evaluate the command line, and print the result of running the command line back to the console console. The ``msh`` program 
-will continuously perform this REPL mechanism until the user enters ``exit``. Most prompts for a shell such as bash looks like something like ``lamonts@linux2:~$``, where it might have the machine logged in under along with current directory and a ``$``. For ``msh``, it will **always** have the prompt: ``msh>``. 
- 
-Inside the ``src/msh.c``, you will implement a ``main`` function along with any helper functions you wish that must have the following
-
-1. Handle the following **optional** command line arguments: ``-s NUMBER``, ``-j NUMBER``, ``-l NUMBER``. The ``-s NUMBER`` represents the maximum number of command lines to store in the shell history. ``-j NUMBER`` represents the maximum number of jobs that can be in existence at any point in time and ``-l NUMBER`` represents the maximum number of characters that can be entered in for a single command line. These can be entered in any order and you must ensure that ``NUMBER`` is a positive integer (i.e., an integer greater than zero). **Please note we are not implementing the functionality of -j and -s in this assignment but will in future assignments**. However, you still need to  handle these arguments in this assignment. I recommend looking at `getopt() <https://www.geeksforgeeks.org/getopt-function-in-c-to-parse-command-line-arguments/>`__ to make it easy to process the options and ``sscanf`` to easily determine if the ``NUMBER`` is an actual number. If any additional command line arguments are specified or an **optional** command line argument is not correctly formatted then the program must ``return 1`` and print the usage state: ``usage: msh [-s NUMBER] [-j NUMBER] [-l NUMBER]``. **Do not print anything else out**. 
-2. Allocate and initialize a ``msh_t`` state (i.e., call ``allocate_shell``). If the user did not supply a optional command line argument then a ``0`` is passed in for that specific limit parameter (i.e., the shell will use the default value for that specific limit). This is the global variable mentioned in the previous section ``msh_t *shell``. This means you will need to ``include "shell.h"`` to get access to this variable in order to allocate and initialize the variable. 
-3. Using the allocated ``msh_t`` state, implement the *REPL* mechanism where it will prompt the user to enter in a command line, call the ``evaluate`` function of the shell module to execute the command. The program will continuously allow the user to enter in command lines until they enter ``exit``, which should close down the shell and exit.  
-4. If std-in closes then close down the shell and exit. We will explain how to check if stdin closes in the next section.  
-
-``getline()``
------------
-The C ``getline(char **lineptr, size_t *restrict n,FILE *restrict stream)`` function reads an entire line from stream. The ``getline()`` stores the contents of a single line into the argument ``lineptr``. The ``*lineptr`` is null-terminated and includes the newline character, if one was found. 
-If ``*lineptr`` is set to ``NULL`` before the call, then ``getline()`` will allocate the string for storing the line. This string should be freed by the user program even if ``getline()`` failed. For example, take a look at the following code:
-
-.. code-block:: C 
-
-  #define _GNU_SOURCE
-  #include <stdio.h>
-  #include <stdlib.h>
-
-  int main() {
-
-      char *line = NULL;
-      long int len = 0;
-      long nRead = getline(&line, &len, stdin);
-      while ( nRead != -1) {
-          printf("Retrieved line of length %zd with contents:%s\n", nRead, line); //Remove this printf in your shell. It it only here for demonstration purposes. 
-          //The getline function keeps the \n at the end so we remove by assigning the null character at that location. 
-           if (line[nRead - 1] == '\n'){ 
-            line[nRead - 1] = '\0';
-          }
-          // Done using line so I must free it!!
-          free(line);
-          //Make sure to reset line back to null for the next line
-          line = NULL;
-          nRead = getline(&line, &len, stdin);
+    $: go run golite.go ../benchmarks/simple/simple.golite
+      func main() {
+        var a int;
+        a = 3 + 4 + 5;
+        printf("%d", a);
       }
-      return 0;
-  }
 
-For the purposes of this assignment, we can grab the entire contents being read in from standard input using ``getline`` within a while loop. ``getline`` will return ``-1`` once it has reached the end of the stream (i.e., std-in has closed). Otherwise, 
-it returns the number of characters on the line (``nRead``). Notice that line is always set to ``NULL`` before we call ``getline``. This is a requirement for this assignment so we can allocate a new string for each line from the stream. Make sure to always free 
-the line after you are done using it. Also notice that when calling ``getline`` we pass in ``&line`` and ``&len``. This is required to make sure it can successfully place in the contents. Note that ``len`` is not the number of characters on the line but rather it is the length of an internal buffer to hold the characters. 
-You can ignore that value for this assignment; however, you still need to pass it in to call ``getline``. Make sure to include ``#define _GNU_SOURCE`` because it is required to use ``getline``.
+    $: go run golite.go ../benchmarks/bad/bad.golite
+    syntax error(5,3): expected expression on right-hand side but found '+'
 
+The message does not have to match the one above. You can just use the message you get back from ANTLR. Notice the default execution of the compiler at this point is just running through both the lexer then the parser. Additionally, the print out of the AST looks very similar to the original source code. You should try to do the same in your implementation; however, it does not to be exact but close to the original source code.
 
-Building the ``msh`` executable 
-=================================
+Grading and What to Submit 
+---------------------------
+You must provide the following to get full credit for this milestone:
 
-Since the source and header files are in different directories you need to tell the compiler (i.e., ``gcc``) where they are located. Here's a simple way to do it: 
-
-.. code-block:: console  
-
-  $ gcc -I./include/ -o ./bin/msh src/*.c
-
-**This assumes you are in the root directory of your repository**! The ``-I`` flag tells the compiler were the user-defined header files are located. Running this code will then place the ``msh`` executable in the ``bin`` directory. 
-
-Sample Runs 
-=============
-
-Here are few sample runs of the ``msh`` shell at this point in its development. Please note that all sample runs assumes you are running and building the program from the root directory of your repository:
+1. Submit a few Golite programs (e.g., ``simple1.golite``, ``simple2.golite``, etc.) that verifies your lexer and parser are running correctly.
+2. Make sure to explicitly fill out the README file as explained above.
 
 
-.. code-block:: console  
+The milestone is 6% of your grade and the exact weights for grading are:
 
-  $ gcc -I./include/ -o ./bin/msh src/*.c
-  $ alias msh=./bin/msh
-  $ msh 
-  msh>/usr/bin/ls -l
-  total 29
-  -rwxrwx--- 1 lamonts lamonts 50048 Nov 10 09:38 msh
-  msh> /usr/bin/echo "This is the MPCS shell"
-  "This is the MPCS shell"
-  msh> exit 
-  $ msh -l lamont -s 45 
-  usage: msh [-s NUMBER] [-j NUMBER] [-l NUMBER]
-  $ msh -s 45 -j 0 
-  usage: msh [-s NUMBER] [-j NUMBER] [-l NUMBER]
-  $ msh -l -j 
-  usage: msh [-s NUMBER] [-j NUMBER] [-l NUMBER]
-  $ msh -l 5
-  msh> ls -la /mpcs; 
-  error: reached the maximum line limit 
-  msh> exit 
+- **6% credit**: Parses everything correctly with a few minor errors. 
+- **5% credit**: 75% and above of all tokens are being identified and parsed correctly.
+- **4%-3% credit**: 74%-50% of all tokens are being identified and parsed correctly.
+- **3%-0% credit**: No solution provided or less than 50% of the tokens in the language are being identified.
 
-
-Task 3: ``build.sh`` 
-~~~~~~~~~~~~~~~~~~~~~
-Inside the ``scripts/build.sh`` write a bash script that builds the ``msh`` executable and places it inside the ``bin`` directory. Use the information from the *Building the ``msh`` executable* section above. This really should only be one to three lines of code. If you are using a ``Makefile`` then you can call ``make`` function from within here. 
-
-**Note: The script must work relative to executing it from within the scripts directory.** For example, 
-
-.. code-block:: console  
-
-  ~/msh-lamonts/scripts$ source build.sh 
-
-This should build the executable ``msh`` and place it inside the ``bin`` directory. 
-
-Testing 
-~~~~~~~~
-Inside your ``tests`` directory, you can test your ``shell`` library by running the tests inside the ``test_seperate_args``  and ``test_parse_tok.c``. For example, here's how to build ``test_parse_tok``, 
-
-.. code-block:: console  
-  
-  $ cd tests 
-  $ gcc -I../include/ -o test_parse_tok ../src/shell.c ../src/job.c test_parse_tok.c && ./test_parse_tok 
-
-You can do the same for ``test_seperate_args.c``. 
-
-You can test the running of the ``msh`` program by running the tests inside ``tests/milestone1``. Specifically, you can do the following 
-
-.. code-block:: console  
-  
-  $ cd tests/milestone1 
-  $ bash test_msh.sh #Make sure the msh executable is built first and is inside the bin directory (i.e., bin/msh)
-
-Please let Professor Samuels know if there is any issues running these tests on Ed. 
-
-Grading
-~~~~~~~~
-Programming assignments will be graded according to a general rubric. Specifically, we will assign points for completeness, correctness, design, and style. (For more details on the categories, see our Assignment Rubric page.)
-
-The exact weights for each category will vary from one assignment to another. For this assignment, the weights will be:
-
-- **Completeness**: 70%
-- **Correctness**: 20%
-- **Design/Style**: 10% 
+We will verify “correctness” by checking the output of your AST from parsing.
 
 Submission
-~~~~~~~~~~~~
+----------
 
-Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Milestone #1" assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
+Before submitting, make sure you’ve added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Milestone #1" assignment page via two ways, 
+
+1. **Uploading from Github directly (recommended way)**: You can link your Github account to your Gradescope account and upload the correct repository based on 
+   the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
   
-Depending on the assignment, once you submit your work, an "autograder" will run. This autograder should produce the same test results as when you run the code yourself; if it doesn't, please let us know so we can look into it. A few other notes: 
-
-- You are allowed to make as many submissions as you want before the deadline.
-- Please make sure you have read and understood our :ref:`Late Submission Policy <late_submissions>`. 
-- Your completeness score is determined solely based on the automated tests, but we may adjust your score if you attempt to pass tests by rote (e.g., by writing code that hard-codes the expected output for each possible test input).
-- Gradescope will report the test score it obtains when running your code. If there is a discrepancy between the score you get when running our grader script, and the score reported by Gradescope, please let us know so we can take a look at it.
+2. **Uploading via a Zip file**: You can also upload a zip file of the assignment directory.
