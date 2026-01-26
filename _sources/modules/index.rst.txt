@@ -6,3 +6,4 @@ Modules
 - `M1: Introduction to Compilers  <./m1/m1.html>`__
 - `M2: Lexical Analysis  <./m2/m2.html>`__
 - `M3: Syntax Analysis  <./m3/m3.html>`__
+- `M4: Semantic Analysis  <./m4/m4.html>`__

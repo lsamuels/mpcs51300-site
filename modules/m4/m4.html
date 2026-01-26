@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Module 4: Advanced Unix Kernel Subsystems &#8212; MPCS 51082 - Introduction to Unix Systems  documentation</title>
+    <title>M4: Static Semantic Analysis &amp; Intermediate Representation &#8212; MPCS 51300 - Compilers  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=0bf093e7" />
     <link rel="stylesheet" type="text/css" href="../../_static/chiweb.css?v=9805d56b" />
@@ -37,7 +37,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="../../index.html">
-          MPCS 51082</a>
+          MPCS 51300</a>
         <span class="navbar-text navbar-version pull-left"><b></b></span>
       </div>
 
@@ -92,16 +92,14 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li><a class="reference internal" href="#">Module 4: Advanced Unix Kernel Subsystems</a><ul>
+<li><a class="reference internal" href="#">M4: Static Semantic Analysis &amp; Intermediate Representation</a><ul>
 <li><a class="reference internal" href="#pre-recorded-lectures">Pre-recorded Lectures</a><ul>
-<li><a class="reference internal" href="#week-8">Week 8</a></li>
-<li><a class="reference internal" href="#wee-9">Wee 9</a></li>
+<li><a class="reference internal" href="#week-4">Week 4</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#resources-readings">Resources/Readings</a></li>
 <li><a class="reference internal" href="#synchronous-sessions-in-person-lecture">Synchronous Sessions (In-person Lecture)</a><ul>
-<li><a class="reference internal" href="#id1">Week 8</a></li>
-<li><a class="reference internal" href="#week-9">Week 9</a></li>
+<li><a class="reference internal" href="#id1">Week 4</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#assignment">Assignment</a></li>
@@ -117,50 +115,32 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <section id="module-4-advanced-unix-kernel-subsystems">
-<h1>Module 4: Advanced Unix Kernel Subsystems<a class="headerlink" href="#module-4-advanced-unix-kernel-subsystems" title="Link to this heading">¶</a></h1>
-<ul class="simple">
-<li><p>Deep dive into filesystem architecture (including VFS), file I/O in C, virtual memory, and basic Unix networking tools.</p></li>
-</ul>
-<p>By the end of this module, students will be able to:</p>
-<ul class="simple">
-<li><p>Explain how the Virtual File System (VFS) abstracts concrete filesystems.</p></li>
-<li><p>Write robust C programs that open, modify, and close files using POSIX APIs with correct error handling.</p></li>
-<li><p>Describe virtual memory concepts (paging, page cache).</p></li>
-<li><p>Use core Unix networking commands to inspect connectivity, and name resolution.</p></li>
-</ul>
+  <section id="m4-static-semantic-analysis-intermediate-representation">
+<h1>M4: Static Semantic Analysis &amp; Intermediate Representation<a class="headerlink" href="#m4-static-semantic-analysis-intermediate-representation" title="Link to this heading">¶</a></h1>
+<p>We will begin an introduction into the next phase of the compiler, static semantic analysis. We will also continue our discussion into syntactical analysis by looking over common parsing algorithms. We will also begin discussing Intermediate representations.</p>
 <section id="pre-recorded-lectures">
 <h2>Pre-recorded Lectures<a class="headerlink" href="#pre-recorded-lectures" title="Link to this heading">¶</a></h2>
 <p><strong>Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.</strong></p>
-<p>The pre-recorded lectures are available here: <a class="reference external" href="https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=43577bb9-fbb5-46ad-bee4-b39c000b5992">M4 Videos</a>.
-You can also find the videos under the “Panopto” tab on the MPCS 51082 canvas site.</p>
+<p>The pre-recorded lectures are available here: <a class="reference external" href="...">M4 Videos</a>.
+You can also find the videos under the “Panopto” tab on the MPCS 51300 canvas site.</p>
 <p>The lectures are a series of approx 15-20 minute videos. <strong>Please come back here weekly as the videos will be updated if a module spans multiple weeks.</strong> This module includes the following videos:</p>
-<section id="week-8">
-<h3>Week 8<a class="headerlink" href="#week-8" title="Link to this heading">¶</a></h3>
+<section id="week-4">
+<h3>Week 4<a class="headerlink" href="#week-4" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>4.0: Introduction to File I/O</p></li>
-<li><p>4.1: Unix I/O Functions</p></li>
-<li><p>4.2: Standard I/O Functions</p></li>
+<li><p>4.0: Syntax Error Handling</p></li>
+<li><p>4.1: AST Construction using an ANTLR Parse Tree (Part 1)</p></li>
+<li><p>4.2: AST Construction using an ANTLR Parse Tree (Part 2)</p></li>
 </ul>
-</section>
-<section id="wee-9">
-<h3>Wee 9<a class="headerlink" href="#wee-9" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>4.3: File Systems</p></li>
-<li><p>4.4: Networking in Unix</p></li>
-</ul>
-<p>The slides presented in these videos are accessible in the upstream repository.</p>
+<p>The slides presented in these videos are accessible in the upstream repository and canvas.</p>
 </section>
 </section>
 <section id="resources-readings">
 <h2>Resources/Readings<a class="headerlink" href="#resources-readings" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>The slides and code presented in this module are accessible in the upstream repository.</p></li>
+<li><p>The slides and code presented in this module are accessible in the upstream repository and canvas.</p></li>
 <li><dl class="simple">
-<dt><strong>The Linux Programming Interface: A Linux and UNIX System Programming Handbook readings:</strong></dt><dd><ul>
-<li><p>Chapter 4.1-4.6</p></li>
-<li><p>Chapter 5.4 - 5.5</p></li>
-<li><p>Chapter 20.1 - 20.8</p></li>
+<dt><strong>Engineering a Compiler* readings</strong>:</dt><dd><ul>
+<li><p>Chapter 4.1 - 4.4</p></li>
 </ul>
 </dd>
 </dl>
@@ -171,41 +151,20 @@ You can also find the videos under the “Panopto” tab on the MPCS 51082 canva
 <h2>Synchronous Sessions (In-person Lecture)<a class="headerlink" href="#synchronous-sessions-in-person-lecture" title="Link to this heading">¶</a></h2>
 <p>As a reminder here are the dates and times for the synchronous session for this module:</p>
 <section id="id1">
-<h3>Week 8<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<h3>Week 4<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>Dates/Times</dt><dd><ul>
-<li><p><strong>Monday November 17th 10:30am-12:20pm</strong></p></li>
-<li><p><strong>Thursday November 20th 5:30pm-7:30pm</strong></p></li>
+<li><p>Section 1: <strong>Monday January 26th &#64; 10:30am-12:20pm</strong></p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Session Outline</dt><dd><ul>
-<li><p>Exam</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</section>
-<section id="week-9">
-<h3>Week 9<a class="headerlink" href="#week-9" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Dates/Times</dt><dd><ul>
-<li><p><strong>Monday December 1st 10:30am-12:20pm</strong></p></li>
-<li><p><strong>Thursday November 4th 5:30pm-7:30pm</strong></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Session Outline</dt><dd><ul>
-<li><p>Virtual Memory</p></li>
-<li><p>Unix File systems</p></li>
-<li><p>Course recap</p></li>
+<dt>Discussion Outline</dt><dd><ul>
+<li><p>Intermediate Representations</p></li>
+<li><p>Introduction to Semantic Analysis</p></li>
+<li><p>Introduction to Symbol Tables</p></li>
 </ul>
 </dd>
 </dl>
@@ -215,9 +174,9 @@ You can also find the videos under the “Panopto” tab on the MPCS 51082 canva
 </section>
 <section id="assignment">
 <h2>Assignment<a class="headerlink" href="#assignment" title="Link to this heading">¶</a></h2>
+<p>Assignments are always <strong>due</strong> on Tuesday evenings.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="../../assignments/milestone1/index.html">Milestone #1</a>, due December 3rd at 11:59pm CDT</p></li>
-<li><p><a class="reference external" href="../../assignments/milestone2/index.html">Milestone #2</a>, due December 13th at 11:59pm CDT</p></li>
+<li><p><a class="reference external" href="../../assignments/milestone3/index.html">Milestone #3</a>, due February 3rd at 11:59pm CDT</p></li>
 </ul>
 </section>
 </section>
