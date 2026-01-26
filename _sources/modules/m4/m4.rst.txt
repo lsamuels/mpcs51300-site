@@ -36,7 +36,7 @@ As a reminder here are the dates and times for the synchronous session for this 
 Week 4
 ~~~~~~~~~
 - Dates/Times
-   - Section 1: **Monday January 26th @ 10:30am-12:20pm** 
+   - Section 1: **Monday January 26th @ 2:30am-4:20pm** 
 - Discussion Outline 
    - Intermediate Representations 
    - Introduction to Semantic Analysis
