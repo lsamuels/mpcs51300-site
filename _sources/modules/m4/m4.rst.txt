@@ -42,6 +42,15 @@ Week 4
    - Introduction to Semantic Analysis
    - Introduction to Symbol Tables
 
+Week 5
+~~~~~~~~
+- Dates/Times
+   - Section 1: **Monday February 2nd @ 2:30am-4:20pm** 
+- Discussion Outline 
+   - Type Checking 
+   - Control flow Graphs 
+   - IR Lowering to LLVM [if time permits]
+   
 Assignment
 ----------------------
 Assignments are always **due** on Tuesday evenings. 
