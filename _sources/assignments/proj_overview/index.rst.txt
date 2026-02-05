@@ -87,14 +87,14 @@ The semantics for GoLite are provide informally. Please ask questions on Ed if y
     - Global variables with the same name cannot be defined (compiler produces an error)
     - Local variables of the same function cannot be defined (compiler produces an error)
     - Two ``struct`` definitions with same name cannot be defined (compiler produces an error) 
-    - Two fields within a struct cannot be defined (compiler produces an error)
+    - Two field names within a struct cannot be same (compiler produces an error)
     - Two functions with the same name cannot be defined (compiler produces an error)
 - The entry point into a program begins in the a function named ``main`` that takes no arguments. All valid programs must define a ``main`` function. 
 - ``struct`` type may only include fields of the primitive types and ``struct`` types defined in the file. You must also allow fields of its own type.   
 - The conditional expression for the ``if`` and ``for`` statements must be a boolean expression.
 -  Assignment statements require the left-hand side and right-hand side to have same type. However, ``nil`` can be defined to any ``struct`` type. 
 - All ``struct`` values must be defined with the ``new id`` syntax. ``id`` must be equal to a struct name and cannot be an ``int`` or ``bool``. All ``struct`` values in the language are pointers to their types. You can not use the ``&`` to make a pointer to a struct in Golite. At the code generation phase, The ``new`` syntax evaluates to a reference (i.e., a pointer to a memory address) to store a value of the specific type.
-- Unlike in Go where there is garbage collection, all allocated memory in Golite must be freed (i.e., deallocated) by the programmer. A programmer deallocates memory that was allocated with the ``new id`` syntax by calling ``delete Expression``. During the code generation phase, ``Expression`` must reference a struct value (i.e.,  an address to a struct value).
+- Unlike in Go where there is garbage collection, all allocated memory in Golite must be freed (i.e., deallocated) by the programmer. A programmer deallocates memory that was allocated with the ``new id`` syntax by calling ``delete Expression``. During the code generation phase, ``Expression`` must reference a struct value (i.e.,  an address to a struct value).Tracking and correctly managing memory allocation and deallocation is not the responsibility of the compiler developer; it is the sole responsibility of the programmer.
 
 - The ``.`` operator is used to access a field in a ``struct`` value.  All ``id`` strings that follow a ``.`` must be fields of the corresponding ``struct`` definition.
 - All arguments in the language are passed by value (including pointers to ``struct`` values). 
