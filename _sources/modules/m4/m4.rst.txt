@@ -23,6 +23,7 @@ Week 5
 - 4.4.1: Introduction to LLVM 
 - 4.4.2: Basic LLVM Instructions 
 
+
 The slides presented in these videos are accessible in the upstream repository and canvas.
 
 Resources/Readings 
@@ -49,11 +50,19 @@ Week 4
 Week 5
 ~~~~~~~~
 - Dates/Times
-   - Section 1: **Monday February 2nd @ 2:30am-4:20pm** 
+   - Section 1: **Monday February 2nd @ 2:30pm-4:20pm** 
 - Discussion Outline 
    - Type Checking 
    - Control flow Graphs 
    - IR Lowering to LLVM [if time permits]
+
+Week 6
+~~~~~~~~
+- Dates/Times
+   - Section 1: **Monday February 9th @ 2:30pm-4:20pm** 
+- Discussion Outline 
+   - IR Lowering to LLVM 
+   - LLVM Phase-Implementation [if time permits]
 
 Assignment
 ----------------------
