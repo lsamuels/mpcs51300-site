@@ -1,0 +1,44 @@
+M5: Code Generation  
+==================================================
+This fifth module we begin our transition to talking about code generation (i.e., the backend of the compiler). 
+
+Pre-recorded Lectures
+---------------------
+**Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.**
+
+The pre-recorded lectures are available here: `M5 Videos <>`_.
+You can also find the videos under the "Panopto" tab on the MPCS 51300 canvas site.
+
+The lectures are a series of approx 15-20 minute videos. **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
+
+Week 7 
+~~~~~~~
+
+
+The slides presented in these videos are accessible in the upstream repository.
+
+Resources/Readings 
+-------------------
+
+* The slides and code presented in this module are accessible in the upstream repository.
+* **Engineering a Compiler readings:**
+ - Chapter 6.1 - 6.4
+
+Synchronous Sessions (In-person Lecture) 
+-----------------------------------------
+As a reminder here are the dates and times for the synchronous session for this module:
+
+Week 7 
+~~~~~~~
+- Dates/Times
+   - Section 1: **Monday February 16th 10:30am-12:20pm** 
+- Session Outline 
+   - LLVM SSA Formation 
+
+
+Assignment
+----------------------
+Assignments are always **due** on Friday evenings. 
+
+* `Milestone #2 <../../assignments/milestone2/index.html>`__, due February 17th at 11:59pm CDT
+* `Milestone #3 <../../assignments/milestone3/index.html>`__, due March 3rd at 11:59pm CDT

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Milestone #3: Code Generation &#8212; MPCS 51300 - Compilers  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=0bf093e7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chiweb.css?v=9805d56b" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="../../_static/rmsearch.js?v=9704a757"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          MPCS 51300</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../syllabus.html">Syllabus</a></li>
+                <li><a href="../../calendar.html">Calendar</a></li>
+                <li><a href="../../modules/index.html">Modules</a></li>
+                <li><a href="../index.html">Assignments</a></li>
+                <li><a href="../../office-hours.html">Office Hours</a></li>
+                <li><a href="https://uchicago-cs.github.io/student-resource-guide/">CS Student Resources</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">Milestone #3: Code Generation</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#language-overview-golite">Language Overview: GoLite</a></li>
+<li><a class="reference internal" href="#milestone-requirement-translation-from-stack-based-to-register-based-llvm-ir">Milestone Requirement: Translation from <strong>Stack-Based</strong> to <strong>Register-Based</strong> LLVM IR</a></li>
+<li><a class="reference internal" href="#milestone-requirement-arm-code-generation">Milestone Requirement: ARM Code Generation</a><ul>
+<li><a class="reference internal" href="#translating-from-llvm-ir-to-arm64">Translating from LLVM IR to ARM64</a></li>
+<li><a class="reference internal" href="#command-line-options-augmented">Command-line Options Augmented</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grading-and-what-to-submit">Grading and What to Submit</a></li>
+<li><a class="reference internal" href="#submission">Submission</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="sourcelink">
+  <a href="../../_sources/assignments/milestone3/index.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <section id="milestone-3-code-generation">
+<h1>Milestone #3: Code Generation<a class="headerlink" href="#milestone-3-code-generation" title="Link to this heading">¶</a></h1>
+<p><strong>Due: Friday March 3rd at 11:59pm</strong></p>
+<p>This milestone will require you to</p>
+<ol class="arabic simple">
+<li><p>Convert your stack-based LLVM IR representation into an SSA LLVM-IR Register based implementation</p></li>
+<li><p>Implement Linear Scan Register Allocation</p></li>
+<li><p>Begin the translation from LLVM IR Register based implementation into native ARM assembly code.</p></li>
+</ol>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
+<p>You will not be creating a new repository for every milestone. Continue to work out of the same repository as Milestone #2 for all remaining milestones and the final submission of the compiler.</p>
+</section>
+<section id="language-overview-golite">
+<h2>Language Overview: GoLite<a class="headerlink" href="#language-overview-golite" title="Link to this heading">¶</a></h2>
+<p>Please make sure you read over the document that describes the language we will be implementing this quarter: <a class="reference external" href="../proj_overview/index.html">Language Overview</a></p>
+</section>
+<section id="milestone-requirement-translation-from-stack-based-to-register-based-llvm-ir">
+<h2>Milestone Requirement: Translation from <strong>Stack-Based</strong> to <strong>Register-Based</strong> LLVM IR<a class="headerlink" href="#milestone-requirement-translation-from-stack-based-to-register-based-llvm-ir" title="Link to this heading">¶</a></h2>
+<p>Implement the algorithm explained in the M5 lecture that translates your stack-based representation into a register-based implementation. As a reminder, after this translation your LLVM IR will be fully in SSA form, and all instructions related to stack-based memory (i.e., stack-based loads, stores, and alloca instructions) will have been removed. You are also required to remove any unnecessary phi nodes that are never used in their current block or in any future blocks.</p>
+</section>
+<section id="milestone-requirement-arm-code-generation">
+<h2>Milestone Requirement: ARM Code Generation<a class="headerlink" href="#milestone-requirement-arm-code-generation" title="Link to this heading">¶</a></h2>
+<p>After LLVM IR Register based translation, you will then generate the equivalent ARM64 assembly code. As stated in lecture, the output of the ARM assembly code is a <code class="docutils literal notranslate"><span class="pre">.s</span></code> file that contains the original source code represented in its ARM assembly form. <strong>You are not required to complete the full ARM translation</strong>. For this milestone, we are looking for ARM translation for the following <strong>Basic Requirements</strong>:</p>
+<ul class="simple">
+<li><p>Global and local variable declarations for integers only</p></li>
+<li><p>Integer binary expressions</p></li>
+<li><p>Variable assignment updating</p></li>
+<li><p>Simple function calls</p></li>
+<li><p>Printing of a single integer</p></li>
+</ul>
+<p>Thus, you are not required to have all of the benchmarks working but rather programs that look like the following:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
+<span class="w">   </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">   </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">   </span><span class="nx">printf</span><span class="p">(</span><span class="s">&quot;%d\n%d\n&quot;</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We recommend that you complete as much of the ARM translation as possible; however, we are only looking for the above requirements. <strong>You must implement a Linear Scan Register allocator for this milestone</strong>. Please look back at the M5 slides for this implementation.</p>
+<section id="translating-from-llvm-ir-to-arm64">
+<h3>Translating from LLVM IR to ARM64<a class="headerlink" href="#translating-from-llvm-ir-to-arm64" title="Link to this heading">¶</a></h3>
+<p>For this milestone and the last milestone, <strong>we are not providing sample code or design guidance</strong>. You should now be familiar enough with translating from one IR into another IR; therefore, you should have more insight on how to perform this translation. However, we do recommend the following:</p>
+<ul class="simple">
+<li><p>Similar to llvm, we recommend that you define an <code class="docutils literal notranslate"><span class="pre">arm</span></code> package that includes all structs, interfaces, and files associated with ARM code generation.</p></li>
+<li><p>Since ARM64 is the final stage of our compiler, you are not required to define a struct similar to <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">LLVMProgram</span> <span class="pre">struct</span></code> for ARM. You can translate the CFG of LLVM Instructions directly into a string that contains the ARM code. However, it may be easier for you to define a <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">ARMProgram</span> <span class="pre">struct</span></code> that represents the state information for constructing an ARM assembly file along with your ARM instructions inside this arm package. This is not a requirement and is left to your discretion.</p></li>
+<li><p>We recommend that you keep the same <code class="docutils literal notranslate"><span class="pre">cfg</span></code> structure, but during the translation, you translate the llvm instructions into their arm counterparts. This is what you will need to consider.</p></li>
+</ul>
+</section>
+<section id="command-line-options-augmented">
+<h3>Command-line Options Augmented<a class="headerlink" href="#command-line-options-augmented" title="Link to this heading">¶</a></h3>
+<p>For this milestone, the must augment the compiler with the additional command line argument flags:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-S</span></code>: Produces the ARM64 form from the input source file. The filename must be the same as the original source filename but with the extension of <code class="docutils literal notranslate"><span class="pre">.s</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">llvm-stack</span></code>: Enables saving only the stack-based implementation to the <code class="docutils literal notranslate"><span class="pre">.ll</span></code> file. The register-based translation is now the default representation printed to the <code class="docutils literal notranslate"><span class="pre">.ll</span></code> files. Thus, specifying <code class="docutils literal notranslate"><span class="pre">llvm-stack</span></code> produces a <code class="docutils literal notranslate"><span class="pre">.ll</span></code> file and prevents the compiler from generating ARM64 code.</p></li>
+</ul>
+</section>
+</section>
+<section id="grading-and-what-to-submit">
+<h2>Grading and What to Submit<a class="headerlink" href="#grading-and-what-to-submit" title="Link to this heading">¶</a></h2>
+<p>The milestone is 6% of your grade and the exact weights for grading are:</p>
+<ul class="simple">
+<li><p><strong>6% credit</strong>: LLVM-IR Register-Based Implementation and ARM64 are working for all the <strong>Basic Requirements</strong> specified above and <strong>at least</strong> one of the following benchmarks are working: <code class="docutils literal notranslate"><span class="pre">thermopylae</span></code>, <code class="docutils literal notranslate"><span class="pre">primes</span></code>, or <code class="docutils literal notranslate"><span class="pre">primes2</span></code>.</p></li>
+<li><p><strong>5% credit</strong>: LLVM-IR Register-Based Implementation and ARM64 are working and ARM working for all the <strong>Basic Requirements</strong> specified above, except no benchmarks are working.</p></li>
+<li><p><strong>4%-3% credit</strong>:  LLVM-IR Register-Based Implementation is fully working and ARM generation has started and some of the <strong>Basic Requirements</strong> are working.</p></li>
+<li><p><strong>2%-1% credit</strong>:  LLVM-IR Register-Based Implementation needs some work and no arm translation is implemented.</p></li>
+<li><p><strong>0% credit</strong>: No solution or barely any work completed.</p></li>
+</ul>
+</section>
+<section id="submission">
+<h2>Submission<a class="headerlink" href="#submission" title="Link to this heading">¶</a></h2>
+<p>Before submitting, make sure you’ve added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the “Milestone #3” assignment page via two ways,</p>
+<ol class="arabic simple">
+<li><p><strong>Uploading from Github directly (recommended way)</strong>: You can link your Github account to your Gradescope account and upload the correct repository based on
+the homework assignment. When you submit your homework, a pop window will appear. Click on “Github” and then  “Connect to Github” to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be “main” or “master”) for this course.</p></li>
+<li><p><strong>Uploading via a Zip file</strong>: You can also upload a zip file of the assignment directory.</p></li>
+</ol>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021-2025, University of Chicago.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.3.7.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

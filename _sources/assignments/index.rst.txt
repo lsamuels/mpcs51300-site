@@ -7,6 +7,7 @@ Assignments
 - `Homework #2  <./hw2/index.html>`__, due January 20th at 11:59pm CDT
 - `Milestone #1  <./milestone1/index.html>`__, due February 3rd at 11:59pm CDT
 - `Milestone #2  <./milestone2/index.html>`__, due February 17th at 11:59pm CDT
+- `Milestone #3  <./milestone3/index.html>`__, due March 3rd at 11:59pm CDT
 
 
 Compiler Documents 

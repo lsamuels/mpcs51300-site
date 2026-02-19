@@ -1,0 +1,91 @@
+==========================================
+Milestone #3: Code Generation  
+==========================================
+
+**Due: Friday March 3rd at 11:59pm**
+
+This milestone will require you to
+
+1. Convert your stack-based LLVM IR representation into an SSA LLVM-IR Register based implementation 
+2. Implement Linear Scan Register Allocation 
+3. Begin the translation from LLVM IR Register based implementation into native ARM assembly code.
+
+
+Getting started
+---------------
+You will not be creating a new repository for every milestone. Continue to work out of the same repository as Milestone #2 for all remaining milestones and the final submission of the compiler.
+
+
+Language Overview: GoLite 
+--------------------------
+Please make sure you read over the document that describes the language we will be implementing this quarter: `Language Overview <../proj_overview/index.html>`__
+
+Milestone Requirement: Translation from **Stack-Based** to **Register-Based** LLVM IR 
+--------------------------------------------------------------------------------------
+Implement the algorithm explained in the M5 lecture that translates your stack-based representation into a register-based implementation. As a reminder, after this translation your LLVM IR will be fully in SSA form, and all instructions related to stack-based memory (i.e., stack-based loads, stores, and alloca instructions) will have been removed. You are also required to remove any unnecessary phi nodes that are never used in their current block or in any future blocks.
+
+
+Milestone Requirement: ARM Code Generation
+-------------------------------------------
+After LLVM IR Register based translation, you will then generate the equivalent ARM64 assembly code. As stated in lecture, the output of the ARM assembly code is a ``.s`` file that contains the original source code represented in its ARM assembly form. **You are not required to complete the full ARM translation**. For this milestone, we are looking for ARM translation for the following **Basic Requirements**: 
+
+- Global and local variable declarations for integers only
+- Integer binary expressions
+- Variable assignment updating
+- Simple function calls 
+- Printing of a single integer
+
+Thus, you are not required to have all of the benchmarks working but rather programs that look like the following:
+
+.. code-block:: go
+
+   var a int;
+   func add(a int, b int) int {
+      return a + b;
+   }
+   func main () {
+      var b int;
+      a = 5;
+      b = (add(a,b) * 2) - 3;
+      printf("%d\n%d\n",b,a);
+   }
+
+We recommend that you complete as much of the ARM translation as possible; however, we are only looking for the above requirements. **You must implement a Linear Scan Register allocator for this milestone**. Please look back at the M5 slides for this implementation.  
+
+Translating from LLVM IR to ARM64 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+For this milestone and the last milestone, **we are not providing sample code or design guidance**. You should now be familiar enough with translating from one IR into another IR; therefore, you should have more insight on how to perform this translation. However, we do recommend the following: 
+
+- Similar to llvm, we recommend that you define an ``arm`` package that includes all structs, interfaces, and files associated with ARM code generation.
+- Since ARM64 is the final stage of our compiler, you are not required to define a struct similar to ``type LLVMProgram struct`` for ARM. You can translate the CFG of LLVM Instructions directly into a string that contains the ARM code. However, it may be easier for you to define a ``type ARMProgram struct`` that represents the state information for constructing an ARM assembly file along with your ARM instructions inside this arm package. This is not a requirement and is left to your discretion. 
+- We recommend that you keep the same ``cfg`` structure, but during the translation, you translate the llvm instructions into their arm counterparts. This is what you will need to consider.
+
+
+Command-line Options Augmented  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For this milestone, the must augment the compiler with the additional command line argument flags: 
+
+- ``-S``: Produces the ARM64 form from the input source file. The filename must be the same as the original source filename but with the extension of ``.s``.
+- ``llvm-stack``: Enables saving only the stack-based implementation to the ``.ll`` file. The register-based translation is now the default representation printed to the ``.ll`` files. Thus, specifying ``llvm-stack`` produces a ``.ll`` file and prevents the compiler from generating ARM64 code.
+
+Grading and What to Submit
+---------------------------
+
+The milestone is 6% of your grade and the exact weights for grading are: 
+
+- **6% credit**: LLVM-IR Register-Based Implementation and ARM64 are working for all the **Basic Requirements** specified above and **at least** one of the following benchmarks are working: ``thermopylae``, ``primes``, or ``primes2``. 
+- **5% credit**: LLVM-IR Register-Based Implementation and ARM64 are working and ARM working for all the **Basic Requirements** specified above, except no benchmarks are working. 
+- **4%-3% credit**:  LLVM-IR Register-Based Implementation is fully working and ARM generation has started and some of the **Basic Requirements** are working. 
+- **2%-1% credit**:  LLVM-IR Register-Based Implementation needs some work and no arm translation is implemented. 
+- **0% credit**: No solution or barely any work completed. 
+
+Submission
+----------
+
+Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Milestone #3" assignment page via two ways, 
+
+1. **Uploading from Github directly (recommended way)**: You can link your Github account to your Gradescope account and upload the correct repository based on 
+   the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
+  
+2. **Uploading via a Zip file**: You can also upload a zip file of the assignment directory.
