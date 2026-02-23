@@ -11,9 +11,6 @@ You can also find the videos under the "Panopto" tab on the MPCS 51300 canvas si
 
 The lectures are a series of approx 15-20 minute videos. **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
 
-Week 7 
-~~~~~~~
-
 
 The slides presented in these videos are accessible in the upstream repository.
 
@@ -36,9 +33,17 @@ Week 7
    - LLVM SSA Formation 
 
 
+Week 8 
+~~~~~~~
+- Dates/Times
+   - Section 1: **Monday February 23rd 10:30am-12:20pm** 
+- Session Outline 
+   - Register Allocation  
+
+
 Assignment
 ----------------------
-Assignments are always **due** on Friday evenings. 
+Assignments are always **due** on Wednesday evenings. 
 
 * `Milestone #2 <../../assignments/milestone2/index.html>`__, due February 17th at 11:59pm CDT
 * `Milestone #3 <../../assignments/milestone3/index.html>`__, due March 3rd at 11:59pm CDT
