@@ -1,0 +1,38 @@
+M6: Compiler Optimizations 
+==================================================
+In this final module, you we will explore a the optimizer portion of the compiler and discuss how one implements various optimizations in the middle component of the compiler. We will also have a course-recap of all the components that makeup a compiler.
+
+Pre-recorded Lectures
+---------------------
+**Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.**
+
+There will be no videos for the final module in compilers. However, Professor Samuels will post a few additional resources about other compiler optimizations. 
+
+The slides presented in these videos are accessible in the upstream repository.
+
+Resources/Readings 
+-------------------
+
+* The slides and code presented in this module are accessible in the upstream repository.
+* **Engineering a Compiler readings:**
+ - Chapter 8.1 - 8.4.1
+
+Synchronous Sessions (In-person Lecture) 
+-----------------------------------------
+As a reminder here are the dates and times for the synchronous session for this module:
+
+Week 9 
+~~~~~~~
+- Dates/Times
+   - Section 1: **Monday March 2nd 2:20pm-04:30pm** 
+- Session Outline 
+   - Local basic block optimizations: Value Numbering, Copy Prorogation, Constant folding 
+   - Debriefing about the course 
+   - Open-office hours [remainder of time] 
+
+Assignment
+----------------------
+Assignments are always **due** on Tuesdays evenings. 
+
+* `Milestone #3  <../../assignments/milestone3/index.html>`__, due March 3rd at 11:59pm CDT
+* `Milestone #4 (Final Submission)  <../../assignments/milestone5/index.html>`__, see due date(s) in specification 

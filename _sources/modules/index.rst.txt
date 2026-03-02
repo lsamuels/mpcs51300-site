@@ -8,3 +8,4 @@ Modules
 - `M3: Syntax Analysis  <./m3/m3.html>`__
 - `M4: Semantic Analysi & IR Lowering  <./m4/m4.html>`__
 - `M5: Code Generation  <./m5/m5.html>`__
+- `M6: Compiler Optimizations   <./m6/m6.html>`__

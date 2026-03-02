@@ -6,10 +6,16 @@ Pre-recorded Lectures
 ---------------------
 **Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.**
 
-The pre-recorded lectures are available here: `M5 Videos <>`_.
+The pre-recorded lectures are available here: `M5 Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=9528ddd6-5753-4392-b6e3-b3f8013dce11>`_.
 You can also find the videos under the "Panopto" tab on the MPCS 51300 canvas site.
 
 The lectures are a series of approx 15-20 minute videos. **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
+
+- 5.1: Introduction to ARM64
+- 5.2: ARM Control Flow 
+- 5.3: ARM Procedure Standard 
+- 5.4: C-Runtime Call in ARM 
+- 5.5: Writing a Simple ARM Program 
 
 
 The slides presented in these videos are accessible in the upstream repository.

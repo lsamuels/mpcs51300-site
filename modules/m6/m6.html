@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>M5: Code Generation &#8212; MPCS 51300 - Compilers  documentation</title>
+    <title>M6: Compiler Optimizations &#8212; MPCS 51300 - Compilers  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=0bf093e7" />
     <link rel="stylesheet" type="text/css" href="../../_static/chiweb.css?v=9805d56b" />
@@ -92,12 +92,11 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li><a class="reference internal" href="#">M5: Code Generation</a><ul>
+<li><a class="reference internal" href="#">M6: Compiler Optimizations</a><ul>
 <li><a class="reference internal" href="#pre-recorded-lectures">Pre-recorded Lectures</a></li>
 <li><a class="reference internal" href="#resources-readings">Resources/Readings</a></li>
 <li><a class="reference internal" href="#synchronous-sessions-in-person-lecture">Synchronous Sessions (In-person Lecture)</a><ul>
-<li><a class="reference internal" href="#week-7">Week 7</a></li>
-<li><a class="reference internal" href="#week-8">Week 8</a></li>
+<li><a class="reference internal" href="#week-9">Week 9</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#assignment">Assignment</a></li>
@@ -106,29 +105,20 @@
 </ul>
 
 <div id="sourcelink">
-  <a href="../../_sources/modules/m5/m5.rst.txt"
+  <a href="../../_sources/modules/m6/m6.rst.txt"
      rel="nofollow">Source</a>
 </div>
         </div>
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <section id="m5-code-generation">
-<h1>M5: Code Generation<a class="headerlink" href="#m5-code-generation" title="Link to this heading">¶</a></h1>
-<p>This fifth module we begin our transition to talking about code generation (i.e., the backend of the compiler).</p>
+  <section id="m6-compiler-optimizations">
+<h1>M6: Compiler Optimizations<a class="headerlink" href="#m6-compiler-optimizations" title="Link to this heading">¶</a></h1>
+<p>In this final module, you we will explore a the optimizer portion of the compiler and discuss how one implements various optimizations in the middle component of the compiler. We will also have a course-recap of all the components that makeup a compiler.</p>
 <section id="pre-recorded-lectures">
 <h2>Pre-recorded Lectures<a class="headerlink" href="#pre-recorded-lectures" title="Link to this heading">¶</a></h2>
 <p><strong>Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.</strong></p>
-<p>The pre-recorded lectures are available here: <a class="reference external" href="https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=9528ddd6-5753-4392-b6e3-b3f8013dce11">M5 Videos</a>.
-You can also find the videos under the “Panopto” tab on the MPCS 51300 canvas site.</p>
-<p>The lectures are a series of approx 15-20 minute videos. <strong>Please come back here weekly as the videos will be updated if a module spans multiple weeks.</strong> This module includes the following videos:</p>
-<ul class="simple">
-<li><p>5.1: Introduction to ARM64</p></li>
-<li><p>5.2: ARM Control Flow</p></li>
-<li><p>5.3: ARM Procedure Standard</p></li>
-<li><p>5.4: C-Runtime Call in ARM</p></li>
-<li><p>5.5: Writing a Simple ARM Program</p></li>
-</ul>
+<p>There will be no videos for the final module in compilers. However, Professor Samuels will post a few additional resources about other compiler optimizations.</p>
 <p>The slides presented in these videos are accessible in the upstream repository.</p>
 </section>
 <section id="resources-readings">
@@ -139,45 +129,28 @@ You can also find the videos under the “Panopto” tab on the MPCS 51300 canva
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li><p>Chapter 6.1 - 6.4</p></li>
+<li><p>Chapter 8.1 - 8.4.1</p></li>
 </ul>
 </div></blockquote>
 </section>
 <section id="synchronous-sessions-in-person-lecture">
 <h2>Synchronous Sessions (In-person Lecture)<a class="headerlink" href="#synchronous-sessions-in-person-lecture" title="Link to this heading">¶</a></h2>
 <p>As a reminder here are the dates and times for the synchronous session for this module:</p>
-<section id="week-7">
-<h3>Week 7<a class="headerlink" href="#week-7" title="Link to this heading">¶</a></h3>
+<section id="week-9">
+<h3>Week 9<a class="headerlink" href="#week-9" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>Dates/Times</dt><dd><ul>
-<li><p>Section 1: <strong>Monday February 16th 10:30am-12:20pm</strong></p></li>
+<li><p>Section 1: <strong>Monday March 2nd 2:20pm-04:30pm</strong></p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt>Session Outline</dt><dd><ul>
-<li><p>LLVM SSA Formation</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</section>
-<section id="week-8">
-<h3>Week 8<a class="headerlink" href="#week-8" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Dates/Times</dt><dd><ul>
-<li><p>Section 1: <strong>Monday February 23rd 10:30am-12:20pm</strong></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Session Outline</dt><dd><ul>
-<li><p>Register Allocation</p></li>
+<li><p>Local basic block optimizations: Value Numbering, Copy Prorogation, Constant folding</p></li>
+<li><p>Debriefing about the course</p></li>
+<li><p>Open-office hours [remainder of time]</p></li>
 </ul>
 </dd>
 </dl>
@@ -187,10 +160,10 @@ You can also find the videos under the “Panopto” tab on the MPCS 51300 canva
 </section>
 <section id="assignment">
 <h2>Assignment<a class="headerlink" href="#assignment" title="Link to this heading">¶</a></h2>
-<p>Assignments are always <strong>due</strong> on Wednesday evenings.</p>
+<p>Assignments are always <strong>due</strong> on Tuesdays evenings.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="../../assignments/milestone2/index.html">Milestone #2</a>, due February 17th at 11:59pm CDT</p></li>
 <li><p><a class="reference external" href="../../assignments/milestone3/index.html">Milestone #3</a>, due March 3rd at 11:59pm CDT</p></li>
+<li><p><a class="reference external" href="../../assignments/milestone5/index.html">Milestone #4 (Final Submission)</a>, see due date(s) in specification</p></li>
 </ul>
 </section>
 </section>
