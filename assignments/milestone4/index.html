@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Milestone #4: Final Compiler and Paper Submission &#8212; MPCS 51300 - Compilers  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css?v=0bf093e7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chiweb.css?v=9805d56b" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="../../_static/rmsearch.js?v=9704a757"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          MPCS 51300</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../syllabus.html">Syllabus</a></li>
+                <li><a href="../../calendar.html">Calendar</a></li>
+                <li><a href="../../modules/index.html">Modules</a></li>
+                <li><a href="../index.html">Assignments</a></li>
+                <li><a href="../../office-hours.html">Office Hours</a></li>
+                <li><a href="https://uchicago-cs.github.io/student-resource-guide/">CS Student Resources</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">Milestone #4: Final Compiler and Paper Submission</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#language-overview-golite">Language Overview: GoLite</a></li>
+<li><a class="reference internal" href="#milestone-requirement-completed-compile">Milestone Requirement: Completed Compile</a></li>
+<li><a class="reference internal" href="#milestone-extra-credit-optimizations">Milestone Extra-Credit (Optimizations)</a><ul>
+<li><a class="reference internal" href="#extra-credit-requirement">Extra-Credit Requirement</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-line-options">Command-line Options</a></li>
+<li><a class="reference internal" href="#milestone-requirement-paper-submission">Milestone Requirement: Paper Submission</a></li>
+<li><a class="reference internal" href="#grading-and-what-to-submit">Grading and What to Submit</a></li>
+<li><a class="reference internal" href="#submission">Submission</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="sourcelink">
+  <a href="../../_sources/assignments/milestone4/index.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <section id="milestone-4-final-compiler-and-paper-submission">
+<h1>Milestone #4: Final Compiler and Paper Submission<a class="headerlink" href="#milestone-4-final-compiler-and-paper-submission" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Final Code Due: Wednesday March 11th at 11:59pm CDT.</p></li>
+<li><p>Final Paper Due: Thursday March 12th at 11:59pm CDT.</p></li>
+</ul>
+<p><strong>No extensions can be used for the above deadlines.</strong></p>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
+<p>You will not be creating a new repository for every milestone. Continue to work out of the same repository as Milestone #4 for all remaining milestones and the final submission of the compiler.</p>
+</section>
+<section id="language-overview-golite">
+<h2>Language Overview: GoLite<a class="headerlink" href="#language-overview-golite" title="Link to this heading">¶</a></h2>
+<p>Please make sure you read over the document that describes the language we will be implementing this quarter: <a class="reference external" href="../proj_overview/index.html">Language Overview</a></p>
+</section>
+<section id="milestone-requirement-completed-compile">
+<h2>Milestone Requirement: Completed Compile<a class="headerlink" href="#milestone-requirement-completed-compile" title="Link to this heading">¶</a></h2>
+<p>You must complete the compiler in it’s entirety. Your program must perform linear register allocation for ARM assembly. The resulting output from
+this stage of the project should be a valid assembly file that ends with <code class="docutils literal notranslate"><span class="pre">.s</span></code>. <strong>You are not required to assemble and link with ``gcc`` to create an executable</strong>. The final output of the compiler will only be the assembly file.</p>
+</section>
+<section id="milestone-extra-credit-optimizations">
+<h2>Milestone Extra-Credit (Optimizations)<a class="headerlink" href="#milestone-extra-credit-optimizations" title="Link to this heading">¶</a></h2>
+<p>For extra-credit, you must implement at least one optimization from the list below:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Copy_propagation">Copy propagation</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Constant_folding">Constant folding</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Dead-code_elimination">Dead-code elimination</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Value_numbering">Value numbering</a></p></li>
+</ul>
+<p><strong>Please note the optimizations do not have to work on the benchmarks!</strong>. For the optimizations, please provide additional examples of Golite code being optimized based on the optimization you implemented. Please make a note about this in your <code class="docutils literal notranslate"><span class="pre">README</span></code> file.</p>
+<p>If there’s a compiler optimization that you found in the literature that you wish to implement then you need to get approval from Professor Samuels <strong>before</strong> implementing it.</p>
+<section id="extra-credit-requirement">
+<h3>Extra-Credit Requirement<a class="headerlink" href="#extra-credit-requirement" title="Link to this heading">¶</a></h3>
+<p>You must have fully completed the compiler implementation and pass all the required ARM benchmarks before receiving extra-credit. You cannot have a partially correct compiler and receive extra-credit. Points will be rewarded based on implementation and difficulty of the optimization(s).</p>
+</section>
+</section>
+<section id="command-line-options">
+<h2>Command-line Options<a class="headerlink" href="#command-line-options" title="Link to this heading">¶</a></h2>
+<p>Please make sure to include the options from the previous milestones in your final submission along with the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-O1</span></code>: Turns on the optimizations for the compiler. By default the compiler produces generated code with no optimizations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">llvm-ir=[stack|reg]</span></code>: Update your compiler flags so that if <code class="docutils literal notranslate"><span class="pre">-llvm-ir=stack</span></code> is specified, the compiler compiles the source file, stops at the LLVM-IR stack-based phase, and saves the output to a <code class="docutils literal notranslate"><span class="pre">.ll</span></code> file. If <code class="docutils literal notranslate"><span class="pre">-llvm-ir=reg</span></code> is specified, the compiler stops at the LLVM-IR register-based phase and saves the output to a <code class="docutils literal notranslate"><span class="pre">.ll</span></code> file. Additionally, please remove the <code class="docutils literal notranslate"><span class="pre">llvm-stack</span></code> flag from the previous milestone. If <code class="docutils literal notranslate"><span class="pre">-llvm-ir</span></code> is not specified, the compiler proceeds to the final phase (ARM64 code generation) to produce the assembly code.</p></li>
+</ul>
+</section>
+<section id="milestone-requirement-paper-submission">
+<h2>Milestone Requirement: Paper Submission<a class="headerlink" href="#milestone-requirement-paper-submission" title="Link to this heading">¶</a></h2>
+<p>The final paper must provide an overview of the architecture of your compiler and the important data structures used within. In particular, discuss the different phases of your compiler (listed below). Each of the following can be addressed in a paragraph or two.</p>
+<ul class="simple">
+<li><p>Lexing and Parsing: Describe how your compiler lexes and parses a Golite program?</p></li>
+<li><p>Static Semantics: Discuss how your compiler implements static type checking and how it checks to ensure all control-flow paths have a return statement.</p></li>
+<li><p>LLVM Intermediate Representation: Discuss the structure used to implement the LLVM instructions and how they are store after converting the AST nodes to LLVM instructions.</p></li>
+<li><p>Optimizations: State the specific optimization implemented and how you implemented the optimization in your code. Discuss the representation of the program as a set of control flow graphs with LLVM instructions. If you did not implement an optimization then discuss how you would modify your compiler to include one. Talk specifically about what packages you would need to add, how your LLVM representation would need to change, etc.</p></li>
+<li><p>Code Generation and Register Allocation: Discuss any interesting aspects of your translation from LLVM to assembly.</p></li>
+<li><p>Misc.: Discuss other aspects of your compiler that you find interesting. Be proud that you implemented you very first compiler and talk about your struggles and what you learned in the process.</p></li>
+<li><p><strong>Compiler Groups only</strong>: If you worked on the compiler with a partner then explicitly state each member’s contributions.  If there is any additional information you wish for me to know then please private message me on Ed. This will be kept private and will not be shared with your partner.</p></li>
+</ul>
+<p>Each group/individual only needs to submit a single paper. I expect the paper to be in range of 3 pages. However, you can definitely describe these details in less than 3 pages. You can go pass the 3 page requirement.</p>
+</section>
+<section id="grading-and-what-to-submit">
+<h2>Grading and What to Submit<a class="headerlink" href="#grading-and-what-to-submit" title="Link to this heading">¶</a></h2>
+<p>You must provide the following to get full credit for this milestone:</p>
+<ul class="simple">
+<li><p>Submit your final paper at the root of your repository in a PDF format. Please use your CNET-ID for the name of the paper.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">README</span></code> file that states how any information we will need to run your compiler. <strong>You must be very specific about how to compile, and run your compiler</strong>. If we have difficulties getting your compiler to execute that will result in significant penalities.</p></li>
+<li><p>Please submit your final paper and final code submissions separately on Gradescope. There will be two submissions pages for each. However, make sure to also include your paper in the root directory of your compiler.</p></li>
+</ul>
+<p>The following table breaks down the highest possible grade you can receive on your final submission based on fulfilling the requirements specified. This does not mean you will automatically get that specific letter grade in a range if you generate the expected output for the benchmarks. We will also look over you code and implementation for the various phases of the compiler. The front-end of the compiler refers to lexing, parsing, and semantic analysis. The breakdown is a bit subjective to allow for you to get the most points as possible.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Grade Range</p></th>
+<th class="head"><p>Requirements</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A range</p></td>
+<td><p>The frontend of the compiler is fully implemented and produces correct LLVM-IR stack and register based implementations for all benchmarks. Produces correct ARM64 assembly code for benchmarks: <code class="docutils literal notranslate"><span class="pre">primes</span></code> and  <code class="docutils literal notranslate"><span class="pre">primes2</span></code> and <code class="docutils literal notranslate"><span class="pre">thermopylae</span></code>. <strong>You must use the linear scan register allocation algorithm</strong>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>B range</p></td>
+<td><p>The frontend of the compiler is fully implemented and produces correct LLVM-IR stack and register based implementations for all benchmarks. Produces correct ARM64 assembly code for at least one of the following benchmarks: <code class="docutils literal notranslate"><span class="pre">primes</span></code> and <code class="docutils literal notranslate"><span class="pre">primes2</span></code> and <code class="docutils literal notranslate"><span class="pre">thermopylae</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Low B range to C range</p></td>
+<td><p>The frontend of the compiler is fully implemented and produces correct LLVM-IR stack and register based implementations for all benchmarks. Work has started on ARM64 but none of the required benchmarks produce their expected output.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Lower than C</p></td>
+<td><p>The frontend and backend (i.e. LLVM/ARM64) of the compiler are not fully working and may contain errors. This will be graded on a case-by-case basis.</p></td>
+</tr>
+</tbody>
+</table>
+<p>A few additional notes:</p>
+<ul class="simple">
+<li><p>We will be looking at design and style for your compiler and the various ways you implemented the phases. Please keep that in mind.</p></li>
+</ul>
+</section>
+<section id="submission">
+<h2>Submission<a class="headerlink" href="#submission" title="Link to this heading">¶</a></h2>
+<p>Before submitting, make sure you’ve added, committed, and pushed all your code to GitHub. You must submit your final code submission through Gradescope (linked from our Canvas site) in the “Milestone #4 (Final Submission)” assignment page and the paper in the “Compiler Paper” page. Submissions for both can be done via two ways,</p>
+<ol class="arabic simple">
+<li><p><strong>Uploading from Github directly (recommended way)</strong>: You can link your Github account to your Gradescope account and upload the correct repository based on
+the homework assignment. When you submit your homework, a pop window will appear. Click on “Github” and then  “Connect to Github” to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be “main” or “master”) for this course.</p></li>
+<li><p><strong>Uploading via a Zip file</strong>: You can also upload a zip file of the assignment directory.</p></li>
+</ol>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2021-2025, University of Chicago.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.3.7.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

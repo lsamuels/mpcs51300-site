@@ -1,0 +1,99 @@
+==================================================
+Milestone #4: Final Compiler and Paper Submission
+==================================================
+
+- Final Code Due: Wednesday March 11th at 11:59pm CDT.
+- Final Paper Due: Thursday March 12th at 11:59pm CDT.
+
+**No extensions can be used for the above deadlines.**
+
+Getting started
+---------------
+You will not be creating a new repository for every milestone. Continue to work out of the same repository as Milestone #4 for all remaining milestones and the final submission of the compiler.
+
+
+Language Overview: GoLite 
+--------------------------
+Please make sure you read over the document that describes the language we will be implementing this quarter: `Language Overview <../proj_overview/index.html>`__
+
+
+Milestone Requirement: Completed Compile
+-------------------------------------------
+You must complete the compiler in it's entirety. Your program must perform linear register allocation for ARM assembly. The resulting output from 
+this stage of the project should be a valid assembly file that ends with ``.s``. **You are not required to assemble and link with ``gcc`` to create an executable**. The final output of the compiler will only be the assembly file. 
+
+Milestone Extra-Credit (Optimizations)
+----------------------------------------
+For extra-credit, you must implement at least one optimization from the list below: 
+
+- `Copy propagation <https://en.wikipedia.org/wiki/Copy_propagation>`__
+- `Constant folding <https://en.wikipedia.org/wiki/Constant_folding>`__
+- `Dead-code elimination <https://en.wikipedia.org/wiki/Dead-code_elimination>`__
+- `Value numbering <https://en.wikipedia.org/wiki/Value_numbering>`__
+
+**Please note the optimizations do not have to work on the benchmarks!**. For the optimizations, please provide additional examples of Golite code being optimized based on the optimization you implemented. Please make a note about this in your ``README`` file. 
+
+If there's a compiler optimization that you found in the literature that you wish to implement then you need to get approval from Professor Samuels **before** implementing it.
+
+Extra-Credit Requirement
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+You must have fully completed the compiler implementation and pass all the required ARM benchmarks before receiving extra-credit. You cannot have a partially correct compiler and receive extra-credit. Points will be rewarded based on implementation and difficulty of the optimization(s).
+
+Command-line Options 
+----------------------
+Please make sure to include the options from the previous milestones in your final submission along with the following:
+
+- ``-O1``: Turns on the optimizations for the compiler. By default the compiler produces generated code with no optimizations. 
+- ``llvm-ir=[stack|reg]``: Update your compiler flags so that if ``-llvm-ir=stack`` is specified, the compiler compiles the source file, stops at the LLVM-IR stack-based phase, and saves the output to a ``.ll`` file. If ``-llvm-ir=reg`` is specified, the compiler stops at the LLVM-IR register-based phase and saves the output to a ``.ll`` file. Additionally, please remove the ``llvm-stack`` flag from the previous milestone. If ``-llvm-ir`` is not specified, the compiler proceeds to the final phase (ARM64 code generation) to produce the assembly code.
+
+
+Milestone Requirement: Paper Submission 
+-----------------------------------------
+The final paper must provide an overview of the architecture of your compiler and the important data structures used within. In particular, discuss the different phases of your compiler (listed below). Each of the following can be addressed in a paragraph or two.
+
+- Lexing and Parsing: Describe how your compiler lexes and parses a Golite program?
+- Static Semantics: Discuss how your compiler implements static type checking and how it checks to ensure all control-flow paths have a return statement.
+- LLVM Intermediate Representation: Discuss the structure used to implement the LLVM instructions and how they are store after converting the AST nodes to LLVM instructions.
+- Optimizations: State the specific optimization implemented and how you implemented the optimization in your code. Discuss the representation of the program as a set of control flow graphs with LLVM instructions. If you did not implement an optimization then discuss how you would modify your compiler to include one. Talk specifically about what packages you would need to add, how your LLVM representation would need to change, etc.
+- Code Generation and Register Allocation: Discuss any interesting aspects of your translation from LLVM to assembly.
+- Misc.: Discuss other aspects of your compiler that you find interesting. Be proud that you implemented you very first compiler and talk about your struggles and what you learned in the process.
+- **Compiler Groups only**: If you worked on the compiler with a partner then explicitly state each member's contributions.  If there is any additional information you wish for me to know then please private message me on Ed. This will be kept private and will not be shared with your partner. 
+
+Each group/individual only needs to submit a single paper. I expect the paper to be in range of 3 pages. However, you can definitely describe these details in less than 3 pages. You can go pass the 3 page requirement.
+
+Grading and What to Submit
+---------------------------
+You must provide the following to get full credit for this milestone:
+
+- Submit your final paper at the root of your repository in a PDF format. Please use your CNET-ID for the name of the paper.
+- A ``README`` file that states how any information we will need to run your compiler. **You must be very specific about how to compile, and run your compiler**. If we have difficulties getting your compiler to execute that will result in significant penalities. 
+- Please submit your final paper and final code submissions separately on Gradescope. There will be two submissions pages for each. However, make sure to also include your paper in the root directory of your compiler.
+
+The following table breaks down the highest possible grade you can receive on your final submission based on fulfilling the requirements specified. This does not mean you will automatically get that specific letter grade in a range if you generate the expected output for the benchmarks. We will also look over you code and implementation for the various phases of the compiler. The front-end of the compiler refers to lexing, parsing, and semantic analysis. The breakdown is a bit subjective to allow for you to get the most points as possible.
+
+.. csv-table::
+   :widths: 20,80 
+   :header-rows: 1
+
+    Grade Range, Requirements 
+    A range, The frontend of the compiler is fully implemented and produces correct LLVM-IR stack and register based implementations for all benchmarks. Produces correct ARM64 assembly code for benchmarks: ``primes`` and  ``primes2`` and ``thermopylae``. **You must use the linear scan register allocation algorithm**.
+    B range, The frontend of the compiler is fully implemented and produces correct LLVM-IR stack and register based implementations for all benchmarks. Produces correct ARM64 assembly code for at least one of the following benchmarks: ``primes`` and ``primes2`` and ``thermopylae``. 
+    Low B range to C range,  The frontend of the compiler is fully implemented and produces correct LLVM-IR stack and register based implementations for all benchmarks. Work has started on ARM64 but none of the required benchmarks produce their expected output.  
+    Lower than C, The frontend and backend (i.e. LLVM/ARM64) of the compiler are not fully working and may contain errors. This will be graded on a case-by-case basis.
+
+A few additional notes: 
+
+- We will be looking at design and style for your compiler and the various ways you implemented the phases. Please keep that in mind. 
+
+
+Submission
+----------
+
+Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final code submission through Gradescope (linked from our Canvas site) in the “Milestone #4 (Final Submission)” assignment page and the paper in the “Compiler Paper” page. Submissions for both can be done via two ways,
+
+1. **Uploading from Github directly (recommended way)**: You can link your Github account to your Gradescope account and upload the correct repository based on 
+   the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
+  
+2. **Uploading via a Zip file**: You can also upload a zip file of the assignment directory.
+
+

@@ -35,4 +35,4 @@ Assignment
 Assignments are always **due** on Tuesdays evenings. 
 
 * `Milestone #3  <../../assignments/milestone3/index.html>`__, due March 3rd at 11:59pm CDT
-* `Milestone #4 (Final Submission)  <../../assignments/milestone5/index.html>`__, see due date(s) in specification 
+* `Milestone #4 (Final Submission)  <../../assignments/milestone4/index.html>`__, see due date(s) in specification 
